@@ -46,11 +46,17 @@ namespace DiscUtils.Streams
 		{
 			if (typeof(T) == typeof(long))
 			{
-				return ((Numbers<T>.NoParamFn)(() => 1L))();
+				return ((Numbers<T>.NoParamFn)(() =>
+                {
+                    return default;//1L;
+                }))();
 			}
 			if (typeof(T) == typeof(int))
 			{
-				return ((Numbers<T>.NoParamFn)(() => 1))();
+				return ((Numbers<T>.NoParamFn)(() =>
+                {
+					return default; //1
+                }))();
 			}
 			throw new NotSupportedException();
 		}
@@ -60,12 +66,12 @@ namespace DiscUtils.Streams
 		{
 			if (typeof(T) == typeof(long))
 			{
-				return (Numbers<T>.ConvertLongFn)((long x) => x);
+				return default;//(Numbers<T>.ConvertLongFn)((long x) => ()x);
 			}
 			if (typeof(T) == typeof(int))
 			{
-				return (Numbers<T>.ConvertLongFn)((long x) => (int)x);
-			}
+				return default;//(Numbers<T>.ConvertLongFn)((long x) => (int)x);
+            }
 			throw new NotSupportedException();
 		}
 
@@ -74,11 +80,11 @@ namespace DiscUtils.Streams
 		{
 			if (typeof(T) == typeof(long))
 			{
-				return (Numbers<T>.ConvertIntFn)((int x) => (long)x);
+				return default;//(Numbers<T>.ConvertIntFn)((int x) => (long)x);
 			}
 			if (typeof(T) == typeof(int))
 			{
-				return (Numbers<T>.ConvertIntFn)((int x) => x);
+				return default;//(Numbers<T>.ConvertIntFn)((int x) => x);
 			}
 			throw new NotSupportedException();
 		}
@@ -88,11 +94,11 @@ namespace DiscUtils.Streams
 		{
 			if (typeof(T) == typeof(long))
 			{
-				return (Numbers<T>.DualParamFn)((long a, long b) => a + b);
+				return default;//(Numbers<T>.DualParamFn)((long a, long b) => a + b);
 			}
 			if (typeof(T) == typeof(int))
 			{
-				return (Numbers<T>.DualParamFn)((int a, int b) => a + b);
+				return default;//(Numbers<T>.DualParamFn)((int a, int b) => a + b);
 			}
 			throw new NotSupportedException();
 		}
@@ -102,25 +108,25 @@ namespace DiscUtils.Streams
 		{
 			if (typeof(T) == typeof(long))
 			{
-				return (Numbers<T>.DualParamFn)((long a, long b) => a - b);
+				return default;//(long a, long b) => a - b;
 			}
 			if (typeof(T) == typeof(int))
 			{
-				return (Numbers<T>.DualParamFn)((int a, int b) => a - b);
+				return default;//(Numbers<T>.DualParamFn)((int a, int b) => a - b);
 			}
 			throw new NotSupportedException();
 		}
 
 		// Token: 0x060001EE RID: 494 RVA: 0x00006C14 File Offset: 0x00004E14
-		private static Numbers<T>.DualParamFn GetMultiply()
-		{
+		private static Numbers<T>.DualParamFn GetMultiply() // Numbers<T>.DualParamFn
+        {
 			if (typeof(T) == typeof(long))
 			{
-				return (Numbers<T>.DualParamFn)((long a, long b) => a * b);
+				return default;//(long a, long b) => a * b;
 			}
 			if (typeof(T) == typeof(int))
 			{
-				return (Numbers<T>.DualParamFn)((int a, int b) => a * b);
+				return default;//(Numbers<T>.DualParamFn)((int a, int b) => a * b);
 			}
 			throw new NotSupportedException();
 		}
@@ -130,11 +136,11 @@ namespace DiscUtils.Streams
 		{
 			if (typeof(T) == typeof(long))
 			{
-				return (Numbers<T>.DualParamFn)((long a, long b) => a / b);
+				return default;//(Numbers<T>.DualParamFn)((long a, long b) => a / b);
 			}
 			if (typeof(T) == typeof(int))
 			{
-				return (Numbers<T>.DualParamFn)((int a, int b) => a / b);
+				return default;//(Numbers<T>.DualParamFn)((int a, int b) => a / b);
 			}
 			throw new NotSupportedException();
 		}
@@ -144,11 +150,11 @@ namespace DiscUtils.Streams
 		{
 			if (typeof(T) == typeof(long))
 			{
-				return (Numbers<T>.DualParamFn)((long a, long b) => (a + b - 1L) / b * b);
+				return default;//(Numbers<T>.DualParamFn)((long a, long b) => (a + b - 1L) / b * b);
 			}
 			if (typeof(T) == typeof(int))
 			{
-				return (Numbers<T>.DualParamFn)((int a, int b) => (a + b - 1) / b * b);
+				return default;//(Numbers<T>.DualParamFn)((int a, int b) => (a + b - 1) / b * b);
 			}
 			throw new NotSupportedException();
 		}
@@ -158,11 +164,11 @@ namespace DiscUtils.Streams
 		{
 			if (typeof(T) == typeof(long))
 			{
-				return (Numbers<T>.DualParamFn)((long a, long b) => a / b * b);
+				return default;//(Numbers<T>.DualParamFn)((long a, long b) => a / b * b);
 			}
 			if (typeof(T) == typeof(int))
 			{
-				return (Numbers<T>.DualParamFn)((int a, int b) => a / b * b);
+				return default;// (Numbers<T>.DualParamFn)((int a, int b) => a / b * b);
 			}
 			throw new NotSupportedException();
 		}
@@ -172,12 +178,12 @@ namespace DiscUtils.Streams
 		{
 			if (typeof(T) == typeof(long))
 			{
-				return (Numbers<T>.DualParamFn)((long a, long b) => (a + b - 1L) / b);
+				return  default;//(Numbers<T>.DualParamFn)((long a, long b) => (a + b - 1L) / b);
 			}
 			if (typeof(T) == typeof(int))
 			{
-				return (Numbers<T>.DualParamFn)((int a, int b) => (a + b - 1) / b);
-			}
+				return default;//(Numbers<T>.DualParamFn)((int a, int b) => (a + b - 1) / b);
+            }
 			throw new NotSupportedException();
 		}
 

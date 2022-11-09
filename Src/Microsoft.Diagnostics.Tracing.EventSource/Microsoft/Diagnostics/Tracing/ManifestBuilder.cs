@@ -830,6 +830,7 @@ namespace Microsoft.Diagnostics.Tracing
 		// Token: 0x060001D9 RID: 473 RVA: 0x0000D068 File Offset: 0x0000B268
 		private string TranslateToManifestConvention(string eventMessage, string evtName)
 		{
+            /*
 			ManifestBuilder.<>c__DisplayClass4 CS$<>8__locals1 = new ManifestBuilder.<>c__DisplayClass4();
 			CS$<>8__locals1.eventMessage = eventMessage;
 			CS$<>8__locals1.stringBuilder = null;
@@ -919,12 +920,14 @@ namespace Microsoft.Diagnostics.Tracing
 					return CS$<>8__locals1.eventMessage;
 				}
 				ManifestBuilder.UpdateStringBuilder(ref CS$<>8__locals1.stringBuilder, CS$<>8__locals1.eventMessage, CS$<>8__locals1.writtenSoFar, i - CS$<>8__locals1.writtenSoFar);
-				return CS$<>8__locals1.stringBuilder.ToString();
-			}
-		}
+				return CS$<>8__locals1.stringBuilder.ToString();			    
 
-		// Token: 0x060001DA RID: 474 RVA: 0x0000D4E0 File Offset: 0x0000B6E0
-		private int TranslateIndexToManifestConvention(int idx, string evtName)
+             }*/
+            return default;
+        }//TranslateToManifestConvention end
+
+        // Token: 0x060001DA RID: 474 RVA: 0x0000D4E0 File Offset: 0x0000B6E0
+        private int TranslateIndexToManifestConvention(int idx, string evtName)
 		{
 			checked
 			{

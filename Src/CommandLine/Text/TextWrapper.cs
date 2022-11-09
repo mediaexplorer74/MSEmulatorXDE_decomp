@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,103 +6,174 @@ using CommandLine.Infrastructure;
 
 namespace CommandLine.Text
 {
-	// Token: 0x0200005C RID: 92
-	public class TextWrapper
-	{
-		// Token: 0x06000262 RID: 610 RVA: 0x00009EF4 File Offset: 0x000080F4
-		public TextWrapper(string input)
-		{
-			this.lines = input.Replace("\r", "").Split(new char[]
-			{
-				'\n'
-			}, StringSplitOptions.None);
-		}
+    /// <summary>
+    /// A utility class to word-wrap and indent blocks of text
+    /// </summary>
+    public class TextWrapper
+    {
+        private string[] lines;
+        public TextWrapper(string input)
+        {
+            //start by splitting at newlines and then reinserting the newline as a separate word
+            //Note that on the input side, we can't assume the line-break style at run time so we have to
+            //be able to handle both.  We can't use Environment.NewLine because that changes at
+            //_runtime_ and may not match the line-break style that was compiled in
+            lines = input
+                .Replace("\r","")
+                .Split(new[] {'\n'}, StringSplitOptions.None);
+        }
 
-		// Token: 0x06000263 RID: 611 RVA: 0x00009F24 File Offset: 0x00008124
-		public TextWrapper WordWrap(int columnWidth)
-		{
-			columnWidth = Math.Max(1, columnWidth);
-			this.lines = this.lines.SelectMany((string line) => this.WordWrapLine(line, columnWidth)).ToArray<string>();
-			return this;
-		}
+        /// <summary>
+        /// Splits a string into a words and performs wrapping while also preserving line-breaks and sub-indentation
+        /// </summary>
+        /// <param name="columnWidth">The number of characters we can use for text</param>
+        /// <remarks>
+        /// This method attempts to wrap text without breaking words 
+        /// For example, if columnWidth is 10 , the input
+        /// "a string for wrapping 01234567890123"
+        /// would return
+        /// "a string
+        /// "for 
+        /// "wrapping
+        /// "0123456789
+        /// "0123"          
+        /// </remarks>
+        /// <returns>this</returns>
+        public TextWrapper WordWrap(int columnWidth)
+        {
+            //ensure we always use at least 1 column even if the client has told us there's no space available
+            columnWidth = Math.Max(1, columnWidth);
+            lines= lines
+                .SelectMany(line => WordWrapLine(line, columnWidth))
+                .ToArray();
+            return this;
+        }
 
-		// Token: 0x06000264 RID: 612 RVA: 0x00009F7C File Offset: 0x0000817C
-		public TextWrapper Indent(int numberOfSpaces)
-		{
-			this.lines = (from line in this.lines
-			select numberOfSpaces.Spaces() + line).ToArray<string>();
-			return this;
-		}
+        /// <summary>
+        /// Indent all lines in the TextWrapper by the desired number of spaces
+        /// </summary>
+        /// <param name="numberOfSpaces">The number of spaces to indent by</param>
+        /// <returns>this</returns>
+        public TextWrapper Indent(int numberOfSpaces)
+        {
+            lines = lines
+                .Select(line => numberOfSpaces.Spaces() + line)
+                .ToArray();
+            return this;
+        }
 
-		// Token: 0x06000265 RID: 613 RVA: 0x00009FB9 File Offset: 0x000081B9
-		public string ToText()
-		{
-			return string.Join(Environment.NewLine, this.lines);
-		}
+        /// <summary>
+        /// Returns the current state of the TextWrapper as a string
+        /// </summary>
+        /// <returns></returns>
+        public string ToText()
+        {
+            //return the whole thing as a single string
+            return string.Join(Environment.NewLine,lines);
+        }
 
-		// Token: 0x06000266 RID: 614 RVA: 0x00009FCB File Offset: 0x000081CB
-		public static string WrapAndIndentText(string input, int indentLevel, int columnWidth)
-		{
-			return new TextWrapper(input).WordWrap(columnWidth).Indent(indentLevel).ToText();
-		}
+        /// <summary>
+        /// Convenience method to wraps and indent a string in a single operation
+        /// </summary>
+        /// <param name="input">The string to operate on</param>
+        /// <param name="indentLevel">The number of spaces to indent by</param>
+        /// <param name="columnWidth">The width of the column used for wrapping</param>
+        /// <remarks>
+        /// The string is wrapped _then_ indented so the columnWidth is the width of the
+        /// usable text block, and does NOT include the indentLevel.
+        /// </remarks>
+        /// <returns>the processed string</returns>
+        public static string WrapAndIndentText(string input, int indentLevel,int columnWidth)
+        {
+            return new TextWrapper(input)
+                .WordWrap(columnWidth)
+                .Indent(indentLevel)
+                .ToText();
+        }
 
-		// Token: 0x06000267 RID: 615 RVA: 0x00009FE4 File Offset: 0x000081E4
-		private string[] WordWrapLine(string line, int columnWidth)
-		{
-			string text = line.TrimStart(Array.Empty<char>());
-			int currentIndentLevel = Math.Min(line.Length - text.Length, columnWidth - 1);
-			columnWidth -= currentIndentLevel;
-			return (from builder in text.Split(new char[]
-			{
-				' '
-			}).Aggregate(new List<StringBuilder>(), (List<StringBuilder> lineList, string word) => TextWrapper.AddWordToLastLineOrCreateNewLineIfNecessary(lineList, word, columnWidth))
-			select currentIndentLevel.Spaces() + builder.ToString().TrimEnd(Array.Empty<char>())).ToArray<string>();
-		}
 
-		// Token: 0x06000268 RID: 616 RVA: 0x0000A07C File Offset: 0x0000827C
-		private static List<StringBuilder> AddWordToLastLineOrCreateNewLineIfNecessary(List<StringBuilder> lines, string word, int columnWidth)
-		{
-			StringBuilder stringBuilder = lines.LastOrDefault<StringBuilder>();
-			string text = ((stringBuilder != null) ? stringBuilder.ToString() : null) ?? string.Empty;
-			if (lines.Any<StringBuilder>() && (word.Length <= 0 || text.Length + word.Length <= columnWidth))
-			{
-				lines.Last<StringBuilder>().Append(word + " ");
-			}
-			else
-			{
-				do
-				{
-					int n = Math.Min(columnWidth, word.Length);
-					string value = TextWrapper.LeftString(word, n) + " ";
-					lines.Add(new StringBuilder(value));
-					word = TextWrapper.RightString(word, n);
-				}
-				while (word.Length > 0);
-			}
-			return lines;
-		}
+        private string [] WordWrapLine(string line,int columnWidth)
+        {
+            //create a list of individual lines generated from the supplied line
 
-		// Token: 0x06000269 RID: 617 RVA: 0x0000A125 File Offset: 0x00008325
-		private static string RightString(string str, int n)
-		{
-			if (n < str.Length && str.Length != 0)
-			{
-				return str.Substring(n);
-			}
-			return string.Empty;
-		}
+            //When handling sub-indentation we must always reserve at least one column for text!
+            var unindentedLine = line.TrimStart();
+            var currentIndentLevel = Math.Min(line.Length - unindentedLine.Length,columnWidth-1) ;
+            columnWidth -= currentIndentLevel;
 
-		// Token: 0x0600026A RID: 618 RVA: 0x0000A145 File Offset: 0x00008345
-		private static string LeftString(string str, int n)
-		{
-			if (n < str.Length && str.Length != 0)
-			{
-				return str.Substring(0, n);
-			}
-			return str;
-		}
+            return unindentedLine.Split(' ')
+                .Aggregate(
+                    new List<StringBuilder>(),
+                    (lineList, word) => AddWordToLastLineOrCreateNewLineIfNecessary(lineList, word, columnWidth)
+                )
+                .Select(builder => currentIndentLevel.Spaces()+builder.ToString().TrimEnd())
+                .ToArray();
+        }
 
-		// Token: 0x040000BC RID: 188
-		private string[] lines;
-	}
+        /// <summary>
+        /// When presented with a word, either append to the last line in the list or start a new line
+        /// </summary>
+        /// <param name="lines">A list of StringBuilders containing results so far</param>
+        /// <param name="word">The individual word to append</param>
+        /// <param name="columnWidth">The usable text space</param>
+        /// <remarks>
+        /// The 'word' can actually be an empty string.  It's important to keep these -
+        /// empty strings allow us to preserve indentation and extra spaces within a line.
+        /// </remarks>
+        /// <returns>The same list as is passed in</returns>
+        private static List<StringBuilder> AddWordToLastLineOrCreateNewLineIfNecessary(List<StringBuilder> lines, string word,int columnWidth)
+        {
+            //The current indentation level is based on the previous line but we need to be careful
+            var previousLine = lines.LastOrDefault()?.ToString() ??string.Empty;
+            
+            var wouldWrap = !lines.Any() || (word.Length>0 && previousLine.Length + word.Length > columnWidth);
+          
+            if (!wouldWrap)
+            {
+                //The usual case is we just append the 'word' and a space to the current line
+                //Note that trailing spaces will get removed later when we turn the line list 
+                //into a single string
+                lines.Last().Append(word + ' ');
+            }
+            else
+            {
+                //The 'while' here is to take account of the possibility of someone providing a word
+                //which just can't fit in the current column.  In that case we just split it at the 
+                //column end.
+                //That's a rare case though - most of the time we'll succeed in a single pass without
+                //having to split
+                //Note that we always do at least one pass even if the 'word' is empty in order to 
+                //honour sub-indentation and extra spaces within strings
+                do
+                {
+                    var availableCharacters = Math.Min(columnWidth, word.Length);
+                    var segmentToAdd = LeftString(word,availableCharacters) + ' ';
+                    lines.Add(new StringBuilder(segmentToAdd));
+                    word = RightString(word,availableCharacters);
+                } while (word.Length > 0);
+            }
+            return lines;
+        }
+
+       
+        /// <summary>
+        /// Return the right part of a string in a way that compensates for Substring's deficiencies
+        /// </summary>
+        private static string RightString(string str,int n)
+        {
+            return (n >= str.Length || str.Length==0) 
+                ? string.Empty 
+                : str.Substring(n);
+        }
+        /// <summary>
+        /// Return the left part of a string in a way that compensates for Substring's deficiencies
+        /// </summary>
+        private static string LeftString(string str,int n)
+        {
+            
+            return  (n >= str.Length || str.Length==0)
+                ? str 
+                : str.Substring(0,n);
+        }
+    }
 }

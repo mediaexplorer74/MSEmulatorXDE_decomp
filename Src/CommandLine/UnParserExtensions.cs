@@ -1,7 +1,8 @@
-﻿using System;
+﻿// Copyright 2005-2015 Giacomo Stelluti Scala & Contributors. All rights reserved. See License.md in the project root for license information.
+
+using System;
 using System.Collections;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using CommandLine.Core;
 using CommandLine.Infrastructure;
@@ -9,198 +10,248 @@ using CSharpx;
 
 namespace CommandLine
 {
-	// Token: 0x0200004F RID: 79
-	public static class UnParserExtensions
-	{
-		// Token: 0x060001C8 RID: 456 RVA: 0x00007D46 File Offset: 0x00005F46
-		public static string FormatCommandLine<T>(this Parser parser, T options)
-		{
-			return parser.FormatCommandLine(options, delegate(UnParserSettings config)
-			{
-			});
-		}
+    /// <summary>
+    /// Provides settings for when formatting command line from an options instance../>.
+    /// </summary>
+    public class UnParserSettings
+    {
+        private bool preferShortName;
+        private bool groupSwitches;
+        private bool useEqualToken;
+        private bool showHidden;
 
-		// Token: 0x060001C9 RID: 457 RVA: 0x00007D70 File Offset: 0x00005F70
-		public static string FormatCommandLine<T>(this Parser parser, T options, Action<UnParserSettings> configuration)
-		{
-			UnParserExtensions.<>c__DisplayClass1_0<T> CS$<>8__locals1 = new UnParserExtensions.<>c__DisplayClass1_0<T>();
-			CS$<>8__locals1.options = options;
-			if (CS$<>8__locals1.options == null)
-			{
-				throw new ArgumentNullException("options");
-			}
-			CS$<>8__locals1.settings = new UnParserSettings();
-			configuration(CS$<>8__locals1.settings);
-			CS$<>8__locals1.settings.Consumed = true;
-			Type type = CS$<>8__locals1.options.GetType();
-			CS$<>8__locals1.builder = new StringBuilder();
-			type.GetVerbSpecification().MapValueOrDefault((VerbAttribute verb) => CS$<>8__locals1.builder.Append(verb.Name).Append(' '), CS$<>8__locals1.builder);
-			var source = (from info in type.GetSpecifications((PropertyInfo pi) => new
-			{
-				Specification = Specification.FromProperty(pi),
-				Value = pi.GetValue(CS$<>8__locals1.options, null).NormalizeValue(),
-				PropertyValue = pi.GetValue(CS$<>8__locals1.options, null)
-			})
-			where !info.PropertyValue.IsEmpty()
-			select info).Memorize();
-			var enumerable = from i in source
-			where i.Specification.Tag == SpecificationType.Option
-			select i into info
-			let o = (OptionSpecification)info.Specification
-			where o.TargetType != TargetType.Switch || (o.TargetType == TargetType.Switch && (bool)info.Value)
-			where !o.Hidden || CS$<>8__locals1.settings.ShowHidden
-			orderby o.UniqueName()
-			select info;
-			CS$<>8__locals1.shortSwitches = from info in enumerable
-			let o = (OptionSpecification)info.Specification
-			where o.TargetType == TargetType.Switch
-			where o.ShortName.Length > 0
-			orderby o.UniqueName()
-			select info;
-			var source2 = CS$<>8__locals1.settings.GroupSwitches ? (from info in enumerable
-			where !CS$<>8__locals1.shortSwitches.Contains(info)
-			select info) : enumerable;
-			var source3 = from i in source
-			where i.Specification.Tag == SpecificationType.Value
-			select i into info
-			let v = (ValueSpecification)info.Specification
-			orderby v.Index
-			select info;
-			UnParserExtensions.<>c__DisplayClass1_0<T> CS$<>8__locals2 = CS$<>8__locals1;
-			StringBuilder builder;
-			if (!CS$<>8__locals1.settings.GroupSwitches || !CS$<>8__locals1.shortSwitches.Any())
-			{
-				builder = CS$<>8__locals1.builder;
-			}
-			else
-			{
-				builder = CS$<>8__locals1.builder.Append('-').Append(string.Join(string.Empty, (from info in CS$<>8__locals1.shortSwitches
-				select ((OptionSpecification)info.Specification).ShortName).ToArray<string>())).Append(' ');
-			}
-			CS$<>8__locals2.builder = builder;
-			source2.ForEach(delegate(opt)
-			{
-				CS$<>8__locals1.builder.Append(UnParserExtensions.FormatOption((OptionSpecification)opt.Specification, opt.Value, CS$<>8__locals1.settings)).Append(' ');
-			});
-			CS$<>8__locals1.builder.AppendWhen(source3.Any() && parser.Settings.EnableDashDash, new string[]
-			{
-				"-- "
-			});
-			source3.ForEach(delegate(val)
-			{
-				CS$<>8__locals1.builder.Append(UnParserExtensions.FormatValue(val.Specification, val.Value)).Append(' ');
-			});
-			return CS$<>8__locals1.builder.ToString().TrimEnd(new char[]
-			{
-				' '
-			});
-		}
+        /// <summary>
+        /// Gets or sets a value indicating whether unparsing process shall prefer short or long names.
+        /// </summary>
+        public bool PreferShortName
+        {
+            get { return preferShortName; }
+            set { PopsicleSetter.Set(Consumed, ref preferShortName, value); }
+        }
 
-		// Token: 0x060001CA RID: 458 RVA: 0x00008158 File Offset: 0x00006358
-		private static string FormatValue(Specification spec, object value)
-		{
-			StringBuilder stringBuilder = new StringBuilder();
-			TargetType targetType = spec.TargetType;
-			if (targetType != TargetType.Scalar)
-			{
-				if (targetType == TargetType.Sequence)
-				{
-					char sep = spec.SeperatorOrSpace();
-					Func<object, object> func = delegate(object v)
-					{
-						if (sep != ' ')
-						{
-							return v;
-						}
-						return UnParserExtensions.FormatWithQuotesIfString(v);
-					};
-					foreach (object arg in ((IEnumerable)value))
-					{
-						stringBuilder.Append(func(arg)).Append(sep);
-					}
-					stringBuilder.TrimEndIfMatch(sep);
-				}
-			}
-			else
-			{
-				stringBuilder.Append(UnParserExtensions.FormatWithQuotesIfString(value));
-			}
-			return stringBuilder.ToString();
-		}
+        /// <summary>
+        /// Gets or sets a value indicating whether unparsing process shall group switches.
+        /// </summary>
+        public bool GroupSwitches
+        {
+            get { return groupSwitches; }
+            set { PopsicleSetter.Set(Consumed, ref groupSwitches, value); }
+        }
 
-		// Token: 0x060001CB RID: 459 RVA: 0x000081F4 File Offset: 0x000063F4
-		private static object FormatWithQuotesIfString(object value)
-		{
-			Func<string, string> doubQt = delegate(string v)
-			{
-				if (!v.Contains("\""))
-				{
-					return v;
-				}
-				return v.Replace("\"", "\\\"");
-			};
-			return (value as string).ToMaybe<string>().MapValueOrDefault(delegate(string v)
-			{
-				if (!v.Contains(' ') && !v.Contains("\""))
-				{
-					return v;
-				}
-				return "\"".JoinTo(new string[]
-				{
-					doubQt(v),
-					"\""
-				});
-			}, value);
-		}
+        /// <summary>
+        /// Gets or sets a value indicating whether unparsing process shall use equal sign with long names.
+        /// </summary>
+        public bool UseEqualToken
+        {
+            get { return useEqualToken; }
+            set { PopsicleSetter.Set(Consumed, ref useEqualToken, value); }
+        }
 
-		// Token: 0x060001CC RID: 460 RVA: 0x00008249 File Offset: 0x00006449
-		private static char SeperatorOrSpace(this Specification spec)
-		{
-			return (spec as OptionSpecification).ToMaybe<OptionSpecification>().MapValueOrDefault(delegate(OptionSpecification o)
-			{
-				if (o.Separator == '\0')
-				{
-					return ' ';
-				}
-				return o.Separator;
-			}, ' ');
-		}
+        /// <summary>
+        /// Gets or sets a value indicating whether unparsing process shall expose hidden options.
+        /// </summary>
+        public bool ShowHidden
+        {
+            get { return showHidden; }
+            set { PopsicleSetter.Set(Consumed, ref showHidden, value); }
+        }
+        /// <summary>
+        /// Factory method that creates an instance of <see cref="CommandLine.UnParserSettings"/> with GroupSwitches set to true.
+        /// </summary>
+        /// <returns>A properly initalized <see cref="CommandLine.UnParserSettings"/> instance.</returns>
+        public static UnParserSettings WithGroupSwitchesOnly()
+        {
+            return new UnParserSettings { GroupSwitches = true };
+        }
 
-		// Token: 0x060001CD RID: 461 RVA: 0x0000827C File Offset: 0x0000647C
-		private static string FormatOption(OptionSpecification spec, object value, UnParserSettings settings)
-		{
-			return new StringBuilder().Append(spec.FormatName(settings)).AppendWhen(spec.TargetType > TargetType.Switch, new string[]
-			{
-				UnParserExtensions.FormatValue(spec, value)
-			}).ToString();
-		}
+        /// <summary>
+        /// Factory method that creates an instance of <see cref="CommandLine.UnParserSettings"/> with UseEqualToken set to true.
+        /// </summary>
+        /// <returns>A properly initalized <see cref="CommandLine.UnParserSettings"/> instance.</returns>
+        public static UnParserSettings WithUseEqualTokenOnly()
+        {
+            return new UnParserSettings { UseEqualToken = true };
+        }
 
-		// Token: 0x060001CE RID: 462 RVA: 0x000082B4 File Offset: 0x000064B4
-		private static string FormatName(this OptionSpecification optionSpec, UnParserSettings settings)
-		{
-			bool flag = (optionSpec.LongName.Length > 0 && !settings.PreferShortName) || optionSpec.ShortName.Length == 0;
-			return new StringBuilder(flag ? "--".JoinTo(new string[]
-			{
-				optionSpec.LongName
-			}) : "-".JoinTo(new string[]
-			{
-				optionSpec.ShortName
-			})).AppendWhen(optionSpec.TargetType > TargetType.Switch, new string[]
-			{
-				(flag && settings.UseEqualToken) ? "=" : " "
-			}).ToString();
-		}
+        internal bool Consumed { get; set; }
+    }
 
-		// Token: 0x060001CF RID: 463 RVA: 0x00008358 File Offset: 0x00006558
-		private static object NormalizeValue(this object value)
-		{
-			return value;
-		}
+    /// <summary>
+    /// Provides overloads to unparse options instance.
+    /// </summary>
+    public static class UnParserExtensions
+    {
+        /// <summary>
+        /// Format a command line argument string from a parsed instance. 
+        /// </summary>
+        /// <typeparam name="T">Type of <paramref name="options"/>.</typeparam>
+        /// <param name="parser">Parser instance.</param>
+        /// <param name="options">A parsed (or manually correctly constructed instance).</param>
+        /// <returns>A string with command line arguments.</returns>
+        public static string FormatCommandLine<T>(this Parser parser, T options)
+        {
+            return parser.FormatCommandLine(options, config => {});
+        }
 
-		// Token: 0x060001D0 RID: 464 RVA: 0x0000835C File Offset: 0x0000655C
-		private static bool IsEmpty(this object value)
-		{
-			return value == null || (value is ValueType && value.Equals(value.GetType().GetDefaultValue())) || (value is string && ((string)value).Length == 0) || (value is IEnumerable && !((IEnumerable)value).GetEnumerator().MoveNext());
-		}
-	}
+        /// <summary>
+        /// Format a command line argument string from a parsed instance. 
+        /// </summary>
+        /// <typeparam name="T">Type of <paramref name="options"/>.</typeparam>
+        /// <param name="parser">Parser instance.</param>
+        /// <param name="options">A parsed (or manually correctly constructed instance).</param>
+        /// <param name="configuration">The <see cref="Action{UnParserSettings}"/> lambda used to configure
+        /// aspects and behaviors of the unparsersing process.</param>
+        /// <returns>A string with command line arguments.</returns>
+        public static string FormatCommandLine<T>(this Parser parser, T options, Action<UnParserSettings> configuration)
+        {
+            if (options == null) throw new ArgumentNullException("options");
+
+            var settings = new UnParserSettings();
+            configuration(settings);
+            settings.Consumed = true;
+
+            var type = options.GetType();
+            var builder = new StringBuilder();
+
+            type.GetVerbSpecification()
+                .MapValueOrDefault(verb => builder.Append(verb.Name).Append(' '), builder);
+
+            var specs =
+                (from info in
+                    type.GetSpecifications(
+                        pi => new { Specification = Specification.FromProperty(pi),
+                            Value = pi.GetValue(options, null).NormalizeValue(), PropertyValue = pi.GetValue(options, null) })
+                where !info.PropertyValue.IsEmpty()
+                select info)
+                    .Memorize();
+
+            var allOptSpecs = from info in specs.Where(i => i.Specification.Tag == SpecificationType.Option)
+                let o = (OptionSpecification)info.Specification
+                where o.TargetType != TargetType.Switch || (o.TargetType == TargetType.Switch && ((bool)info.Value))
+                where !o.Hidden || settings.ShowHidden
+                orderby o.UniqueName()
+                select info;
+
+            var shortSwitches = from info in allOptSpecs
+                let o = (OptionSpecification)info.Specification
+                where o.TargetType == TargetType.Switch
+                where o.ShortName.Length > 0
+                orderby o.UniqueName()
+                select info;
+
+            var optSpecs = settings.GroupSwitches
+                ? allOptSpecs.Where(info => !shortSwitches.Contains(info))
+                : allOptSpecs;
+
+            var valSpecs = from info in specs.Where(i => i.Specification.Tag == SpecificationType.Value)
+                let v = (ValueSpecification)info.Specification
+                orderby v.Index
+                select info;
+
+            builder = settings.GroupSwitches && shortSwitches.Any()
+                ? builder.Append('-').Append(string.Join(string.Empty, shortSwitches.Select(
+                    info => ((OptionSpecification)info.Specification).ShortName).ToArray())).Append(' ')
+                : builder;
+            optSpecs.ForEach(
+                opt =>
+                    builder
+                        .Append(FormatOption((OptionSpecification)opt.Specification, opt.Value, settings))
+                        .Append(' ')
+                );
+
+            builder.AppendWhen(valSpecs.Any() && parser.Settings.EnableDashDash, "-- ");
+
+            valSpecs.ForEach(
+                val => builder.Append(FormatValue(val.Specification, val.Value)).Append(' '));
+
+            return builder
+                .ToString().TrimEnd(' ');
+        }
+
+        private static string FormatValue(Specification spec, object value)
+        {
+            var builder = new StringBuilder();
+            switch (spec.TargetType)
+            {
+                case TargetType.Scalar:
+                    builder.Append(FormatWithQuotesIfString(value));
+                    break;
+                case TargetType.Sequence:
+                    var sep = spec.SeperatorOrSpace();
+                    Func<object, object> format = v
+                        => sep == ' ' ? FormatWithQuotesIfString(v) : v;
+                    var e = ((IEnumerable)value).GetEnumerator();
+                    while (e.MoveNext())
+                        builder.Append(format(e.Current)).Append(sep);
+                    builder.TrimEndIfMatch(sep);
+                    break;
+            }
+            return builder.ToString();
+        }
+
+        private static object FormatWithQuotesIfString(object value)
+        {
+            Func<string, string> doubQt = v
+                => v.Contains("\"") ? v.Replace("\"", "\\\"") : v;
+
+            return (value as string)
+                .ToMaybe()
+                .MapValueOrDefault(v => v.Contains(' ') || v.Contains("\"")
+                    ? "\"".JoinTo(doubQt(v), "\"") : v, value);
+        }
+
+        private static char SeperatorOrSpace(this Specification spec)
+        {
+            return (spec as OptionSpecification).ToMaybe()
+                .MapValueOrDefault(o => o.Separator != '\0' ? o.Separator : ' ', ' ');
+        }
+
+        private static string FormatOption(OptionSpecification spec, object value, UnParserSettings settings)
+        {
+            return new StringBuilder()
+                    .Append(spec.FormatName(settings))
+                    .AppendWhen(spec.TargetType != TargetType.Switch, FormatValue(spec, value))
+                .ToString();
+        }
+
+        private static string FormatName(this OptionSpecification optionSpec, UnParserSettings settings)
+        {
+            // Have a long name and short name not preferred? Go with long! 
+            // No short name? Has to be long!
+            var longName = (optionSpec.LongName.Length >  0 && !settings.PreferShortName)
+                         || optionSpec.ShortName.Length == 0;
+
+            return
+                new StringBuilder(longName
+                    ? "--".JoinTo(optionSpec.LongName)
+                    : "-".JoinTo(optionSpec.ShortName))
+                        .AppendWhen(optionSpec.TargetType != TargetType.Switch, longName && settings.UseEqualToken ? "=" : " ")
+                    .ToString();
+        }
+
+        private static object NormalizeValue(this object value)
+        {
+#if !SKIP_FSHARP
+            if (value != null
+                && ReflectionHelper.IsFSharpOptionType(value.GetType())
+                && FSharpOptionHelper.IsSome(value))
+            {
+                return FSharpOptionHelper.ValueOf(value);
+            }
+#endif
+            return value;
+        }
+
+        private static bool IsEmpty(this object value)
+        {
+            if (value == null) return true;
+#if !SKIP_FSHARP
+            if (ReflectionHelper.IsFSharpOptionType(value.GetType()) && !FSharpOptionHelper.IsSome(value)) return true;
+#endif
+            if (value is ValueType && value.Equals(value.GetType().GetDefaultValue())) return true;
+            if (value is string && ((string)value).Length == 0) return true;
+            if (value is IEnumerable && !((IEnumerable)value).GetEnumerator().MoveNext()) return true;
+            return false;
+        }
+    }
 }

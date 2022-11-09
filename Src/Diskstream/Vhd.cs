@@ -64,8 +64,8 @@ namespace Microsoft.Spaces.Diskstream
 			bool flag2 = intPtr == Disk.InvalidHandleValue;
 			if (flag2)
 			{
-				throw new Win32Exception();
-			}
+				throw new Exception();//Win32Exception();
+            }
 			return new Vhd(intPtr);
 		}
 

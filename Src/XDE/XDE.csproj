@@ -38,49 +38,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DiscUtils.Core">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\DiscUtils.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="DiscUtils.Streams">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\DiscUtils.Streams.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Microsoft.Xde.Base">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.Common">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.Common.Base">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Common.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.Communication">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Communication.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.DeviceManagement">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.DeviceManagement.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.Hcs">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Hcs.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.Interface">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.Interface.Common">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Interface.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.Interface.Public.10.1">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Interface.Public.10.1.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.Tools">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Tools.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.WindowsAPICodePack">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.WindowsAPICodePack.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.Wmi">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Wmi.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -89,15 +47,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Threading.Tasks.Dataflow">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\System.Threading.Tasks.Dataflow.dll</HintPath>
-    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="WindowsDevicePortalWrapper">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\WindowsDevicePortalWrapper.dll</HintPath>
-    </Reference>
     <Reference Include="WindowsFormsIntegration" />
     <Reference Include="mscorlib" />
   </ItemGroup>
@@ -192,6 +144,68 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resources\microsoftemulator.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DiscUtils.Core\DiscUtils.Core.csproj">
+      <Project>{6932758a-cd40-42a9-9e4c-bff9141e6d97}</Project>
+      <Name>DiscUtils.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DiscUtils.Streams\DiscUtils.Streams.csproj">
+      <Project>{49ffb3df-bb58-496c-93a8-2881be6899b9}</Project>
+      <Name>DiscUtils.Streams</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.Base\Microsoft.Xde.Base.csproj">
+      <Project>{49394f18-62ee-4bdb-b1ef-fc2468ff116f}</Project>
+      <Name>Microsoft.Xde.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.Common.Base\Microsoft.Xde.Common.Base.csproj">
+      <Project>{a78f4998-31a5-4e67-bf7a-a39f9ff038be}</Project>
+      <Name>Microsoft.Xde.Common.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.Common\Microsoft.Xde.Common.csproj">
+      <Project>{8576637a-f463-47ac-9ce3-759d4089f5f9}</Project>
+      <Name>Microsoft.Xde.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.Communication\Microsoft.Xde.Communication.csproj">
+      <Project>{c42562bf-5fb0-43af-90dd-61b7aeb63fca}</Project>
+      <Name>Microsoft.Xde.Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.DeviceManagement\Microsoft.Xde.DeviceManagement.csproj">
+      <Project>{d766028e-531d-459c-96c4-822a31a5620f}</Project>
+      <Name>Microsoft.Xde.DeviceManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.Hcs\Microsoft.Xde.Hcs.csproj">
+      <Project>{c06cc4d2-ab3f-468d-9143-9dc82793739d}</Project>
+      <Name>Microsoft.Xde.Hcs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.Interface.Common\Microsoft.Xde.Interface.Common.csproj">
+      <Project>{565c6d9f-dbc4-4cc0-9011-fe6618fdf434}</Project>
+      <Name>Microsoft.Xde.Interface.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.Interface.Public.10.1\Microsoft.Xde.Interface.Public.10.1.csproj">
+      <Project>{d3b49452-82a4-4f0e-a20c-390454165999}</Project>
+      <Name>Microsoft.Xde.Interface.Public.10.1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.Interface\Microsoft.Xde.Interface.csproj">
+      <Project>{2ad88882-cb2b-4cd5-9215-c6c1e3b49876}</Project>
+      <Name>Microsoft.Xde.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.WindowsAPICodePack\Microsoft.Xde.WindowsAPICodePack.csproj">
+      <Project>{145e9b91-376c-4e59-906a-330b77465b1a}</Project>
+      <Name>Microsoft.Xde.WindowsAPICodePack</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.Wmi\Microsoft.Xde.Wmi.csproj">
+      <Project>{6795cf2d-8b93-4408-9ef4-216a2b8320f6}</Project>
+      <Name>Microsoft.Xde.Wmi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\System.Threading.Tasks.Dataflow\System.Threading.Tasks.Dataflow.csproj">
+      <Project>{86d47c1f-6ca2-43b7-a57b-9ab7684235f7}</Project>
+      <Name>System.Threading.Tasks.Dataflow</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WindowsDevicePortalWrapper\WindowsDevicePortalWrapper.csproj">
+      <Project>{405ee189-8412-4875-9f9d-f4d9b1dec91a}</Project>
+      <Name>WindowsDevicePortalWrapper</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

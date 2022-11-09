@@ -1,0 +1,95 @@
+Microsoft.Smartdevice.Connectivity and Windows Phone 8, launch native apps, send input?
+Asked 9 years ago
+Modified 8 years, 6 months ago
+Viewed 2k times
+
+7
+
+
+I've written a small .NET Console program that will launch the Windows 8 Simulator. Very straightforward:
+
+using Microsoft.SmartDevice.Connectivity;
+using Microsoft.SmartDevice.Connectivity.Interface;
+using Microsoft.SmartDevice.MultiTargeting.Connectivity;
+
+MultiTargetingConnectivity connectivity = new MultiTargetingConnectivity(CultureInfo.CurrentUICulture.LCID);
+var devices = connectivity.GetConnectableDevices();
+ConnectableDevice connectableDevice = devices[2];
+Console.WriteLine("Found Connectable Device \'" + connectableDevice.Name + "\' for Device id {" + connectableDevice.Id + "}.");
+Pretty straightforward. However, what I want to do now is programmatically interact with the device. I know I can launch my own Apps by using iDevice.installApplication but what I really want to do is run a built-in app that comes with the simulator (the mail app). Can I use the SmartDevice.Connectivity libs to send touches, or launch 'hidden' apps that don't show up in the GetInstalledApplications() method? the API is sparse, and doesn't seem like a ton of developers are using this.
+
+windows-phone-8smart-device-framework
+Share
+Improve this question
+Follow
+edited Apr 24, 2014 at 9:00
+Johan Falk's user avatar
+Johan Falk
+4,32122 gold badges2828 silver badges4242 bronze badges
+asked Oct 24, 2013 at 15:10
+Richthofen's user avatar
+Richthofen
+2,0661919 silver badges3636 bronze badges
+Add a comment
+1 Answer
+Sorted by:
+
+Highest score (default)
+
+1
+
+
+I've actually found a better framework than the SmartDevice framework. Inside the C:\Program Files (x86)\Microsoft XDE\8.0 folder you can find the Microsoft.XDE DLLs, which help power the Windows 8 simulator wrapper/skin, and are managed libraries that allow you to interact with the simulator. Sample code:
+
+private static void BootViaXdeLibs()
+{
+    var factory = new Microsoft.Xde.Wmi.XdeWmiFactory();
+    Console.WriteLine("Polling for virtual machines");
+
+    var virtualMachine = factory.GetAllXdeVirtualMachines(SettingsOptions.None)[2];
+    Console.WriteLine("Found machine {0}", virtualMachine.Name);
+
+    if (virtualMachine.EnabledState != VirtualMachineEnabledState.Disabled)
+    {
+        Console.WriteLine("Virtual Machine {0} is already running. Shutting down. ", virtualMachine.Name);
+        virtualMachine.Stop();
+        while (virtualMachine.EnabledState != VirtualMachineEnabledState.Disabled)
+        {
+            Thread.Sleep(1000);
+        }
+    }
+
+    Console.WriteLine("Starting {0}", virtualMachine.Name);
+
+    virtualMachine.Start();
+    while (virtualMachine.EnabledState == VirtualMachineEnabledState.Starting)
+    {
+        Thread.Sleep(1000);
+    }
+
+    Console.WriteLine("Sleeping before image capture to give boot time");
+    Thread.Sleep(30000);
+
+    //Click on the screen
+    virtualMachine.SendMouseEvent(new MouseEventArgs(MouseButtons.Left, 1, 295, 260, 0));
+    Thread.Sleep(100);
+    virtualMachine.SendMouseEvent(new MouseEventArgs(MouseButtons.None, 0, 295, 260, 0));
+    Thread.Sleep(1000);
+
+    Console.WriteLine("Saving screenshot");
+
+    //Capture Screen
+    var res = virtualMachine.GetCurrentResolution();
+    var image = virtualMachine.GetScreenShot(0, 0, res.Width, res.Height);
+    image.Save("C:\\image.png", ImageFormat.Png);
+
+    virtualMachine.Stop();
+}
+Share
+Improve this answer
+Follow
+edited Apr 24, 2014 at 8:59
+Johan Falk's user avatar
+Johan Falk
+4,32122 gold badges2828 silver badges4242 bronze badges
+answered Nov 7, 2013 at 17:16

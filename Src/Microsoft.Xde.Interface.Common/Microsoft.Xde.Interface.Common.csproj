@@ -33,12 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Xde.Common.Base">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Common.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.WindowsAPICodePack">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.WindowsAPICodePack.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
@@ -81,6 +75,16 @@
     <Compile Include="Toolbar\XdeButtonBase.cs" />
     <Compile Include="Toolbar\XdeToolbarItemBase.cs" />
     <Compile Include="TrackbarSettings.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Xde.Common.Base\Microsoft.Xde.Common.Base.csproj">
+      <Project>{a78f4998-31a5-4e67-bf7a-a39f9ff038be}</Project>
+      <Name>Microsoft.Xde.Common.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.WindowsAPICodePack\Microsoft.Xde.WindowsAPICodePack.csproj">
+      <Project>{145e9b91-376c-4e59-906a-330b77465b1a}</Project>
+      <Name>Microsoft.Xde.WindowsAPICodePack</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -32,15 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Xde.Common">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.Common.Base">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Common.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.Interface.Public.10.1">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Interface.Public.10.1.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -76,6 +67,20 @@
   <ItemGroup>
     <EmbeddedResource Include="Strings.resources" />
     <EmbeddedResource Include="XdeVmExceptions.resources" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Xde.Common.Base\Microsoft.Xde.Common.Base.csproj">
+      <Project>{a78f4998-31a5-4e67-bf7a-a39f9ff038be}</Project>
+      <Name>Microsoft.Xde.Common.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.Common\Microsoft.Xde.Common.csproj">
+      <Project>{8576637a-f463-47ac-9ce3-759d4089f5f9}</Project>
+      <Name>Microsoft.Xde.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.Interface.Public.10.1\Microsoft.Xde.Interface.Public.10.1.csproj">
+      <Project>{d3b49452-82a4-4f0e-a20c-390454165999}</Project>
+      <Name>Microsoft.Xde.Interface.Public.10.1</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

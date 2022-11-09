@@ -1,13 +1,12 @@
-﻿using System;
+﻿// Copyright 2005-2015 Giacomo Stelluti Scala & Contributors. All rights reserved. See License.md in the project root for license information.
 
 namespace CommandLine
 {
-	// Token: 0x02000043 RID: 67
-	public sealed class NullInstance
-	{
-		// Token: 0x0600014D RID: 333 RVA: 0x00005645 File Offset: 0x00003845
-		internal NullInstance()
-		{
-		}
-	}
+    /// <summary>
+    /// Models a null result when constructing a <see cref="ParserResult{T}"/> in a faling verbs scenario.
+    /// </summary>
+    public sealed class NullInstance
+    {
+        internal NullInstance() { }
+    }
 }

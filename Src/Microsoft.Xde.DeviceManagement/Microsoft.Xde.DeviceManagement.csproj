@@ -33,22 +33,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Xde.Common.Base">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Common.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.Interface.Public.10.1">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Interface.Public.10.1.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.WindowsRuntime" />
     <Reference Include="System.Xml" />
-    <Reference Include="Windows.Foundation.FoundationContract" />
-    <Reference Include="Windows.Foundation.UniversalApiContract" />
-    <Reference Include="Windows.Services.Store.StoreContract" />
   </ItemGroup>
   <ItemGroup>
     <AppDesigner Include="Properties\" />
@@ -79,6 +70,31 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resources\microsoftemulator.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Xde.Common.Base\Microsoft.Xde.Common.Base.csproj">
+      <Project>{a78f4998-31a5-4e67-bf7a-a39f9ff038be}</Project>
+      <Name>Microsoft.Xde.Common.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.Interface.Public.10.1\Microsoft.Xde.Interface.Public.10.1.csproj">
+      <Project>{d3b49452-82a4-4f0e-a20c-390454165999}</Project>
+      <Name>Microsoft.Xde.Interface.Public.10.1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Windows.Foundation.FoundationContract\Windows.Foundation.FoundationContract.csproj">
+      <Project>{042c448c-8b3d-477e-a58f-5f6381a90e77}</Project>
+      <Name>Windows.Foundation.FoundationContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Windows.Foundation.UniversalApiContract\Windows.Foundation.UniversalApiContract.csproj">
+      <Project>{3c60abaa-c19b-44ff-922b-c10ce187eda6}</Project>
+      <Name>Windows.Foundation.UniversalApiContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Windows.Services.Store.StoreContract\Windows.Services.Store.StoreContract.csproj">
+      <Project>{8068d6c4-df9e-44ac-ae31-b8240d4703f2}</Project>
+      <Name>Windows.Services.Store.StoreContract</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

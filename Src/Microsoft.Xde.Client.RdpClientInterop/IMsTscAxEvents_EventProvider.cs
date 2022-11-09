@@ -7,8 +7,8 @@ using System.Threading;
 namespace Microsoft.Xde.Client.RdpClientInterop
 {
 	// Token: 0x020000A2 RID: 162
-	internal sealed class IMsTscAxEvents_EventProvider : IMsTscAxEvents_Event, IDisposable
-	{
+	internal sealed class IMsTscAxEvents_EventProvider : IDisposable // IMsTscAxEvents_Event, IDisposable
+    {
 		// Token: 0x060024DF RID: 9439 RVA: 0x00002734 File Offset: 0x00000934
 		private void Init()
 		{
@@ -42,8 +42,8 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
-				Monitor.Enter(this, ref flag);
+				bool flag = default;
+				Monitor.Enter(this, ref	flag);
 				if (this.m_ConnectionPoint == null)
 				{
 					this.Init();
@@ -57,7 +57,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -70,7 +70,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_aEventSinkHelpers != null)
 				{
@@ -106,7 +106,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -119,7 +119,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_ConnectionPoint == null)
 				{
@@ -134,7 +134,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -147,8 +147,8 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
-				Monitor.Enter(this, ref flag);
+				bool flag = default;
+                Monitor.Enter(this, ref flag);
 				if (this.m_aEventSinkHelpers != null)
 				{
 					int count = this.m_aEventSinkHelpers.Count;
@@ -183,8 +183,8 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
-				if (flag)
+				bool flag = default;
+                if (flag)
 				{
 					Monitor.Exit(this);
 				}
@@ -196,8 +196,8 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
-				Monitor.Enter(this, ref flag);
+				bool flag = default;
+                Monitor.Enter(this, ref flag);
 				if (this.m_ConnectionPoint == null)
 				{
 					this.Init();
@@ -211,8 +211,8 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
-				if (flag)
+				bool flag = default;
+                if (flag)
 				{
 					Monitor.Exit(this);
 				}
@@ -301,8 +301,8 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
-				Monitor.Enter(this, ref flag);
+				bool flag = default;
+                Monitor.Enter(this, ref flag);
 				if (this.m_aEventSinkHelpers != null)
 				{
 					int count = this.m_aEventSinkHelpers.Count;
@@ -350,8 +350,8 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
-				Monitor.Enter(this, ref flag);
+				bool flag = default;
+                Monitor.Enter(this, ref flag);
 				if (this.m_ConnectionPoint == null)
 				{
 					this.Init();
@@ -2290,8 +2290,8 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
-				if (flag)
+				bool flag = default;
+                if (flag)
 				{
 					Monitor.Exit(this);
 				}
@@ -2303,7 +2303,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag  = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_aEventSinkHelpers != null)
 				{
@@ -2339,8 +2339,8 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
-				if (flag)
+				bool flag = default;
+                if (flag)
 				{
 					Monitor.Exit(this);
 				}
@@ -2354,6 +2354,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		}
 
 		// Token: 0x0600251D RID: 9501 RVA: 0x00005AA8 File Offset: 0x00003CA8
+		/*
 		public override void Finalize()
 		{
 			try
@@ -2389,11 +2390,13 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 				}
 			}
 		}
+		*/
 
 		// Token: 0x0600251E RID: 9502 RVA: 0x00005B70 File Offset: 0x00003D70
 		public void Dispose()
 		{
-			this.Finalize();
+			//RnD
+			//this.Finalize();
 			GC.SuppressFinalize(this);
 		}
 
@@ -2405,5 +2408,36 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 
 		// Token: 0x040000BE RID: 190
 		private IConnectionPoint m_ConnectionPoint;
-	}
+
+        public event IMsTscAxEvents_OnConnectingEventHandler OnConnecting1;
+        public event IMsTscAxEvents_OnConnectedEventHandler OnConnected1;
+        public event IMsTscAxEvents_OnLoginCompleteEventHandler OnLoginComplete1;
+        public event IMsTscAxEvents_OnDisconnectedEventHandler OnDisconnected1;
+        public event IMsTscAxEvents_OnEnterFullScreenModeEventHandler OnEnterFullScreenMode1;
+        public event IMsTscAxEvents_OnLeaveFullScreenModeEventHandler OnLeaveFullScreenMode1;
+        public event IMsTscAxEvents_OnChannelReceivedDataEventHandler OnChannelReceivedData1;
+        public event IMsTscAxEvents_OnRequestGoFullScreenEventHandler OnRequestGoFullScreen1;
+        public event IMsTscAxEvents_OnRequestLeaveFullScreenEventHandler OnRequestLeaveFullScreen1;
+        public event IMsTscAxEvents_OnFatalErrorEventHandler OnFatalError1;
+        public event IMsTscAxEvents_OnWarningEventHandler OnWarning1;
+        public event IMsTscAxEvents_OnRemoteDesktopSizeChangeEventHandler OnRemoteDesktopSizeChange1;
+        public event IMsTscAxEvents_OnIdleTimeoutNotificationEventHandler OnIdleTimeoutNotification1;
+        public event IMsTscAxEvents_OnRequestContainerMinimizeEventHandler OnRequestContainerMinimize1;
+        public event IMsTscAxEvents_OnConfirmCloseEventHandler OnConfirmClose1;
+        public event IMsTscAxEvents_OnReceivedTSPublicKeyEventHandler OnReceivedTSPublicKe1y;
+        public event IMsTscAxEvents_OnAutoReconnectingEventHandler OnAutoReconnecting1;
+        public event IMsTscAxEvents_OnAuthenticationWarningDisplayedEventHandler OnAuthenticationWarningDisplayed1;
+        public event IMsTscAxEvents_OnAuthenticationWarningDismissedEventHandler OnAuthenticationWarningDismissed1;
+        public event IMsTscAxEvents_OnRemoteProgramResultEventHandler OnRemoteProgramResult1;
+        public event IMsTscAxEvents_OnRemoteProgramDisplayedEventHandler OnRemoteProgramDisplayed1;
+        public event IMsTscAxEvents_OnRemoteWindowDisplayedEventHandler OnRemoteWindowDisplayed1;
+        public event IMsTscAxEvents_OnLogonErrorEventHandler OnLogonError1;
+        public event IMsTscAxEvents_OnFocusReleasedEventHandler OnFocusReleased1;
+        public event IMsTscAxEvents_OnUserNameAcquiredEventHandler OnUserNameAcquired1;
+        public event IMsTscAxEvents_OnMouseInputModeChangedEventHandler OnMouseInputModeChanged1;
+        public event IMsTscAxEvents_OnServiceMessageReceivedEventHandler OnServiceMessageReceived1;
+        public event IMsTscAxEvents_OnConnectionBarPullDownEventHandler OnConnectionBarPullDown1;
+        public event IMsTscAxEvents_OnNetworkBandwidthChangedEventHandler OnNetworkBandwidthChanged1;
+        public event IMsTscAxEvents_OnAutoReconnectedEventHandler OnAutoReconnected1;
+    }
 }

@@ -32,14 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DiscUtils.Core">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\DiscUtils.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="DiscUtils.Streams">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\DiscUtils.Streams.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
@@ -79,6 +71,16 @@
     <Compile Include="RegionTable.cs" />
     <Compile Include="RegionTableInfo.cs" />
     <Compile Include="VhdxHeader.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DiscUtils.Core\DiscUtils.Core.csproj">
+      <Project>{6932758a-cd40-42a9-9e4c-bff9141e6d97}</Project>
+      <Name>DiscUtils.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DiscUtils.Streams\DiscUtils.Streams.csproj">
+      <Project>{49ffb3df-bb58-496c-93a8-2881be6899b9}</Project>
+      <Name>DiscUtils.Streams</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

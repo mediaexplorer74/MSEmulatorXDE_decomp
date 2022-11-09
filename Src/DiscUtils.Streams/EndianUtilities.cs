@@ -124,7 +124,9 @@ namespace DiscUtils.Streams
 		// Token: 0x060001C9 RID: 457 RVA: 0x0000655F File Offset: 0x0000475F
 		public static uint ToUInt32LittleEndian(byte[] buffer, int offset)
 		{
-			return (uint)(((long)((long)buffer[offset + 3] << 24) & (long)((ulong)-16777216)) | ((long)((long)buffer[offset + 2] << 16) & 16711680L) | ((long)((long)buffer[offset + 1] << 8) & 65280L) | ((long)buffer[offset] & 255L));
+			return (uint)(((long)((long)buffer[offset + 3] << 24) & (long)((-16777216)) 
+				| ((long)((long)buffer[offset + 2] << 16) & 16711680L) 
+				| ((long)((long)buffer[offset + 1] << 8) & 65280L) | ((long)buffer[offset] & 255L)));
 		}
 
 		// Token: 0x060001CA RID: 458 RVA: 0x0000659F File Offset: 0x0000479F
@@ -160,7 +162,10 @@ namespace DiscUtils.Streams
 		// Token: 0x060001CF RID: 463 RVA: 0x000065ED File Offset: 0x000047ED
 		public static uint ToUInt32BigEndian(byte[] buffer, int offset)
 		{
-			return (uint)(((long)((long)buffer[offset] << 24) & (long)((ulong)-16777216)) | ((long)((long)buffer[offset + 1] << 16) & 16711680L) | ((long)((long)buffer[offset + 2] << 8) & 65280L) | ((long)buffer[offset + 3] & 255L));
+			return (uint)(((long)((long)buffer[offset] << 24) & (long)(-16777216)) 
+				| ((long)((buffer[offset + 1] << 16) & 16711680L) 
+				| ((long)((long)buffer[offset + 2] << 8) & 65280L) 
+				| ((long)buffer[offset + 3] & 255L)));
 		}
 
 		// Token: 0x060001D0 RID: 464 RVA: 0x0000662D File Offset: 0x0000482D

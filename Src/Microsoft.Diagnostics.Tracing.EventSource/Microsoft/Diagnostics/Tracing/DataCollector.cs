@@ -270,8 +270,9 @@ namespace Microsoft.Diagnostics.Tracing
 			if (this.writingScalars)
 			{
 				EventSource.EventData* ptr = this.datas;
-				ptr->m_Size = (this.scratch - checked((UIntPtr)ptr->m_Ptr)) / 1;
-				this.datas = checked(ptr + 1);
+				ptr->m_Size = (int)(this.scratch - (int)((UIntPtr)ptr->m_Ptr)) / 1;
+
+                this.datas = checked(ptr + 1);
 				this.writingScalars = false;
 			}
 		}

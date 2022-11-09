@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Copyright 2005-2015 Giacomo Stelluti Scala & Contributors. All rights reserved. See License.md in the project root for license information.
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,185 +11,222 @@ using RailwaySharp.ErrorHandling;
 
 namespace CommandLine
 {
-	// Token: 0x02000045 RID: 69
-	public class Parser : IDisposable
-	{
-		// Token: 0x06000159 RID: 345 RVA: 0x00005721 File Offset: 0x00003921
-		public Parser()
-		{
-			this.settings = new ParserSettings
-			{
-				Consumed = true
-			};
-		}
+    /// <summary>
+    /// Provides methods to parse command line arguments.
+    /// </summary>
+    public class Parser : IDisposable
+    {
+        private bool disposed;
+        private readonly ParserSettings settings;
+        private static readonly Lazy<Parser> DefaultParser = new Lazy<Parser>(
+            () => new Parser(new ParserSettings { HelpWriter = Console.Error }));
 
-		// Token: 0x0600015A RID: 346 RVA: 0x0000573B File Offset: 0x0000393B
-		public Parser(Action<ParserSettings> configuration)
-		{
-			if (configuration == null)
-			{
-				throw new ArgumentNullException("configuration");
-			}
-			this.settings = new ParserSettings();
-			configuration(this.settings);
-			this.settings.Consumed = true;
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CommandLine.Parser"/> class.
+        /// </summary>
+        public Parser()
+        {
+            settings = new ParserSettings { Consumed = true };
+        }
 
-		// Token: 0x0600015B RID: 347 RVA: 0x00005774 File Offset: 0x00003974
-		internal Parser(ParserSettings settings)
-		{
-			this.settings = settings;
-			this.settings.Consumed = true;
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Parser"/> class,
+        /// configurable with <see cref="ParserSettings"/> using a delegate.
+        /// </summary>
+        /// <param name="configuration">The <see cref="Action&lt;ParserSettings&gt;"/> delegate used to configure
+        /// aspects and behaviors of the parser.</param>
+        public Parser(Action<ParserSettings> configuration)
+        {
+            if (configuration == null) throw new ArgumentNullException("configuration");
 
-		// Token: 0x0600015C RID: 348 RVA: 0x00005790 File Offset: 0x00003990
-		~Parser()
-		{
-			this.Dispose(false);
-		}
+            settings = new ParserSettings();
+            configuration(settings);
+            settings.Consumed = true;
+        }
 
-		// Token: 0x17000053 RID: 83
-		// (get) Token: 0x0600015D RID: 349 RVA: 0x000057C0 File Offset: 0x000039C0
-		public static Parser Default
-		{
-			get
-			{
-				return Parser.DefaultParser.Value;
-			}
-		}
+        internal Parser(ParserSettings settings)
+        {
+            this.settings = settings;
+            this.settings.Consumed = true;
+        }
 
-		// Token: 0x17000054 RID: 84
-		// (get) Token: 0x0600015E RID: 350 RVA: 0x000057CC File Offset: 0x000039CC
-		public ParserSettings Settings
-		{
-			get
-			{
-				return this.settings;
-			}
-		}
+        /// <summary>
+        /// Finalizes an instance of the <see cref="CommandLine.Parser"/> class.
+        /// </summary>
+        ~Parser()
+        {
+            Dispose(false);
+        }
 
-		// Token: 0x0600015F RID: 351 RVA: 0x000057D4 File Offset: 0x000039D4
-		public ParserResult<T> ParseArguments<T>(IEnumerable<string> args)
-		{
-			if (args == null)
-			{
-				throw new ArgumentNullException("args");
-			}
-			return Parser.MakeParserResult<T>(InstanceBuilder.Build<T>(typeof(T).IsMutable() ? Maybe.Just<Func<T>>(new Func<T>(Activator.CreateInstance<T>)) : Maybe.Nothing<Func<T>>(), (IEnumerable<string> arguments, IEnumerable<OptionSpecification> optionSpecs) => Parser.Tokenize(arguments, optionSpecs, this.settings), args, this.settings.NameComparer, this.settings.CaseInsensitiveEnumValues, this.settings.ParsingCulture, this.settings.AutoHelp, this.settings.AutoVersion, Parser.HandleUnknownArguments(this.settings.IgnoreUnknownArguments)), this.settings);
-		}
+        /// <summary>
+        /// Gets the singleton instance created with basic defaults.
+        /// </summary>
+        public static Parser Default
+        {
+            get { return DefaultParser.Value; }
+        }
 
-		// Token: 0x06000160 RID: 352 RVA: 0x0000587C File Offset: 0x00003A7C
-		public ParserResult<T> ParseArguments<T>(Func<T> factory, IEnumerable<string> args) where T : new()
-		{
-			if (factory == null)
-			{
-				throw new ArgumentNullException("factory");
-			}
-			if (!typeof(T).IsMutable())
-			{
-				throw new ArgumentException("factory");
-			}
-			if (args == null)
-			{
-				throw new ArgumentNullException("args");
-			}
-			return Parser.MakeParserResult<T>(InstanceBuilder.Build<T>(Maybe.Just<Func<T>>(factory), (IEnumerable<string> arguments, IEnumerable<OptionSpecification> optionSpecs) => Parser.Tokenize(arguments, optionSpecs, this.settings), args, this.settings.NameComparer, this.settings.CaseInsensitiveEnumValues, this.settings.ParsingCulture, this.settings.AutoHelp, this.settings.AutoVersion, Parser.HandleUnknownArguments(this.settings.IgnoreUnknownArguments)), this.settings);
-		}
+        /// <summary>
+        /// Gets the instance that implements <see cref="CommandLine.ParserSettings"/> in use.
+        /// </summary>
+        public ParserSettings Settings
+        {
+            get { return settings; }
+        }
 
-		// Token: 0x06000161 RID: 353 RVA: 0x0000592C File Offset: 0x00003B2C
-		public ParserResult<object> ParseArguments(IEnumerable<string> args, params Type[] types)
-		{
-			if (args == null)
-			{
-				throw new ArgumentNullException("args");
-			}
-			if (types == null)
-			{
-				throw new ArgumentNullException("types");
-			}
-			if (types.Length == 0)
-			{
-				throw new ArgumentOutOfRangeException("types");
-			}
-			return Parser.MakeParserResult<object>(InstanceChooser.Choose((IEnumerable<string> arguments, IEnumerable<OptionSpecification> optionSpecs) => Parser.Tokenize(arguments, optionSpecs, this.settings), types, args, this.settings.NameComparer, this.settings.CaseInsensitiveEnumValues, this.settings.ParsingCulture, this.settings.AutoHelp, this.settings.AutoVersion, Parser.HandleUnknownArguments(this.settings.IgnoreUnknownArguments)), this.settings);
-		}
+        /// <summary>
+        /// Parses a string array of command line arguments constructing values in an instance of type <typeparamref name="T"/>.
+        /// Grammar rules are defined decorating public properties with appropriate attributes.
+        /// </summary>
+        /// <typeparam name="T">Type of the target instance built with parsed value.</typeparam>
+        /// <param name="args">A <see cref="System.String"/> array of command line arguments, normally supplied by application entry point.</param>
+        /// <returns>A <see cref="CommandLine.ParserResult{T}"/> containing an instance of type <typeparamref name="T"/> with parsed values
+        /// and a sequence of <see cref="CommandLine.Error"/>.</returns>
+        /// <exception cref="System.ArgumentNullException">Thrown if one or more arguments are null.</exception>
+        public ParserResult<T> ParseArguments<T>(IEnumerable<string> args)
+        {
+            if (args == null) throw new ArgumentNullException("args");
 
-		// Token: 0x06000162 RID: 354 RVA: 0x000059C9 File Offset: 0x00003BC9
-		public void Dispose()
-		{
-			this.Dispose(true);
-			GC.SuppressFinalize(this);
-		}
+            var factory = typeof(T).IsMutable()
+                ? Maybe.Just<Func<T>>(Activator.CreateInstance<T>)
+                : Maybe.Nothing<Func<T>>();
 
-		// Token: 0x06000163 RID: 355 RVA: 0x000059D8 File Offset: 0x00003BD8
-		private static Result<IEnumerable<Token>, Error> Tokenize(IEnumerable<string> arguments, IEnumerable<OptionSpecification> optionSpecs, ParserSettings settings)
-		{
-			return Tokenizer.ConfigureTokenizer(settings.NameComparer, settings.IgnoreUnknownArguments, settings.EnableDashDash)(arguments, optionSpecs);
-		}
+            return MakeParserResult(
+                InstanceBuilder.Build(
+                    factory,
+                    (arguments, optionSpecs) => Tokenize(arguments, optionSpecs, settings),
+                    args,
+                    settings.NameComparer,
+                    settings.CaseInsensitiveEnumValues,
+                    settings.ParsingCulture,
+                    settings.AutoHelp,
+                    settings.AutoVersion,
+                    HandleUnknownArguments(settings.IgnoreUnknownArguments)),
+                settings);
+        }
 
-		// Token: 0x06000164 RID: 356 RVA: 0x000059F8 File Offset: 0x00003BF8
-		private static ParserResult<T> MakeParserResult<T>(ParserResult<T> parserResult, ParserSettings settings)
-		{
-			return Parser.DisplayHelp<T>(parserResult, settings.HelpWriter, settings.MaximumDisplayWidth);
-		}
+        /// <summary>
+        /// Parses a string array of command line arguments constructing values in an instance of type <typeparamref name="T"/>.
+        /// Grammar rules are defined decorating public properties with appropriate attributes.
+        /// </summary>
+        /// <typeparam name="T">Type of the target instance built with parsed value.</typeparam>
+        /// <param name="factory">A <see cref="System.Func{T}"/> delegate used to initialize the target instance.</param>
+        /// <param name="args">A <see cref="System.String"/> array of command line arguments, normally supplied by application entry point.</param>
+        /// <returns>A <see cref="CommandLine.ParserResult{T}"/> containing an instance of type <typeparamref name="T"/> with parsed values
+        /// and a sequence of <see cref="CommandLine.Error"/>.</returns>
+        /// <exception cref="System.ArgumentNullException">Thrown if one or more arguments are null.</exception>
+        public ParserResult<T> ParseArguments<T>(Func<T> factory, IEnumerable<string> args)
+            where T : new()
+        {
+            if (factory == null) throw new ArgumentNullException("factory");
+            if (!typeof(T).IsMutable()) throw new ArgumentException("factory");
+            if (args == null) throw new ArgumentNullException("args");
 
-		// Token: 0x06000165 RID: 357 RVA: 0x00005A0C File Offset: 0x00003C0C
-		private static ParserResult<T> DisplayHelp<T>(ParserResult<T> parserResult, TextWriter helpWriter, int maxDisplayWidth)
-		{
-			Action<IEnumerable<Error>, TextWriter> <>9__1;
-			parserResult.WithNotParsed(delegate(IEnumerable<Error> errors)
-			{
-				Maybe<Tuple<IEnumerable<Error>, TextWriter>> maybe = Maybe.Merge<IEnumerable<Error>, TextWriter>(errors.ToMaybe<Error>(), helpWriter.ToMaybe<TextWriter>());
-				Action<IEnumerable<Error>, TextWriter> action;
-				if ((action = <>9__1) == null)
-				{
-					action = (<>9__1 = delegate(IEnumerable<Error> _, TextWriter writer)
-					{
-						writer.Write(HelpText.AutoBuild<T>(parserResult, maxDisplayWidth));
-					});
-				}
-				maybe.Do(action);
-			});
-			return parserResult;
-		}
+            return MakeParserResult(
+                InstanceBuilder.Build(
+                    Maybe.Just(factory),
+                    (arguments, optionSpecs) => Tokenize(arguments, optionSpecs, settings),
+                    args,
+                    settings.NameComparer,
+                    settings.CaseInsensitiveEnumValues,
+                    settings.ParsingCulture,
+                    settings.AutoHelp,
+                    settings.AutoVersion,
+                    HandleUnknownArguments(settings.IgnoreUnknownArguments)),
+                settings);
+        }
 
-		// Token: 0x06000166 RID: 358 RVA: 0x00005A52 File Offset: 0x00003C52
-		private static IEnumerable<ErrorType> HandleUnknownArguments(bool ignoreUnknownArguments)
-		{
-			if (!ignoreUnknownArguments)
-			{
-				return Enumerable.Empty<ErrorType>();
-			}
-			return Enumerable.Empty<ErrorType>().Concat(ErrorType.UnknownOptionError);
-		}
+        /// <summary>
+        /// Parses a string array of command line arguments for verb commands scenario, constructing the proper instance from the array of types supplied by <paramref name="types"/>.
+        /// Grammar rules are defined decorating public properties with appropriate attributes.
+        /// The <see cref="CommandLine.VerbAttribute"/> must be applied to types in the array.
+        /// </summary>
+        /// <param name="args">A <see cref="System.String"/> array of command line arguments, normally supplied by application entry point.</param>
+        /// <param name="types">A <see cref="System.Type"/> array used to supply verb alternatives.</param>
+        /// <returns>A <see cref="CommandLine.ParserResult{T}"/> containing the appropriate instance with parsed values as a <see cref="System.Object"/>
+        /// and a sequence of <see cref="CommandLine.Error"/>.</returns>
+        /// <exception cref="System.ArgumentNullException">Thrown if one or more arguments are null.</exception>
+        /// <exception cref="System.ArgumentOutOfRangeException">Thrown if <paramref name="types"/> array is empty.</exception>
+        /// <remarks>All types must expose a parameterless constructor. It's strongly recommended to use a generic overload.</remarks>
+        public ParserResult<object> ParseArguments(IEnumerable<string> args, params Type[] types)
+        {
+            if (args == null) throw new ArgumentNullException("args");
+            if (types == null) throw new ArgumentNullException("types");
+            if (types.Length == 0) throw new ArgumentOutOfRangeException("types");
 
-		// Token: 0x06000167 RID: 359 RVA: 0x00005A68 File Offset: 0x00003C68
-		private void Dispose(bool disposing)
-		{
-			if (this.disposed)
-			{
-				return;
-			}
-			if (disposing)
-			{
-				if (this.settings != null)
-				{
-					this.settings.Dispose();
-				}
-				this.disposed = true;
-			}
-		}
+            return MakeParserResult(
+                InstanceChooser.Choose(
+                    (arguments, optionSpecs) => Tokenize(arguments, optionSpecs, settings),
+                    types,
+                    args,
+                    settings.NameComparer,
+                    settings.CaseInsensitiveEnumValues,
+                    settings.ParsingCulture,
+                    settings.AutoHelp,
+                    settings.AutoVersion,
+                    HandleUnknownArguments(settings.IgnoreUnknownArguments)),
+                settings);
+        }
 
-		// Token: 0x0400006D RID: 109
-		private bool disposed;
+        /// <summary>
+        /// Frees resources owned by the instance.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
 
-		// Token: 0x0400006E RID: 110
-		private readonly ParserSettings settings;
+            GC.SuppressFinalize(this);
+        }
 
-		// Token: 0x0400006F RID: 111
-		private static readonly Lazy<Parser> DefaultParser = new Lazy<Parser>(() => new Parser(new ParserSettings
-		{
-			HelpWriter = Console.Error
-		}));
-	}
+        private static Result<IEnumerable<Token>, Error> Tokenize(
+                IEnumerable<string> arguments,
+                IEnumerable<OptionSpecification> optionSpecs,
+                ParserSettings settings)
+        {
+            return
+                Tokenizer.ConfigureTokenizer(
+                    settings.NameComparer,
+                    settings.IgnoreUnknownArguments,
+                    settings.EnableDashDash)(arguments, optionSpecs);
+        }
+
+        private static ParserResult<T> MakeParserResult<T>(ParserResult<T> parserResult, ParserSettings settings)
+        {
+            return DisplayHelp(
+                parserResult,
+                settings.HelpWriter,
+                settings.MaximumDisplayWidth);
+        }
+
+        private static ParserResult<T> DisplayHelp<T>(ParserResult<T> parserResult, TextWriter helpWriter, int maxDisplayWidth)
+        {
+            parserResult.WithNotParsed(
+                errors =>
+                    Maybe.Merge(errors.ToMaybe(), helpWriter.ToMaybe())
+                        .Do((_, writer) => writer.Write(HelpText.AutoBuild(parserResult, maxDisplayWidth)))
+                );
+
+            return parserResult;
+        }
+
+        private static IEnumerable<ErrorType> HandleUnknownArguments(bool ignoreUnknownArguments)
+        {
+            return ignoreUnknownArguments
+                ? Enumerable.Empty<ErrorType>().Concat(ErrorType.UnknownOptionError)
+                : Enumerable.Empty<ErrorType>();
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposed) return;
+
+            if (disposing)
+            {
+                if (settings != null)
+                    settings.Dispose();
+
+                disposed = true;
+            }
+        }
+    }
 }

@@ -98,7 +98,7 @@ namespace DiscUtils.Streams
 		// Token: 0x17000081 RID: 129
 		// (get) Token: 0x0600020F RID: 527 RVA: 0x000073DE File Offset: 0x000055DE
 		// (set) Token: 0x06000210 RID: 528 RVA: 0x000073E6 File Offset: 0x000055E6
-		private protected T WrappedStream { protected get; private set; }
+		private protected T WrappedStream { get; private set; }
 
 		// Token: 0x06000211 RID: 529 RVA: 0x000073F0 File Offset: 0x000055F0
 		public override IEnumerable<StreamExtent> MapContent(long start, long length)

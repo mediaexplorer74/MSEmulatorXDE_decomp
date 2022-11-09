@@ -8,7 +8,7 @@ namespace Microsoft.Diagnostics.Tracing
 	internal class FieldMetadata
 	{
 		// Token: 0x060001E2 RID: 482 RVA: 0x0000D59A File Offset: 0x0000B79A
-		public FieldMetadata(string name, TraceLoggingDataType type, EventFieldTags tags, bool variableCount) : this(name, type, tags, variableCount ? 64 : 0, 0, null)
+		public FieldMetadata(string name, TraceLoggingDataType type, EventFieldTags tags, bool variableCount) : this(name, type, tags, variableCount ? (byte)64 : (byte)0, 0, null)
 		{
 		}
 

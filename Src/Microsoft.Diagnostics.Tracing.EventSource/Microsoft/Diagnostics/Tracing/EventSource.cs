@@ -300,7 +300,7 @@ namespace Microsoft.Diagnostics.Tracing
 		{
 			if (this.m_eventSourceEnabled)
 			{
-				EventSource.EventData* ptr = stackalloc EventSource.EventData[checked(unchecked((UIntPtr)1) * (UIntPtr)sizeof(EventSource.EventData))];
+				EventSource.EventData* ptr = stackalloc EventSource.EventData[checked(unchecked(1) * sizeof(EventData))];
 				ptr->DataPointer = (IntPtr)((void*)(&arg1));
 				ptr->Size = 4;
 				this.WriteEventCore(eventId, 1, ptr);
@@ -313,7 +313,7 @@ namespace Microsoft.Diagnostics.Tracing
 		{
 			if (this.m_eventSourceEnabled)
 			{
-				EventSource.EventData* ptr = stackalloc EventSource.EventData[checked(unchecked((UIntPtr)2) * (UIntPtr)sizeof(EventSource.EventData))];
+				EventSource.EventData* ptr = stackalloc EventSource.EventData[2 * sizeof(EventSource.EventData) ];
 				ptr->DataPointer = (IntPtr)((void*)(&arg1));
 				ptr->Size = 4;
 				ptr[1].DataPointer = (IntPtr)((void*)(&arg2));
@@ -426,15 +426,15 @@ namespace Microsoft.Diagnostics.Tracing
 					fixed (char* value2 = arg2)
 					{
 						EventSource.EventData* ptr;
-						checked
-						{
-							ptr = stackalloc EventSource.EventData[unchecked((UIntPtr)2) * (UIntPtr)sizeof(EventSource.EventData)];
-							ptr->DataPointer = (IntPtr)((void*)value);
-							ptr->Size = (arg1.Length + 1) * 2;
-						}
-						ptr[1].DataPointer = (IntPtr)((void*)value2);
-						ptr[1].Size = checked((arg2.Length + 1) * 2);
-						this.WriteEventCore(eventId, 2, ptr);
+						
+						//RnD
+						//ptr = stackalloc EventSource.EventData[unchecked(2 * sizeof(EventData))]; // stackalloc
+                        //ptr->DataPointer = (IntPtr)((void*)value);
+						//ptr->Size = (arg1.Length + 1) * 2;
+						
+						//ptr[1].DataPointer = (IntPtr)((void*)value2);
+						//ptr[1].Size = checked((arg2.Length + 1) * 2);
+						//this.WriteEventCore(eventId, 2, ptr);
 					}
 				}
 			}
@@ -1243,17 +1243,17 @@ namespace Microsoft.Diagnostics.Tracing
 						Keywords = (EventKeywords)keywords,
 						Level = level
 					};
-					var <>f__AnonymousType = new
+					var ff__AnonymousType = new
 					{
 						message = msgString
 					};
 					TraceLoggingEventTypes eventTypes = new TraceLoggingEventTypes(text, EventTags.None, new Type[]
 					{
-						<>f__AnonymousType.GetType()
+						ff__AnonymousType.GetType()
 					});
 					this.WriteMultiMergeInner(text, ref eventSourceOptions, eventTypes, null, null, new object[]
 					{
-						<>f__AnonymousType
+						ff__AnonymousType
 					});
 					return;
 				}
@@ -1277,7 +1277,7 @@ namespace Microsoft.Diagnostics.Tracing
 					{
 						eventDescriptor = new EventDescriptor(0, 0, 0, (byte)level, 0, 0, keywords);
 						eventData = default(EventProvider.EventData);
-						eventData.Ptr = ptr;
+						eventData.Ptr = (ulong)ptr;
 						eventData.Size = (uint)(2 * (msgString.Length + 1));
 						eventData.Reserved = 0U;
 					}
@@ -2712,11 +2712,11 @@ namespace Microsoft.Diagnostics.Tracing
 			int identity = nameInfo.identity;
 			EventDescriptor eventDescriptor = new EventDescriptor(identity, level, opcode, (long)keywords);
 			int pinCount = eventTypes.pinCount;
-			byte* scratch = stackalloc byte[(UIntPtr)eventTypes.scratchSize];
+			byte* scratch = stackalloc byte[(int)eventTypes.scratchSize];
 			checked
 			{
-				EventSource.EventData* ptr = stackalloc EventSource.EventData[unchecked((UIntPtr)(checked(eventTypes.dataCount + 3))) * (UIntPtr)sizeof(EventSource.EventData)];
-				GCHandle* ptr2 = stackalloc GCHandle[unchecked((UIntPtr)pinCount) * (UIntPtr)sizeof(GCHandle)];
+				EventSource.EventData* ptr = stackalloc EventSource.EventData[unchecked((int)(checked(eventTypes.dataCount + 3))) * (int)sizeof(EventSource.EventData)];
+				GCHandle* ptr2 = stackalloc GCHandle[unchecked((int)pinCount) * (int)sizeof(GCHandle)];
 				fixed (byte* ptr3 = this.providerMetadata, nameMetadata = nameInfo.nameMetadata, typeMetadata = eventTypes.typeMetadata)
 				{
 					ptr->SetMetadata(ptr3, this.providerMetadata.Length, 2);
@@ -2814,11 +2814,11 @@ namespace Microsoft.Diagnostics.Tracing
 				if (nameInfo != null)
 				{
 					int pinCount = instance.pinCount;
-					byte* scratch = stackalloc byte[(UIntPtr)instance.scratchSize];
+					byte* scratch = stackalloc byte[instance.scratchSize];
 					checked
 					{
-						EventSource.EventData* ptr = stackalloc EventSource.EventData[unchecked((UIntPtr)(checked(instance.dataCount + 3))) * (UIntPtr)sizeof(EventSource.EventData)];
-						GCHandle* ptr2 = stackalloc GCHandle[unchecked((UIntPtr)pinCount) * (UIntPtr)sizeof(GCHandle)];
+						EventSource.EventData* ptr = stackalloc EventSource.EventData[unchecked(((int)(instance.dataCount + 3))) * sizeof(EventSource.EventData)];
+						GCHandle* ptr2 = stackalloc GCHandle[unchecked(pinCount) * sizeof(GCHandle)];
 						try
 						{
 							fixed (byte* ptr3 = this.providerMetadata)

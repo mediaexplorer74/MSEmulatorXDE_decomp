@@ -32,9 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DiscUtils.Streams">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\DiscUtils.Streams.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
@@ -191,6 +188,12 @@
     <Compile Include="DiscUtils\WindowsFileInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="System\DateTimeOffsetExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DiscUtils.Streams\DiscUtils.Streams.csproj">
+      <Project>{49ffb3df-bb58-496c-93a8-2881be6899b9}</Project>
+      <Name>DiscUtils.Streams</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

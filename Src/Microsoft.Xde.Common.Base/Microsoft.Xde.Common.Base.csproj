@@ -35,8 +35,8 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
@@ -46,8 +46,6 @@
     <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Windows.Foundation.UniversalApiContract" />
-    <Reference Include="Windows.Services.Store.StoreContract" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +101,19 @@
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resources" />
     <EmbeddedResource Include="Strings.resources" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Windows.Foundation.UniversalApiContract\Windows.Foundation.UniversalApiContract.csproj">
+      <Project>{3c60abaa-c19b-44ff-922b-c10ce187eda6}</Project>
+      <Name>Windows.Foundation.UniversalApiContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Windows.Services.Store.StoreContract\Windows.Services.Store.StoreContract.csproj">
+      <Project>{8068d6c4-df9e-44ac-ae31-b8240d4703f2}</Project>
+      <Name>Windows.Services.Store.StoreContract</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

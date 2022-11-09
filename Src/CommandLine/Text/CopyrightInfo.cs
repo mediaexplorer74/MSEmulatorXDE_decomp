@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Copyright 2005-2015 Giacomo Stelluti Scala & Contributors. All rights reserved. See License.md in the project root for license information.
+
+using System;
 using System.Globalization;
 using System.Reflection;
 using System.Text;
@@ -7,143 +9,187 @@ using CSharpx;
 
 namespace CommandLine.Text
 {
-	// Token: 0x02000054 RID: 84
-	public class CopyrightInfo
-	{
-		// Token: 0x17000071 RID: 113
-		// (get) Token: 0x060001E7 RID: 487 RVA: 0x00008526 File Offset: 0x00006726
-		public static CopyrightInfo Empty
-		{
-			get
-			{
-				return new CopyrightInfo("author", 1);
-			}
-		}
+    /// <summary>
+    /// Models the copyright part of an help text.
+    /// You can assign it where you assign any <see cref="System.String"/> instance.
+    /// </summary>
+    public class CopyrightInfo
+    {
+        private const string DefaultCopyrightWord = "Copyright";
+        private const string SymbolLower = "(c)";
+        private const string SymbolUpper = "(C)";
+        private readonly AssemblyCopyrightAttribute attribute;
+        private readonly bool isSymbolUpper;
+        private readonly int[] copyrightYears;
+        private readonly string author;
+        private readonly int builderSize;
 
-		// Token: 0x060001E8 RID: 488 RVA: 0x00008533 File Offset: 0x00006733
-		public CopyrightInfo(string author, int year) : this(true, author, new int[]
-		{
-			year
-		})
-		{
-		}
+        /// <summary>
+        /// An empty object used for initialization.
+        /// </summary>
+        public static CopyrightInfo Empty 
+        {
+            get
+            {
+               return new CopyrightInfo("author", 1); 
+            }
+        }
 
-		// Token: 0x060001E9 RID: 489 RVA: 0x00008547 File Offset: 0x00006747
-		public CopyrightInfo(string author, params int[] years) : this(true, author, years)
-		{
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CommandLine.Text.CopyrightInfo"/> class
+        /// specifying author and year.
+        /// </summary>
+        /// <param name="author">The company or person holding the copyright.</param>
+        /// <param name="year">The year of coverage of copyright.</param>
+        /// <exception cref="System.ArgumentException">Thrown when parameter <paramref name="author"/> is null or empty string.</exception>
+        public CopyrightInfo(string author, int year)
+            : this(true, author, new[] { year })
+        {
+        }
 
-		// Token: 0x060001EA RID: 490 RVA: 0x00008554 File Offset: 0x00006754
-		public CopyrightInfo(bool isSymbolUpper, string author, params int[] copyrightYears)
-		{
-			if (string.IsNullOrWhiteSpace(author))
-			{
-				throw new ArgumentException("author");
-			}
-			if (copyrightYears.Length == 0)
-			{
-				throw new ArgumentOutOfRangeException("copyrightYears");
-			}
-			this.isSymbolUpper = isSymbolUpper;
-			this.author = author;
-			this.copyrightYears = copyrightYears;
-			this.builderSize = 12 + author.Length + 4 * copyrightYears.Length + 10;
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CommandLine.Text.CopyrightInfo"/> class
+        /// specifying author and copyrightYears.
+        /// </summary>
+        /// <param name="author">The company or person holding the copyright.</param>
+        /// <param name="years">The copyrightYears of coverage of copyright.</param>
+        /// <exception cref="System.ArgumentException">Thrown when parameter <paramref name="author"/> is null or empty string.</exception>
+        /// <exception cref="System.ArgumentOutOfRangeException">Thrown when parameter <paramref name="years"/> is not supplied.</exception>
+        public CopyrightInfo(string author, params int[] years)
+            : this(true, author, years)
+        {
+        }
 
-		// Token: 0x060001EB RID: 491 RVA: 0x000085B6 File Offset: 0x000067B6
-		protected CopyrightInfo()
-		{
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CommandLine.Text.CopyrightInfo"/> class
+        /// specifying symbol case, author and copyrightYears.
+        /// </summary>
+        /// <param name="isSymbolUpper">The case of the copyright symbol.</param>
+        /// <param name="author">The company or person holding the copyright.</param>
+        /// <param name="copyrightYears">The copyrightYears of coverage of copyright.</param>
+        /// <exception cref="System.ArgumentException">Thrown when parameter <paramref name="author"/> is null or empty string.</exception>
+        /// <exception cref="System.ArgumentOutOfRangeException">Thrown when parameter <paramref name="copyrightYears"/> is not supplied.</exception>
+        public CopyrightInfo(bool isSymbolUpper, string author, params int[] copyrightYears)
+        {
+            if (string.IsNullOrWhiteSpace(author)) throw new ArgumentException("author");
+            if (copyrightYears.Length == 0) throw new ArgumentOutOfRangeException("copyrightYears");
 
-		// Token: 0x060001EC RID: 492 RVA: 0x000085BE File Offset: 0x000067BE
-		private CopyrightInfo(AssemblyCopyrightAttribute attribute)
-		{
-			this.attribute = attribute;
-		}
+            const int ExtraLength = 10;
+            this.isSymbolUpper = isSymbolUpper;
+            this.author = author;
+            this.copyrightYears = copyrightYears;
+            builderSize = 12 + author.Length + (4 * copyrightYears.Length) + ExtraLength;
+        }
 
-		// Token: 0x17000072 RID: 114
-		// (get) Token: 0x060001ED RID: 493 RVA: 0x000085D0 File Offset: 0x000067D0
-		public static CopyrightInfo Default
-		{
-			get
-			{
-				Maybe<AssemblyCopyrightAttribute> maybe = ReflectionHelper.GetAttribute<AssemblyCopyrightAttribute>();
-				if (maybe.Tag == MaybeType.Just)
-				{
-					return new CopyrightInfo(maybe.FromJustOrFail(null));
-				}
-				return new CopyrightInfo(ReflectionHelper.GetAttribute<AssemblyCompanyAttribute>().FromJustOrFail(new InvalidOperationException("CopyrightInfo::Default requires that you define AssemblyCopyrightAttribute or AssemblyCompanyAttribute.")).Company, DateTime.Now.Year);
-			}
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CommandLine.Text.CopyrightInfo"/> class.
+        /// </summary>
+        protected CopyrightInfo()
+        {
+        }
 
-		// Token: 0x17000073 RID: 115
-		// (get) Token: 0x060001EE RID: 494 RVA: 0x00008623 File Offset: 0x00006823
-		protected virtual string CopyrightWord
-		{
-			get
-			{
-				return "Copyright";
-			}
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CommandLine.Text.CopyrightInfo"/> class
+        /// with an assembly attribute, this overrides all formatting.
+        /// </summary>
+        /// <param name="attribute">The attribute which text to use.</param>
+        private CopyrightInfo(AssemblyCopyrightAttribute attribute)
+        {
+            this.attribute = attribute;
+        }
 
-		// Token: 0x060001EF RID: 495 RVA: 0x0000862A File Offset: 0x0000682A
-		public static implicit operator string(CopyrightInfo info)
-		{
-			return info.ToString();
-		}
+        /// <summary>
+        /// Gets the default copyright information.
+        /// Retrieved from <see cref="AssemblyCopyrightAttribute"/>, if it exists,
+        /// otherwise it uses <see cref="AssemblyCompanyAttribute"/> as copyright holder with the current year.
+        /// If neither exists it throws an <see cref="InvalidOperationException"/>.
+        /// </summary>
+        public static CopyrightInfo Default
+        {
+            get
+            {
+                // if an exact copyright string has been specified, it takes precedence
+                var copyrightAttr = ReflectionHelper.GetAttribute<AssemblyCopyrightAttribute>();
+                switch (copyrightAttr.Tag)
+                {
+                    case MaybeType.Just:
+                        return new CopyrightInfo(copyrightAttr.FromJustOrFail());
+                    default:
+                        // if no copyright attribute exist but a company attribute does, use it as copyright holder
+                        return new CopyrightInfo(
+                                ReflectionHelper.GetAttribute<AssemblyCompanyAttribute>().FromJustOrFail(
+                                    new InvalidOperationException("CopyrightInfo::Default requires that you define AssemblyCopyrightAttribute or AssemblyCompanyAttribute.")
+                                ).Company,
+                                DateTime.Now.Year);
+                }
+            }
+        }
 
-		// Token: 0x060001F0 RID: 496 RVA: 0x00008634 File Offset: 0x00006834
-		public override string ToString()
-		{
-			if (this.attribute != null)
-			{
-				return this.attribute.Copyright;
-			}
-			return new StringBuilder(this.builderSize).Append(this.CopyrightWord).Append(' ').Append(this.isSymbolUpper ? "(C)" : "(c)").Append(' ').Append(this.FormatYears(this.copyrightYears)).Append(' ').Append(this.author).ToString();
-		}
+        /// <summary>
+        /// Gets a different copyright word when overridden in a derived class.
+        /// </summary>
+        protected virtual string CopyrightWord
+        {
+            get { return DefaultCopyrightWord; }
+        }
 
-		// Token: 0x060001F1 RID: 497 RVA: 0x000086BC File Offset: 0x000068BC
-		protected virtual string FormatYears(int[] years)
-		{
-			if (years.Length == 1)
-			{
-				return years[0].ToString(CultureInfo.InvariantCulture);
-			}
-			StringBuilder stringBuilder = new StringBuilder(years.Length * 6);
-			for (int i = 0; i < years.Length; i++)
-			{
-				stringBuilder.Append(years[i].ToString(CultureInfo.InvariantCulture));
-				int num = i + 1;
-				if (num < years.Length)
-				{
-					stringBuilder.Append((years[num] - years[i] > 1) ? " - " : ", ");
-				}
-			}
-			return stringBuilder.ToString();
-		}
+        /// <summary>
+        /// Converts the copyright instance to a <see cref="System.String"/>.
+        /// </summary>
+        /// <param name="info">This <see cref="CommandLine.Text.CopyrightInfo"/> instance.</param>
+        /// <returns>The <see cref="System.String"/> that contains the copyright.</returns>
+        public static implicit operator string(CopyrightInfo info)
+        {
+            return info.ToString();
+        }
 
-		// Token: 0x04000090 RID: 144
-		private const string DefaultCopyrightWord = "Copyright";
+        /// <summary>
+        /// Returns the copyright as a <see cref="System.String"/>.
+        /// </summary>
+        /// <returns>The <see cref="System.String"/> that contains the copyright.</returns>
+        public override string ToString()
+        {
+            if (attribute != null)
+            {
+                return attribute.Copyright;
+            }
 
-		// Token: 0x04000091 RID: 145
-		private const string SymbolLower = "(c)";
+            return new StringBuilder(builderSize)
+                .Append(CopyrightWord)
+                .Append(' ')
+                .Append(isSymbolUpper ? SymbolUpper : SymbolLower)
+                .Append(' ')
+                .Append(FormatYears(copyrightYears))
+                .Append(' ')
+                .Append(author)
+                .ToString();
+        }
 
-		// Token: 0x04000092 RID: 146
-		private const string SymbolUpper = "(C)";
+        /// <summary>
+        /// When overridden in a derived class, allows to specify a new algorithm to render copyright copyrightYears
+        /// as a <see cref="System.String"/> instance.
+        /// </summary>
+        /// <param name="years">A <see cref="System.Int32"/> array of copyrightYears.</param>
+        /// <returns>A <see cref="System.String"/> instance with copyright copyrightYears.</returns>
+        protected virtual string FormatYears(int[] years)
+        {
+            if (years.Length == 1)
+            {
+                return years[0].ToString(CultureInfo.InvariantCulture);
+            }
 
-		// Token: 0x04000093 RID: 147
-		private readonly AssemblyCopyrightAttribute attribute;
+            var yearsPart = new StringBuilder(years.Length * 6);
+            for (var i = 0; i < years.Length; i++)
+            {
+                yearsPart.Append(years[i].ToString(CultureInfo.InvariantCulture));
+                var next = i + 1;
+                if (next < years.Length)
+                {
+                    yearsPart.Append(years[next] - years[i] > 1 ? " - " : ", ");
+                }
+            }
 
-		// Token: 0x04000094 RID: 148
-		private readonly bool isSymbolUpper;
-
-		// Token: 0x04000095 RID: 149
-		private readonly int[] copyrightYears;
-
-		// Token: 0x04000096 RID: 150
-		private readonly string author;
-
-		// Token: 0x04000097 RID: 151
-		private readonly int builderSize;
-	}
+            return yearsPart.ToString();
+        }
+    }
 }

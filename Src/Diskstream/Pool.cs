@@ -94,8 +94,8 @@ namespace Microsoft.Spaces.Diskstream
 			bool flag3 = intPtr == Pool.InvalidHandleValue;
 			if (flag3)
 			{
-				throw new Win32Exception();
-			}
+				throw new Exception();//Win32Exception();
+            }
 			return new Pool(intPtr);
 		}
 

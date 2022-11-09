@@ -1363,11 +1363,11 @@ namespace Microsoft.Xde.Common
 		public struct DXGI_ADAPTER_DESC
 		{
 			// Token: 0x04000232 RID: 562
-			[FixedBuffer(typeof(char), 128)]
-			public NativeMethods.DXGI_ADAPTER_DESC.<Description>e__FixedBuffer Description;
+			//[FixedBuffer(typeof(char), 128)]
+			public char[] Description; // <Description>
 
-			// Token: 0x04000233 RID: 563
-			public uint VendorId;
+            // Token: 0x04000233 RID: 563
+            public uint VendorId;
 
 			// Token: 0x04000234 RID: 564
 			public uint DeviceId;
@@ -1394,7 +1394,7 @@ namespace Microsoft.Xde.Common
 			[CompilerGenerated]
 			[UnsafeValueType]
 			[StructLayout(LayoutKind.Sequential, Size = 256)]
-			public struct <Description>e__FixedBuffer
+			public struct FixedBuffer_Description//>FixedBuffer
 			{
 				// Token: 0x0400024E RID: 590
 				public char FixedElementField;

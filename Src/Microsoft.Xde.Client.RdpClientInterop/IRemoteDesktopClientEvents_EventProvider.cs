@@ -7,8 +7,8 @@ using System.Threading;
 namespace Microsoft.Xde.Client.RdpClientInterop
 {
 	// Token: 0x020000A4 RID: 164
-	internal sealed class IRemoteDesktopClientEvents_EventProvider : IRemoteDesktopClientEvents_Event, IDisposable
-	{
+	internal sealed class IRemoteDesktopClientEvents_EventProvider : IDisposable //  IRemoteDesktopClientEvents_Event, IDisposable
+    {
 		// Token: 0x0600252D RID: 9517 RVA: 0x00005EBC File Offset: 0x000040BC
 		private void Init()
 		{
@@ -994,7 +994,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_aEventSinkHelpers != null)
 				{
@@ -1045,6 +1045,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		}
 
 		// Token: 0x06002549 RID: 9545 RVA: 0x000075C4 File Offset: 0x000057C4
+		/*
 		public override void Finalize()
 		{
 			try
@@ -1080,11 +1081,12 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 				}
 			}
 		}
+		*/
 
 		// Token: 0x0600254A RID: 9546 RVA: 0x0000768C File Offset: 0x0000588C
 		public void Dispose()
 		{
-			this.Finalize();
+			//this.Finalize();
 			GC.SuppressFinalize(this);
 		}
 

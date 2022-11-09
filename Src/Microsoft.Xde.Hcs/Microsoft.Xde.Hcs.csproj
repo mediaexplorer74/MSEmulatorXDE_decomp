@@ -32,21 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.HyperV.Schema">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.HyperV.Schema.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.Common">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.Common.Base">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Common.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.Interface.Common">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Interface.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.Interface.Public.10.1">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Interface.Public.10.1.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -54,9 +39,6 @@
     <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="WindowsDevicePortalWrapper">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\WindowsDevicePortalWrapper.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <AppDesigner Include="Properties\" />
@@ -87,6 +69,32 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Hcs\Strings.resources" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.HyperV.Schema\Microsoft.HyperV.Schema.csproj">
+      <Project>{a3a0f7cd-217a-478a-842e-adc203c304ef}</Project>
+      <Name>Microsoft.HyperV.Schema</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.Common.Base\Microsoft.Xde.Common.Base.csproj">
+      <Project>{a78f4998-31a5-4e67-bf7a-a39f9ff038be}</Project>
+      <Name>Microsoft.Xde.Common.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.Common\Microsoft.Xde.Common.csproj">
+      <Project>{8576637a-f463-47ac-9ce3-759d4089f5f9}</Project>
+      <Name>Microsoft.Xde.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.Interface.Common\Microsoft.Xde.Interface.Common.csproj">
+      <Project>{565c6d9f-dbc4-4cc0-9011-fe6618fdf434}</Project>
+      <Name>Microsoft.Xde.Interface.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.Interface.Public.10.1\Microsoft.Xde.Interface.Public.10.1.csproj">
+      <Project>{d3b49452-82a4-4f0e-a20c-390454165999}</Project>
+      <Name>Microsoft.Xde.Interface.Public.10.1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WindowsDevicePortalWrapper\WindowsDevicePortalWrapper.csproj">
+      <Project>{405ee189-8412-4875-9f9d-f4d9b1dec91a}</Project>
+      <Name>WindowsDevicePortalWrapper</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

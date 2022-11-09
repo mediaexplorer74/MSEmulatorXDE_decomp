@@ -35,21 +35,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Xde.Common">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.Common.Base">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Common.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.Communication">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Communication.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.Interface">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.Interface.Common">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Interface.Common.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -152,6 +137,28 @@
     <Resource Include="orientation\modes\tentleft.png" />
     <Resource Include="orientation\modes\tentright.png" />
     <Resource Include="orientation\modes\unknown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Xde.Common.Base\Microsoft.Xde.Common.Base.csproj">
+      <Project>{a78f4998-31a5-4e67-bf7a-a39f9ff038be}</Project>
+      <Name>Microsoft.Xde.Common.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.Common\Microsoft.Xde.Common.csproj">
+      <Project>{8576637a-f463-47ac-9ce3-759d4089f5f9}</Project>
+      <Name>Microsoft.Xde.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.Communication\Microsoft.Xde.Communication.csproj">
+      <Project>{c42562bf-5fb0-43af-90dd-61b7aeb63fca}</Project>
+      <Name>Microsoft.Xde.Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.Interface.Common\Microsoft.Xde.Interface.Common.csproj">
+      <Project>{565c6d9f-dbc4-4cc0-9011-fe6618fdf434}</Project>
+      <Name>Microsoft.Xde.Interface.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.Interface\Microsoft.Xde.Interface.csproj">
+      <Project>{2ad88882-cb2b-4cd5-9215-c6c1e3b49876}</Project>
+      <Name>Microsoft.Xde.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

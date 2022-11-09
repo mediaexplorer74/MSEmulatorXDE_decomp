@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Copyright 2005-2015 Giacomo Stelluti Scala & Contributors. All rights reserved. See License.md in the project root for license information.
+
+using System;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -7,89 +9,130 @@ using CSharpx;
 
 namespace CommandLine.Text
 {
-	// Token: 0x02000057 RID: 87
-	public class HeadingInfo
-	{
-		// Token: 0x060001FC RID: 508 RVA: 0x00008894 File Offset: 0x00006A94
-		public HeadingInfo(string programName, string version = null)
-		{
-			if (string.IsNullOrWhiteSpace("programName"))
-			{
-				throw new ArgumentException("programName");
-			}
-			this.programName = programName;
-			this.version = version;
-		}
+    /// <summary>
+    /// Models the heading part of an help text.
+    /// You can assign it where you assign any <see cref="System.String"/> instance.
+    /// </summary>
+    public class HeadingInfo
+    {
+        private readonly string programName;
+        private readonly string version;
 
-		// Token: 0x17000077 RID: 119
-		// (get) Token: 0x060001FD RID: 509 RVA: 0x000088C1 File Offset: 0x00006AC1
-		public static HeadingInfo Empty
-		{
-			get
-			{
-				return new HeadingInfo("", null);
-			}
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CommandLine.Text.HeadingInfo"/> class
+        /// specifying program name and version.
+        /// </summary>
+        /// <param name="programName">The name of the program.</param>
+        /// <param name="version">The version of the program.</param>
+        /// <exception cref="System.ArgumentException">Thrown when parameter <paramref name="programName"/> is null or empty string.</exception>
+        public HeadingInfo(string programName, string version = null)
+        {
+            if (string.IsNullOrWhiteSpace("programName")) throw new ArgumentException("programName");
 
-		// Token: 0x17000078 RID: 120
-		// (get) Token: 0x060001FE RID: 510 RVA: 0x000088D0 File Offset: 0x00006AD0
-		public static HeadingInfo Default
-		{
-			get
-			{
-				string text = ReflectionHelper.GetAttribute<AssemblyTitleAttribute>().MapValueOrDefault((AssemblyTitleAttribute titleAttribute) => titleAttribute.Title, ReflectionHelper.GetAssemblyName());
-				string text2 = ReflectionHelper.GetAttribute<AssemblyInformationalVersionAttribute>().MapValueOrDefault((AssemblyInformationalVersionAttribute versionAttribute) => versionAttribute.InformationalVersion, ReflectionHelper.GetAssemblyVersion());
-				return new HeadingInfo(text, text2);
-			}
-		}
+            this.programName = programName;
+            this.version = version;
+        }
 
-		// Token: 0x060001FF RID: 511 RVA: 0x00008940 File Offset: 0x00006B40
-		public static implicit operator string(HeadingInfo info)
-		{
-			return info.ToString();
-		}
+        /// <summary>
+        /// An empty object used for initialization. 
+        /// </summary>
+        public static HeadingInfo Empty
+        {
+            get
+            {
+                return new HeadingInfo("");
+            }
+        }
 
-		// Token: 0x06000200 RID: 512 RVA: 0x00008948 File Offset: 0x00006B48
-		public override string ToString()
-		{
-			bool flag = string.IsNullOrEmpty(this.version);
-			return new StringBuilder(this.programName.Length + ((!flag) ? (this.version.Length + 1) : 0)).Append(this.programName).AppendWhen(!flag, new string[]
-			{
-				" ",
-				this.version
-			}).ToString();
-		}
+        /// <summary>
+        /// Gets the default heading instance.
+        /// The title is retrieved from <see cref="AssemblyTitleAttribute"/>,
+        /// or the assembly short name if its not defined.
+        /// The version is retrieved from <see cref="AssemblyInformationalVersionAttribute"/>,
+        /// or the assembly version if its not defined.
+        /// </summary>
+        public static HeadingInfo Default
+        {
+            get
+            {
+                var title = ReflectionHelper.GetAttribute<AssemblyTitleAttribute>()
+                    .MapValueOrDefault(
+                        titleAttribute => titleAttribute.Title,
+                        ReflectionHelper.GetAssemblyName());
 
-		// Token: 0x06000201 RID: 513 RVA: 0x000089B8 File Offset: 0x00006BB8
-		public void WriteMessage(string message, TextWriter writer)
-		{
-			if (string.IsNullOrWhiteSpace("message"))
-			{
-				throw new ArgumentException("message");
-			}
-			if (writer == null)
-			{
-				throw new ArgumentNullException("writer");
-			}
-			writer.WriteLine(new StringBuilder(this.programName.Length + message.Length + 2).Append(this.programName).Append(": ").Append(message).ToString());
-		}
+                var version = ReflectionHelper.GetAttribute<AssemblyInformationalVersionAttribute>()
+                    .MapValueOrDefault(
+                        versionAttribute => versionAttribute.InformationalVersion,
+                        ReflectionHelper.GetAssemblyVersion());
+                return new HeadingInfo(title, version);
+            }
+        }
 
-		// Token: 0x06000202 RID: 514 RVA: 0x00008A29 File Offset: 0x00006C29
-		public void WriteMessage(string message)
-		{
-			this.WriteMessage(message, Console.Out);
-		}
+        /// <summary>
+        /// Converts the heading to a <see cref="System.String"/>.
+        /// </summary>
+        /// <param name="info">This <see cref="CommandLine.Text.HeadingInfo"/> instance.</param>
+        /// <returns>The <see cref="System.String"/> that contains the heading.</returns>
+        public static implicit operator string(HeadingInfo info)
+        {
+            return info.ToString();
+        }
 
-		// Token: 0x06000203 RID: 515 RVA: 0x00008A37 File Offset: 0x00006C37
-		public void WriteError(string message)
-		{
-			this.WriteMessage(message, Console.Error);
-		}
+        /// <summary>
+        /// Returns the heading as a <see cref="System.String"/>.
+        /// </summary>
+        /// <returns>The <see cref="System.String"/> that contains the heading.</returns>
+        public override string ToString()
+        {
+            var isVersionNull = string.IsNullOrEmpty(version);
+            return new StringBuilder(programName.Length +
+                    (!isVersionNull ? version.Length + 1 : 0))
+                .Append(programName)
+                .AppendWhen(!isVersionNull, " ", version)
+                .ToString();
+        }
 
-		// Token: 0x0400009B RID: 155
-		private readonly string programName;
+        /// <summary>
+        /// Writes out a string and a new line using the program name specified in the constructor
+        /// and <paramref name="message"/> parameter.
+        /// </summary>
+        /// <param name="message">The <see cref="System.String"/> message to write.</param>
+        /// <param name="writer">The target <see cref="System.IO.TextWriter"/> derived type.</param>
+        /// <exception cref="System.ArgumentException">Thrown when parameter <paramref name="message"/> is null or empty string.</exception>
+        /// <exception cref="System.ArgumentNullException">Thrown when parameter <paramref name="writer"/> is null.</exception>
+        public void WriteMessage(string message, TextWriter writer)
+        {
+            if (string.IsNullOrWhiteSpace("message")) throw new ArgumentException("message");
+            if (writer == null) throw new ArgumentNullException("writer");
 
-		// Token: 0x0400009C RID: 156
-		private readonly string version;
-	}
+            writer.WriteLine(
+                new StringBuilder(programName.Length + message.Length + 2)
+                    .Append(programName)
+                    .Append(": ")
+                    .Append(message)
+                    .ToString());
+        }
+
+        /// <summary>
+        /// Writes out a string and a new line using the program name specified in the constructor
+        /// and <paramref name="message"/> parameter to standard output stream.
+        /// </summary>
+        /// <param name="message">The <see cref="System.String"/> message to write.</param>
+        /// <exception cref="System.ArgumentException">Thrown when parameter <paramref name="message"/> is null or empty string.</exception>
+        public void WriteMessage(string message)
+        {
+            WriteMessage(message, Console.Out);
+        }
+
+        /// <summary>
+        /// Writes out a string and a new line using the program name specified in the constructor
+        /// and <paramref name="message"/> parameter to standard error stream.
+        /// </summary>
+        /// <param name="message">The <see cref="System.String"/> message to write.</param>
+        /// <exception cref="System.ArgumentException">Thrown when parameter <paramref name="message"/> is null or empty string.</exception>
+        public void WriteError(string message)
+        {
+            WriteMessage(message, Console.Error);
+        }
+    }
 }

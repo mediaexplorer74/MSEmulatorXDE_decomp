@@ -39,7 +39,7 @@ namespace Microsoft.Diagnostics.Tracing
 				{
 					byte b = (byte)(num >> 21 & 127);
 					flag = ((num & 2097151) != 0);
-					b |= (flag ? 128 : 0);
+					b |= (flag ? (byte)128 : (byte)0);
 					num <<= 7;
 					if (metadata != null)
 					{
@@ -103,7 +103,7 @@ namespace Microsoft.Diagnostics.Tracing
 		// Token: 0x060002A5 RID: 677 RVA: 0x0000E7DB File Offset: 0x0000C9DB
 		public static TraceLoggingDataType MakeDataType(TraceLoggingDataType baseType, EventFieldFormat format)
 		{
-			return (baseType & (TraceLoggingDataType)31) | (TraceLoggingDataType)(format << 8);
+			return (baseType & (TraceLoggingDataType)31) | (TraceLoggingDataType)((int)format << 8);
 		}
 
 		// Token: 0x060002A6 RID: 678 RVA: 0x0000E7E8 File Offset: 0x0000C9E8

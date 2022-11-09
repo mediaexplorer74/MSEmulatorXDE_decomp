@@ -145,8 +145,8 @@ namespace Microsoft.Spaces.Diskstream
 			bool flag2 = !flag;
 			if (flag2)
 			{
-				throw new Win32Exception();
-			}
+				throw new Exception();//Win32Exception();
+            }
 		}
 
 		// Token: 0x06000011 RID: 17 RVA: 0x0000223C File Offset: 0x0000043C
@@ -176,8 +176,8 @@ namespace Microsoft.Spaces.Diskstream
 			bool flag6 = !flag5;
 			if (flag6)
 			{
-				throw new Win32Exception();
-			}
+				throw new Exception();//Win32Exception();
+            }
 			this.Position += (long)count;
 			return count;
 		}
@@ -209,8 +209,8 @@ namespace Microsoft.Spaces.Diskstream
 			bool flag6 = !flag5;
 			if (flag6)
 			{
-				throw new Win32Exception();
-			}
+				throw new Exception();//Win32Exception();
+            }
 			this.Position += (long)count;
 		}
 

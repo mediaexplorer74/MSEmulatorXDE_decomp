@@ -35,42 +35,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DiscUtils.Core">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\DiscUtils.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="DiscUtils.Ntfs">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\DiscUtils.Ntfs.dll</HintPath>
-    </Reference>
-    <Reference Include="DiscUtils.Registry">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\DiscUtils.Registry.dll</HintPath>
-    </Reference>
-    <Reference Include="DiscUtils.Streams">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\DiscUtils.Streams.dll</HintPath>
-    </Reference>
-    <Reference Include="DiscUtils.Vhd">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\DiscUtils.Vhd.dll</HintPath>
-    </Reference>
-    <Reference Include="DiscUtils.Vhdx">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\DiscUtils.Vhdx.dll</HintPath>
-    </Reference>
-    <Reference Include="Diskstream">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Diskstream.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Diagnostics.Tracing.EventSource">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.Common.Base">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Common.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.Interface.Common">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Interface.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.Interface.Public.10.1">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Interface.Public.10.1.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xde.WindowsAPICodePack">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.WindowsAPICodePack.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -211,6 +175,56 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DiscUtils.Core\DiscUtils.Core.csproj">
+      <Project>{6932758a-cd40-42a9-9e4c-bff9141e6d97}</Project>
+      <Name>DiscUtils.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DiscUtils.Ntfs\DiscUtils.Ntfs.csproj">
+      <Project>{bcfc71c1-6e91-423b-a5ae-c1d632eec071}</Project>
+      <Name>DiscUtils.Ntfs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DiscUtils.Registry\DiscUtils.Registry.csproj">
+      <Project>{177d88fe-1c68-4df1-bd69-6f6ce7e63126}</Project>
+      <Name>DiscUtils.Registry</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DiscUtils.Streams\DiscUtils.Streams.csproj">
+      <Project>{49ffb3df-bb58-496c-93a8-2881be6899b9}</Project>
+      <Name>DiscUtils.Streams</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DiscUtils.Vhdx\DiscUtils.Vhdx.csproj">
+      <Project>{91740f6e-2953-484f-ba64-f47bc05f0bba}</Project>
+      <Name>DiscUtils.Vhdx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DiscUtils.Vhd\DiscUtils.Vhd.csproj">
+      <Project>{aa772f45-e286-4fa2-8d2b-64c6349bb071}</Project>
+      <Name>DiscUtils.Vhd</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Diskstream\Diskstream.csproj">
+      <Project>{04c3f51a-47ef-40f3-8eb5-c54412464800}</Project>
+      <Name>Diskstream</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Diagnostics.Tracing.EventSource\Microsoft.Diagnostics.Tracing.EventSource.csproj">
+      <Project>{cc57a631-ad4f-45db-8ea5-d51081eaa49e}</Project>
+      <Name>Microsoft.Diagnostics.Tracing.EventSource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.Common.Base\Microsoft.Xde.Common.Base.csproj">
+      <Project>{a78f4998-31a5-4e67-bf7a-a39f9ff038be}</Project>
+      <Name>Microsoft.Xde.Common.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.Interface.Common\Microsoft.Xde.Interface.Common.csproj">
+      <Project>{565c6d9f-dbc4-4cc0-9011-fe6618fdf434}</Project>
+      <Name>Microsoft.Xde.Interface.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.Interface.Public.10.1\Microsoft.Xde.Interface.Public.10.1.csproj">
+      <Project>{d3b49452-82a4-4f0e-a20c-390454165999}</Project>
+      <Name>Microsoft.Xde.Interface.Public.10.1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.WindowsAPICodePack\Microsoft.Xde.WindowsAPICodePack.csproj">
+      <Project>{145e9b91-376c-4e59-906a-330b77465b1a}</Project>
+      <Name>Microsoft.Xde.WindowsAPICodePack</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

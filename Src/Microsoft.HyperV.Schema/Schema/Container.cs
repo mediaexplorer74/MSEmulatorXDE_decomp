@@ -112,11 +112,11 @@ namespace HCS.Schema
 		// (get) Token: 0x06000011 RID: 17 RVA: 0x000022FA File Offset: 0x000004FA
 		// (set) Token: 0x06000012 RID: 18 RVA: 0x00002311 File Offset: 0x00000511
 		[DataMember(EmitDefaultValue = false, Name = "HvSocket")]
-		private HvSocket _HvSocket
+		private ContainerCredentialGuardHvSocketServiceConfig _HvSocket
 		{
 			get
 			{
-				if (!HvSocket.IsJsonDefault(this.HvSocket))
+				if (!ContainerCredentialGuardHvSocketServiceConfig.IsJsonDefault(this.HvSocket))
 				{
 					return this.HvSocket;
 				}
@@ -183,7 +183,7 @@ namespace HCS.Schema
 		public Networking Networking = new Networking();
 
 		// Token: 0x0400000E RID: 14
-		public HvSocket HvSocket = new HvSocket();
+		public ContainerCredentialGuardHvSocketServiceConfig HvSocket = new ContainerCredentialGuardHvSocketServiceConfig();
 
 		// Token: 0x0400000F RID: 15
 		[DataMember(EmitDefaultValue = false)]

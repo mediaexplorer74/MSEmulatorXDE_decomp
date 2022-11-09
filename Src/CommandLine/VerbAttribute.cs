@@ -1,82 +1,66 @@
-﻿using System;
-using CommandLine.Infrastructure;
+﻿// Copyright 2005-2015 Giacomo Stelluti Scala & Contributors. All rights reserved. See License.md in the project root for license information.
+
+using System;
 
 namespace CommandLine
 {
-	// Token: 0x02000051 RID: 81
-	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, AllowMultiple = false, Inherited = true)]
-	public class VerbAttribute : Attribute
-	{
-		// Token: 0x060001D5 RID: 469 RVA: 0x00008401 File Offset: 0x00006601
-		public VerbAttribute(string name)
-		{
-			if (string.IsNullOrWhiteSpace(name))
-			{
-				throw new ArgumentException("name");
-			}
-			this.name = name;
-			this.helpText = new LocalizableAttributeProperty("HelpText");
-			this.resourceType = null;
-		}
+    /// <summary>
+    /// Models a verb command specification.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, AllowMultiple = false, Inherited = true)]
+    //public sealed class VerbAttribute : Attribute
+    public  class VerbAttribute : Attribute
+    {
+        private readonly string name;
+        private Infrastructure.LocalizableAttributeProperty helpText;
+        private Type resourceType;
 
-		// Token: 0x1700006D RID: 109
-		// (get) Token: 0x060001D6 RID: 470 RVA: 0x0000843A File Offset: 0x0000663A
-		public string Name
-		{
-			get
-			{
-				return this.name;
-			}
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CommandLine.VerbAttribute"/> class.
+        /// </summary>
+        /// <param name="name">The long name of the verb command.</param>
+        /// <exception cref="System.ArgumentException">Thrown if <paramref name="name"/> is null, empty or whitespace.</exception>
+        public VerbAttribute(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("name");
 
-		// Token: 0x1700006E RID: 110
-		// (get) Token: 0x060001D7 RID: 471 RVA: 0x00008442 File Offset: 0x00006642
-		// (set) Token: 0x060001D8 RID: 472 RVA: 0x0000844A File Offset: 0x0000664A
-		public bool Hidden { get; set; }
+            this.name = name;
+            helpText = new Infrastructure.LocalizableAttributeProperty(nameof(HelpText));
+            resourceType = null;
+        }
 
-		// Token: 0x1700006F RID: 111
-		// (get) Token: 0x060001D9 RID: 473 RVA: 0x00008453 File Offset: 0x00006653
-		// (set) Token: 0x060001DA RID: 474 RVA: 0x00008469 File Offset: 0x00006669
-		public string HelpText
-		{
-			get
-			{
-				return this.helpText.Value ?? string.Empty;
-			}
-			set
-			{
-				LocalizableAttributeProperty localizableAttributeProperty = this.helpText;
-				if (value == null)
-				{
-					throw new ArgumentNullException("value");
-				}
-				localizableAttributeProperty.Value = value;
-			}
-		}
+        /// <summary>
+        /// Gets the verb name.
+        /// </summary>
+        public string Name
+        {
+            get { return name; }
+        }
 
-		// Token: 0x17000070 RID: 112
-		// (get) Token: 0x060001DB RID: 475 RVA: 0x00008486 File Offset: 0x00006686
-		// (set) Token: 0x060001DC RID: 476 RVA: 0x00008490 File Offset: 0x00006690
-		public Type ResourceType
-		{
-			get
-			{
-				return this.resourceType;
-			}
-			set
-			{
-				this.helpText.ResourceType = value;
-				this.resourceType = value;
-			}
-		}
+        /// <summary>
+        /// Gets or sets a value indicating whether a command line verb is visible in the help text.
+        /// </summary>
+        public bool Hidden
+        {
+            get;
+            set;
+        }
 
-		// Token: 0x0400008C RID: 140
-		private readonly string name;
-
-		// Token: 0x0400008D RID: 141
-		private LocalizableAttributeProperty helpText;
-
-		// Token: 0x0400008E RID: 142
-		private Type resourceType;
-	}
+        /// <summary>
+        /// Gets or sets a short description of this command line option. Usually a sentence summary. 
+        /// </summary>
+        public string HelpText
+        {
+            get => helpText.Value??string.Empty;
+            set => helpText.Value = value ?? throw new ArgumentNullException("value");
+        }
+        /// <summary>
+        /// Gets or sets the <see cref="System.Type"/> that contains the resources for <see cref="HelpText"/>.
+        /// </summary>
+        public Type ResourceType
+        {
+            get => resourceType;
+            set => resourceType =helpText.ResourceType = value;
+        }
+    }
 }

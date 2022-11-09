@@ -220,7 +220,7 @@ namespace DiscUtils.Streams
 						yield return new StreamExtent(num, extent.Start - num);
 					}
 					streamExtent = extent;
-					extent = null;
+					//extent = null;
 				}
 			}
 			IEnumerator<StreamExtent> enumerator = null;

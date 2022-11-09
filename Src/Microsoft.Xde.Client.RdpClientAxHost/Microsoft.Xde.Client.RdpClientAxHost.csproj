@@ -34,9 +34,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Xde.Client.RdpClientInterop">
-      <HintPath>Q:\Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe\XdeManager\Microsoft.Xde.Client.RdpClientInterop.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
@@ -181,6 +178,12 @@
     <Compile Include="IRemoteDesktopClientEvents_OnStatusChangedEvent.cs" />
     <Compile Include="IRemoteDesktopClientEvents_OnStatusChangedEventHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Xde.Client.RdpClientInterop\Microsoft.Xde.Client.RdpClientInterop.csproj">
+      <Project>{d9e0ca9a-426a-4d58-82d5-891667ce4812}</Project>
+      <Name>Microsoft.Xde.Client.RdpClientInterop</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

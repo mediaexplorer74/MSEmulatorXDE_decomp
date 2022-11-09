@@ -1,51 +1,45 @@
-﻿using System;
+﻿// Copyright 2005-2015 Giacomo Stelluti Scala & Contributors. All rights reserved. See License.md in the project root for license information.
+
+using System;
 
 namespace CommandLine
 {
-	// Token: 0x02000050 RID: 80
-	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-	public sealed class ValueAttribute : BaseAttribute
-	{
-		// Token: 0x060001D1 RID: 465 RVA: 0x000083BF File Offset: 0x000065BF
-		public ValueAttribute(int index)
-		{
-			this.index = index;
-			this.metaName = string.Empty;
-		}
+    /// <summary>
+    /// Models an value specification, or better how to handle values not bound to options.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+    public sealed class ValueAttribute : BaseAttribute
+    {
+        private readonly int index;
+        private string metaName; 
 
-		// Token: 0x1700006B RID: 107
-		// (get) Token: 0x060001D2 RID: 466 RVA: 0x000083D9 File Offset: 0x000065D9
-		public int Index
-		{
-			get
-			{
-				return this.index;
-			}
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CommandLine.ValueAttribute"/> class.
+        /// </summary>
+        public ValueAttribute(int index) : base()
+        {
+            this.index = index;
+            this.metaName = string.Empty;
+        }
 
-		// Token: 0x1700006C RID: 108
-		// (get) Token: 0x060001D3 RID: 467 RVA: 0x000083E1 File Offset: 0x000065E1
-		// (set) Token: 0x060001D4 RID: 468 RVA: 0x000083E9 File Offset: 0x000065E9
-		public string MetaName
-		{
-			get
-			{
-				return this.metaName;
-			}
-			set
-			{
-				if (value == null)
-				{
-					throw new ArgumentNullException("value");
-				}
-				this.metaName = value;
-			}
-		}
+        /// <summary>
+        /// Gets the position this option has on the command line.
+        /// </summary>
+        public int Index
+        {
+            get { return index; }
+        }
 
-		// Token: 0x0400008A RID: 138
-		private readonly int index;
-
-		// Token: 0x0400008B RID: 139
-		private string metaName;
-	}
+        /// <summary>
+        /// Gets or sets name of this positional value specification.
+        /// </summary>
+        public string MetaName
+        {
+            get { return metaName; }
+            set
+            {
+                metaName = value ?? throw new ArgumentNullException("value");
+            }
+        }
+    }
 }

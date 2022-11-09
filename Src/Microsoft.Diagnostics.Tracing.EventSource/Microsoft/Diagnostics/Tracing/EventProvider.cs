@@ -23,7 +23,11 @@ namespace Microsoft.Diagnostics.Tracing
 		internal void Register(Guid providerGuid)
 		{
 			this.m_providerId = providerGuid;
-			this.m_etwCallback = new UnsafeNativeMethods.ManifestEtw.EtwEnableCallback(this.EtwEnableCallBack);
+
+			//RnD
+			this.m_etwCallback = default;//new UnsafeNativeMethods.ManifestEtw.EtwEnableCallback
+				//(EtwEnableCallBack(ref this.m_providerId, 0,0,0,0,null,null));
+				//(this.EtwEnableCallBack);
 			uint num = this.EventRegister(ref this.m_providerId, this.m_etwCallback);
 			if (num != 0U)
 			{
@@ -454,7 +458,8 @@ namespace Microsoft.Diagnostics.Tracing
 			byte[] array;
 			for (;;)
 			{
-				dataDescriptor.Reserved = 0U;
+				//RnD
+				//dataDescriptor.Reserved = 0U;
 				text = (data as string);
 				array = null;
 				if (text != null)
@@ -542,99 +547,104 @@ namespace Microsoft.Diagnostics.Tracing
 				{
 					if (!(underlyingType == typeof(long)))
 					{
-						goto IL_415;
+						//goto IL_415;
 					}
 					data = ((IConvertible)data).ToInt64(null);
 				}
 			}
-			dataDescriptor.Size = checked(((uint)text.Length + 1U) * 2U);
+			
+			//RnD
+			//dataDescriptor.Size = checked(((uint)text.Length + 1U) * 2U);
 			goto IL_43B;
 			Block_1:
-			*dataBuffer = array.Length;
-			dataDescriptor.Ptr = (ulong)dataBuffer;
-			dataDescriptor.Size = 4U;
-			checked
-			{
-				totalEventSize += dataDescriptor.Size;
-				dataDescriptor += (IntPtr)sizeof(EventProvider.EventData);
-				dataBuffer += unchecked((IntPtr)16);
-				dataDescriptor.Size = (uint)array.Length;
+			*dataBuffer = (byte)array.Length;
+
+			//RnD
+			//dataDescriptor.Ptr = (ulong)dataBuffer;
+			//dataDescriptor.Size = 4U;
+			
+			//checked
+			//{
+				totalEventSize += 4U;// dataDescriptor.Size;
+				dataDescriptor += sizeof(EventProvider.EventData);
+				dataBuffer += 16;
+				//dataDescriptor.Size = (uint)array.Length;
 				goto IL_43B;
 				Block_2:
-				dataDescriptor.Size = (uint)sizeof(IntPtr);
-				IntPtr* ptr = dataBuffer;
+				//dataDescriptor.Size = (uint)sizeof(IntPtr);
+				IntPtr* ptr = (IntPtr*)dataBuffer;
 				*ptr = (IntPtr)data;
-				dataDescriptor.Ptr = ptr;
+				//dataDescriptor.Ptr = ptr;
 				goto IL_43B;
 				Block_3:
-				dataDescriptor.Size = 4U;
-				int* ptr2 = dataBuffer;
+				//dataDescriptor.Size = 4U;
+				int* ptr2 = (int*) dataBuffer;
 				*ptr2 = (int)data;
-				dataDescriptor.Ptr = ptr2;
+				//dataDescriptor.Ptr = ptr2;
 				goto IL_43B;
 				Block_4:
-				dataDescriptor.Size = 8U;
-				long* ptr3 = dataBuffer;
+				//dataDescriptor.Size = 8U;
+				long* ptr3 = (long*)dataBuffer;
 				*ptr3 = (long)data;
-				dataDescriptor.Ptr = ptr3;
+				//dataDescriptor.Ptr = ptr3;
 				goto IL_43B;
 				Block_5:
-				dataDescriptor.Size = 4U;
-				uint* ptr4 = dataBuffer;
+				//dataDescriptor.Size = 4U;
+				uint* ptr4 = (uint*)dataBuffer;
 				*ptr4 = (uint)data;
-				dataDescriptor.Ptr = ptr4;
+				//dataDescriptor.Ptr = ptr4;
 				goto IL_43B;
 				Block_6:
-				dataDescriptor.Size = 8U;
-				ulong* ptr5 = dataBuffer;
+				//dataDescriptor.Size = 8U;
+				ulong* ptr5 = (ulong*)dataBuffer;
 				*ptr5 = (ulong)data;
-				dataDescriptor.Ptr = ptr5;
+				//dataDescriptor.Ptr = ptr5;
 				goto IL_43B;
 				Block_7:
-				dataDescriptor.Size = 2U;
-				char* ptr6 = dataBuffer;
+				//dataDescriptor.Size = 2U;
+				char* ptr6 = (char*)dataBuffer;
 				*ptr6 = (char)data;
-				dataDescriptor.Ptr = ptr6;
+				//dataDescriptor.Ptr = ptr6;
 				goto IL_43B;
 				Block_8:
-				dataDescriptor.Size = 1U;
+				//dataDescriptor.Size = 1U;
 				byte* ptr7 = dataBuffer;
 				*ptr7 = (byte)data;
-				dataDescriptor.Ptr = ptr7;
+				//dataDescriptor.Ptr = ptr7;
 				goto IL_43B;
 				Block_9:
-				dataDescriptor.Size = 2U;
-				short* ptr8 = dataBuffer;
+				//dataDescriptor.Size = 2U;
+				short* ptr8 = (short*)dataBuffer;
 				*ptr8 = (short)data;
-				dataDescriptor.Ptr = ptr8;
+				//dataDescriptor.Ptr = ptr8;
 				goto IL_43B;
 				Block_10:
-				dataDescriptor.Size = 1U;
-				sbyte* ptr9 = dataBuffer;
+				//dataDescriptor.Size = 1U;
+				sbyte* ptr9 = (sbyte*)dataBuffer;
 				*ptr9 = (sbyte)data;
-				dataDescriptor.Ptr = ptr9;
+				//dataDescriptor.Ptr = ptr9;
 				goto IL_43B;
 				Block_11:
-				dataDescriptor.Size = 2U;
-				ushort* ptr10 = dataBuffer;
+				//dataDescriptor.Size = 2U;
+				ushort* ptr10 = (ushort*)dataBuffer;
 				*ptr10 = (ushort)data;
-				dataDescriptor.Ptr = ptr10;
+				//dataDescriptor.Ptr = ptr10;
 				goto IL_43B;
 				Block_12:
-				dataDescriptor.Size = 4U;
-				float* ptr11 = dataBuffer;
+				//dataDescriptor.Size = 4U;
+				float* ptr11 = (float*)dataBuffer;
 				*ptr11 = (float)data;
-				dataDescriptor.Ptr = ptr11;
+				//dataDescriptor.Ptr = ptr11;
 				goto IL_43B;
 				Block_13:
-				dataDescriptor.Size = 8U;
-				double* ptr12 = dataBuffer;
+				//dataDescriptor.Size = 8U;
+				double* ptr12 = (double*)dataBuffer;
 				*ptr12 = (double)data;
-				dataDescriptor.Ptr = ptr12;
+				//dataDescriptor.Ptr = ptr12;
 				goto IL_43B;
 				Block_14:
-				dataDescriptor.Size = 4U;
-				int* ptr13 = dataBuffer;
+				//dataDescriptor.Size = 4U;
+				int* ptr13 = (int*)dataBuffer;
 				if ((bool)data)
 				{
 					*ptr13 = 1;
@@ -683,7 +693,7 @@ namespace Microsoft.Diagnostics.Tracing
 				dataDescriptor += (IntPtr)sizeof(EventProvider.EventData);
 				dataBuffer += unchecked((IntPtr)16);
 				return text ?? array;
-			}
+			
 		}
 
 		// Token: 0x060000AF RID: 175 RVA: 0x00008458 File Offset: 0x00006658
@@ -863,7 +873,9 @@ namespace Microsoft.Diagnostics.Tracing
 		{
 			this.m_providerId = providerId;
 			this.m_etwCallback = enableCallback;
-			return UnsafeNativeMethods.ManifestEtw.EventRegister(ref providerId, enableCallback, null, ref this.m_regHandle);
+
+			//RnD
+			return default;//UnsafeNativeMethods.ManifestEtw.EventRegister(ref providerId, enableCallback, null, ref this.m_regHandle);
 		}
 
 		// Token: 0x060000B3 RID: 179 RVA: 0x00008980 File Offset: 0x00006B80

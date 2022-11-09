@@ -139,7 +139,7 @@ namespace Microsoft.Diagnostics.Tracing
 			Block_9:
 			if (activityInfo == null)
 			{
-				ActivityTracker.ActivityInfo activityInfo2;
+				ActivityTracker.ActivityInfo activityInfo2 = default;
 				activityInfo = activityInfo2.m_creator;
 			}
 			this.m_current.Value = activityInfo;
@@ -449,7 +449,7 @@ namespace Microsoft.Diagnostics.Tracing
 					if (*ptr != 0)
 					{
 						byte* ptr2;
-						ptr = (ptr2 = ptr) + unchecked((IntPtr)1);
+						ptr = (ptr2 = ptr) + (byte)unchecked((IntPtr)1);
 						byte* ptr3 = ptr2;
 						*ptr3 |= (byte)value;
 						return;

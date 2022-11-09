@@ -81,7 +81,7 @@ namespace HCS.Schema.VirtualMachines
 
 		// Token: 0x04000049 RID: 73
 		[DataMember(EmitDefaultValue = false)]
-		public HvSocket HvSocket;
+		public HvSocketAddress HvSocket;
 
 		// Token: 0x0400004A RID: 74
 		[DataMember(EmitDefaultValue = false)]
