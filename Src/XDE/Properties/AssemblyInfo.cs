@@ -19,4 +19,4 @@ using System.Windows.Resources;
 [assembly: AssemblyAssociatedContentFile("microsoft.xde.locsimulator.dll")]
 [assembly: AssemblyAssociatedContentFile("microsoft.xde.santplugin.dll")]
 [assembly: AssemblyAssociatedContentFile("microsoft.xde.stockplugin.dll")]
-[assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
+//[assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]

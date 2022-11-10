@@ -11,15 +11,22 @@ using System.Windows.Shapes;
 namespace Microsoft.Xde.Client
 {
 	// Token: 0x02000021 RID: 33
-	public class MultiTouch : UserControl, IComponentConnector, IStyleConnector
+	public partial class MultiTouch : UserControl, IComponentConnector, IStyleConnector
 	{
-		// Token: 0x14000006 RID: 6
-		// (add) Token: 0x060001BA RID: 442 RVA: 0x000081DC File Offset: 0x000063DC
-		// (remove) Token: 0x060001BB RID: 443 RVA: 0x00008214 File Offset: 0x00006414
-		public event EventHandler<MultiTouchEventArgs> PointsTouched;
+        // Token: 0x060001BF RID: 447 RVA: 0x0000834A File Offset: 0x0000654A
+        public MultiTouch()
+        {
+            this.InitializeComponent();
+            this.MainControl.DataContext = this.model;
+        }
+
+        // Token: 0x14000006 RID: 6
+        // (add) Token: 0x060001BA RID: 442 RVA: 0x000081DC File Offset: 0x000063DC
+        // (remove) Token: 0x060001BB RID: 443 RVA: 0x00008214 File Offset: 0x00006414
+        public event EventHandler<MultiTouchEventArgs> PointsTouched;
 
 		// Token: 0x060001BC RID: 444 RVA: 0x0000824C File Offset: 0x0000644C
-		private void FirePointsTouched(TouchEventType type)
+		public void FirePointsTouched(TouchEventType type)
 		{
 			if (this.PointsTouched != null)
 			{
@@ -38,7 +45,7 @@ namespace Microsoft.Xde.Client
 		}
 
 		// Token: 0x060001BD RID: 445 RVA: 0x000082F4 File Offset: 0x000064F4
-		private static void Point1XCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		public static void Point1XCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
 			MultiTouch.MultiTouchViewModel multiTouchViewModel = ((MultiTouch)d).model;
 			multiTouchViewModel.X1 = (double)e.NewValue;
@@ -46,19 +53,13 @@ namespace Microsoft.Xde.Client
 		}
 
 		// Token: 0x060001BE RID: 446 RVA: 0x0000831F File Offset: 0x0000651F
-		private static void Point1YCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		public static void Point1YCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
 			MultiTouch.MultiTouchViewModel multiTouchViewModel = ((MultiTouch)d).model;
 			multiTouchViewModel.Y1 = (double)e.NewValue;
 			multiTouchViewModel.Y2 = -multiTouchViewModel.Y1;
 		}
-
-		// Token: 0x060001BF RID: 447 RVA: 0x0000834A File Offset: 0x0000654A
-		public MultiTouch()
-		{
-			this.InitializeComponent();
-			this.MainControl.DataContext = this.model;
-		}
+				
 
 		// Token: 0x170000BD RID: 189
 		// (get) Token: 0x060001C0 RID: 448 RVA: 0x00008374 File Offset: 0x00006574
@@ -91,13 +92,13 @@ namespace Microsoft.Xde.Client
 		}
 
 		// Token: 0x060001C4 RID: 452 RVA: 0x000083BE File Offset: 0x000065BE
-		private void TargetCircle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+		public void TargetCircle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
 			this.StartTargetCircleDrag(sender, e, true);
 		}
 
 		// Token: 0x060001C5 RID: 453 RVA: 0x000083CC File Offset: 0x000065CC
-		private void StartTargetCircleDrag(object sender, MouseButtonEventArgs e, bool engaged)
+		public void StartTargetCircleDrag(object sender, MouseButtonEventArgs e, bool engaged)
 		{
 			this.StartDrag(sender, e, engaged);
 			FrameworkElement frameworkElement = sender as FrameworkElement;
@@ -105,7 +106,7 @@ namespace Microsoft.Xde.Client
 		}
 
 		// Token: 0x060001C6 RID: 454 RVA: 0x00008418 File Offset: 0x00006618
-		private void TargetCircle_MouseMove(object sender, MouseEventArgs e)
+		public void TargetCircle_MouseMove(object sender, MouseEventArgs e)
 		{
 			e.Handled = true;
 			if (this.model.IsDragging)
@@ -127,7 +128,7 @@ namespace Microsoft.Xde.Client
 		}
 
 		// Token: 0x060001C7 RID: 455 RVA: 0x000084F0 File Offset: 0x000066F0
-		private void Drag_MouseButtonUp(object sender, MouseButtonEventArgs e)
+		public void Drag_MouseButtonUp(object sender, MouseButtonEventArgs e)
 		{
 			if (this.model.IsDragging)
 			{
@@ -143,13 +144,13 @@ namespace Microsoft.Xde.Client
 		}
 
 		// Token: 0x060001C8 RID: 456 RVA: 0x00008548 File Offset: 0x00006748
-		private void CenterCircle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+		public void CenterCircle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
 			this.StartDrag(sender, e, true);
 		}
 
 		// Token: 0x060001C9 RID: 457 RVA: 0x00008554 File Offset: 0x00006754
-		private void StartDrag(object sender, MouseButtonEventArgs e, bool engaged)
+		public void StartDrag(object sender, MouseButtonEventArgs e, bool engaged)
 		{
 			UIElement uielement = sender as FrameworkElement;
 			FrameworkElement relativeTo = base.Parent as FrameworkElement;
@@ -165,7 +166,7 @@ namespace Microsoft.Xde.Client
 		}
 
 		// Token: 0x060001CA RID: 458 RVA: 0x000085B0 File Offset: 0x000067B0
-		private void CenterCircle_MouseMove(object sender, MouseEventArgs e)
+		public void CenterCircle_MouseMove(object sender, MouseEventArgs e)
 		{
 			e.Handled = true;
 			if (this.model.IsDragging)
@@ -187,35 +188,36 @@ namespace Microsoft.Xde.Client
 		}
 
 		// Token: 0x060001CB RID: 459 RVA: 0x00008677 File Offset: 0x00006877
-		private void CenterCircle_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+		public void CenterCircle_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
 		{
 			this.StartDrag(sender, e, false);
 		}
 
 		// Token: 0x060001CC RID: 460 RVA: 0x00008682 File Offset: 0x00006882
-		private void TargetCircle_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+		public void TargetCircle_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
 		{
 			this.StartTargetCircleDrag(sender, e, false);
 		}
 
 		// Token: 0x060001CD RID: 461 RVA: 0x00008690 File Offset: 0x00006890
-		[DebuggerNonUserCode]
-		[GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
-		public void InitializeComponent()
-		{
-			if (this._contentLoaded)
-			{
-				return;
-			}
-			this._contentLoaded = true;
-			Uri resourceLocator = new Uri("/XDE;V10.1.0.0;component/controls/multitouch.xaml", UriKind.Relative);
-			Application.LoadComponent(this, resourceLocator);
-		}
+		//[DebuggerNonUserCode]
+		//[GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
+		//public void InitializeComponent()
+		//{
+		//	if (this._contentLoaded)
+		//	{
+		//		return;
+		//	}
+		//	this._contentLoaded = true;
+		//	Uri resourceLocator = new Uri("/XDE;V10.1.0.0;component/controls/multitouch.xaml", UriKind.Relative);
+		//	Application.LoadComponent(this, resourceLocator);
+		//}
 
 		// Token: 0x060001CE RID: 462 RVA: 0x000086C0 File Offset: 0x000068C0
-		[DebuggerNonUserCode]
-		[GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
-		[EditorBrowsable(EditorBrowsableState.Never)]
+		//[DebuggerNonUserCode]
+		//[GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
+		//[EditorBrowsable(EditorBrowsableState.Never)]
+		/*
 		void IComponentConnector.Connect(int connectionId, object target)
 		{
 			if (connectionId == 1)
@@ -225,16 +227,17 @@ namespace Microsoft.Xde.Client
 			}
 			if (connectionId != 2)
 			{
-				this._contentLoaded = true;
+				this._contentLoaded1 = true;
 				return;
 			}
 			this.MainControl = (ContentControl)target;
 		}
+		*/
 
 		// Token: 0x060001CF RID: 463 RVA: 0x000086F0 File Offset: 0x000068F0
-		[DebuggerNonUserCode]
-		[GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
-		[EditorBrowsable(EditorBrowsableState.Never)]
+		//[DebuggerNonUserCode]
+		//[GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
+		//[EditorBrowsable(EditorBrowsableState.Never)]
 		void IStyleConnector.Connect(int connectionId, object target)
 		{
 			switch (connectionId)
@@ -272,28 +275,28 @@ namespace Microsoft.Xde.Client
 		public static DependencyProperty Point1YProperty = DependencyProperty.Register("Point1Y", typeof(double), typeof(MultiTouch), new FrameworkPropertyMetadata(40.0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(MultiTouch.Point1YCallback)));
 
 		// Token: 0x040000B7 RID: 183
-		private const double CenterPointRadius = 5.0;
+		public const double CenterPointRadius = 5.0;
 
 		// Token: 0x040000B8 RID: 184
-		private MultiTouch.MultiTouchViewModel model = new MultiTouch.MultiTouchViewModel();
+		public MultiTouch.MultiTouchViewModel model = new MultiTouch.MultiTouchViewModel();
 
 		// Token: 0x040000B9 RID: 185
-		private Point lastPoint;
+		public Point lastPoint;
 
 		// Token: 0x040000BA RID: 186
-		private double dragSign;
+		public double dragSign;
 
 		// Token: 0x040000BC RID: 188
-		internal MultiTouch TopControl;
+		public MultiTouch TopControl;
 
 		// Token: 0x040000BD RID: 189
-		internal ContentControl MainControl;
+		public ContentControl MainControl;
 
 		// Token: 0x040000BE RID: 190
-		private bool _contentLoaded;
+		//public bool _contentLoaded;
 
 		// Token: 0x0200003F RID: 63
-		private class MultiTouchViewModel : INotifyPropertyChanged
+		public class MultiTouchViewModel : INotifyPropertyChanged
 		{
 			// Token: 0x14000019 RID: 25
 			// (add) Token: 0x06000476 RID: 1142 RVA: 0x000113D0 File Offset: 0x0000F5D0
@@ -441,7 +444,7 @@ namespace Microsoft.Xde.Client
 			}
 
 			// Token: 0x06000488 RID: 1160 RVA: 0x00011559 File Offset: 0x0000F759
-			private void OnPropertyChanged(string propName)
+			public void OnPropertyChanged(string propName)
 			{
 				PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
 				if (propertyChanged == null)
@@ -452,25 +455,25 @@ namespace Microsoft.Xde.Client
 			}
 
 			// Token: 0x040001A6 RID: 422
-			private const double Radius = 15.0;
+			public const double Radius = 15.0;
 
 			// Token: 0x040001A7 RID: 423
-			private double x1;
+			public double x1;
 
 			// Token: 0x040001A8 RID: 424
-			private double y1;
+			public double y1;
 
 			// Token: 0x040001A9 RID: 425
-			private double x2;
+			public double x2;
 
 			// Token: 0x040001AA RID: 426
-			private double y2;
+			public double y2;
 
 			// Token: 0x040001AB RID: 427
-			private bool isDragging;
+			public bool isDragging;
 
 			// Token: 0x040001AC RID: 428
-			private bool isEngaged;
+			public bool isEngaged;
 		}
 	}
 }

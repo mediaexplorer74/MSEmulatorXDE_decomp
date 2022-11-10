@@ -216,7 +216,7 @@ namespace Microsoft.Xde.Client
 				else
 				{
 					string text = parsedArg.Name.ToUpperInvariant();
-					uint num = <PrivateImplementationDetails>.ComputeStringHash(text);
+					long num = text.GetHashCode();
 					if (num <= 1701974294U)
 					{
 						if (num <= 1019099605U)

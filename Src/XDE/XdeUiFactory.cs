@@ -10,7 +10,7 @@ using Microsoft.VisualBasic;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Microsoft.Xde.Common;
 using Microsoft.Xde.Telemetry;
-using Microsoft.Xde.Tools;
+//using Microsoft.Xde.Tools;
 
 namespace Microsoft.Xde.Client
 {
@@ -409,7 +409,7 @@ namespace Microsoft.Xde.Client
 		}
 
 		// Token: 0x06000303 RID: 771 RVA: 0x0000B838 File Offset: 0x00009A38
-		private void RetryXdeAsElevatedCallbackForEtwLogging(ElevationRequiredDlg dlg)
+		public void RetryXdeAsElevatedCallbackForEtwLogging(ElevationRequiredDlg dlg)
 		{
 			if (dlg.TaskDlg.FooterCheckBoxChecked.Value)
 			{
@@ -422,10 +422,10 @@ namespace Microsoft.Xde.Client
 		}
 
 		// Token: 0x040000FF RID: 255
-		private ToolsWindow toolsWindow;
+		public ToolsWindow toolsWindow;
 
-		// Token: 0x04000100 RID: 256
-		private bool disposed;
+        // Token: 0x04000100 RID: 256
+        public bool disposed;
 
 		// Token: 0x02000047 RID: 71
 		public class ZoomUiResult

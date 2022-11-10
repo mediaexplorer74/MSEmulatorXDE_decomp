@@ -636,7 +636,8 @@ namespace AxMicrosoft.Xde.Client.RdpClientInterop
 		{
 			if (this.ocx == null)
 			{
-				throw new AxHost.InvalidActiveXStateException("Connect", AxHost.ActiveXInvokeKind.MethodInvoke);
+				throw new AxHost.InvalidActiveXStateException
+					("Connect", AxHost.ActiveXInvokeKind.MethodInvoke);
 			}
 			this.ocx.Connect();
 		}

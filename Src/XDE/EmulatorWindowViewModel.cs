@@ -984,17 +984,21 @@ namespace Microsoft.Xde.Client
 		}
 
 		// Token: 0x06000160 RID: 352 RVA: 0x00006CB0 File Offset: 0x00004EB0
-		private async Task ConsumeMouseDataAync()
+		public async Task ConsumeMouseDataAync()
 		{
 			try
 			{
 				for (;;)
 				{
 					TaskAwaiter<bool> taskAwaiter = this.mouseDataBuffer.OutputAvailableAsync<EmulatorWindowViewModel.MouseData>().GetAwaiter();
+					
 					if (!taskAwaiter.IsCompleted)
 					{
-						await taskAwaiter;
 						TaskAwaiter<bool> taskAwaiter2;
+
+						//RnD
+                        // await taskAwaiter2
+                        
 						taskAwaiter = taskAwaiter2;
 						taskAwaiter2 = default(TaskAwaiter<bool>);
 					}

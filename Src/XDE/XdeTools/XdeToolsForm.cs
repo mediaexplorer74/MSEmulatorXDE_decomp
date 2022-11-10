@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
 using Microsoft.Xde.Common;
-using Microsoft.Xde.Tools;
+//using Microsoft.Xde.Tools;
 
 namespace Microsoft.Xde.Client.XdeTools
 {
@@ -48,9 +48,11 @@ namespace Microsoft.Xde.Client.XdeTools
 				elementHost.Text = Resources.ToolsWindowTitle;
 				xdeToolsControl = new XdeToolsControl();
 				this.XdeToolsControl = xdeToolsControl;
+
 				xdeToolsControl.Initialize();
 				xdeToolsControl.CloseClicked += this.XdeTools_CloseClicked;
 				xdeToolsControl.StartDragMove += this.XdeTools_StartDragMove;
+				
 				int num = 0;
 				foreach (IXdeTab xdeTab in this.Sku.Tabs)
 				{

@@ -9,8 +9,8 @@ namespace Microsoft.Xde.Client.Properties
 {
 	// Token: 0x0200002F RID: 47
 	[CompilerGenerated]
-	[GeneratedCode("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.1.0.0")]
-	internal sealed partial class XdeUserSettings : ApplicationSettingsBase
+	//[GeneratedCode("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.1.0.0")]
+	public sealed partial class XdeUserSettings : ApplicationSettingsBase
 	{
 		// Token: 0x0600040C RID: 1036 RVA: 0x000102A5 File Offset: 0x0000E4A5
 		private XdeUserSettings()

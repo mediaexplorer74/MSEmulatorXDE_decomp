@@ -1,10 +1,12 @@
 ﻿using System;
+using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace Microsoft.Xde.Client
 {
 	// Token: 0x0200001D RID: 29
+	[Export]
 	public class ToolBarItemSelector : DataTemplateSelector
 	{
 		// Token: 0x060001AB RID: 427 RVA: 0x00007FF4 File Offset: 0x000061F4

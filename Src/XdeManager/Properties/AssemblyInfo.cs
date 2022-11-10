@@ -16,4 +16,4 @@ using System.Windows;
 [assembly: AssemblyCopyright("© 2019 Microsoft Corporation")]
 [assembly: AssemblyTrademark("")]
 [assembly: ComVisible(false)]
-[assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
+//[assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]

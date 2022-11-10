@@ -22,10 +22,98 @@ namespace Microsoft.Xde.Client
 	// Token: 0x02000013 RID: 19
 	[Export(typeof(IXdeView))]
 	[Export(typeof(IXdeDisplayInformation))]
-	public class EmulatorWindow : Window, IXdeView, System.Windows.Forms.IWin32Window, IXdeDisplayInformation, IComponentConnector
+	public partial class EmulatorWindow : 
+		Window, 
+		IXdeView, 
+		System.Windows.Forms.IWin32Window, 
+		IXdeDisplayInformation, 
+		IComponentConnector
 	{
-		// Token: 0x0600008D RID: 141 RVA: 0x0000478C File Offset: 0x0000298C
-		public EmulatorWindow()
+		
+        // Token: 0x04000046 RID: 70
+        public EmulatorWindowViewModel model;
+
+        // Token: 0x04000047 RID: 71
+        public InputSettings inputSettings;
+
+        // Token: 0x04000048 RID: 72
+        public WindowsFormsHost host = new WindowsFormsHost();
+
+        // Token: 0x04000049 RID: 73
+        private Icon icon;
+
+        // Token: 0x0400004A RID: 74
+        private KeyboardHook keyboardHook;
+
+        // Token: 0x0400004B RID: 75
+        private System.Windows.Point cornerDownAt;
+
+        // Token: 0x0400004C RID: 76
+        private ResizeCorner currentCorner;
+
+        // Token: 0x0400004D RID: 77
+        private IXdeControllerState controllerState;
+
+        // Token: 0x0400004E RID: 78
+        private IXdeSku sku;
+
+		// Token: 0x04000055 RID: 85
+        public Grid MainGrid;
+
+        // Token: 0x04000056 RID: 86
+        public StackPanel CaptionPanel;
+
+        // Token: 0x04000057 RID: 87
+        public Canvas allChromesCanvas;
+
+        // Token: 0x04000058 RID: 88
+        public ItemsControl ChromesList;
+
+        // Token: 0x04000059 RID: 89
+        public MultiTouch MultiTouch;
+
+        // Token: 0x0400005A RID: 90
+        public System.Windows.Shapes.Rectangle TopSizeRect;
+
+        // Token: 0x0400005B RID: 91
+        public System.Windows.Shapes.Rectangle BottomSizeRect;
+
+        // Token: 0x0400005C RID: 92
+        public System.Windows.Shapes.Rectangle LeftSizeRect;
+
+        // Token: 0x0400005D RID: 93
+        public System.Windows.Shapes.Rectangle RightSizeRect;
+
+        // Token: 0x0400005E RID: 94
+        public Polygon BottomLeftSizeRect;
+
+        // Token: 0x0400005F RID: 95
+        public Polygon TopLeftSizeRect;
+
+        // Token: 0x04000060 RID: 96
+        public Polygon TopRightSizeRect;
+
+        // Token: 0x04000061 RID: 97
+        public Polygon BottomRightSizeRect;
+
+        // Token: 0x04000062 RID: 98
+        public DisplayControl ExternDisplayControl;
+
+        // Token: 0x04000063 RID: 99
+        public Grid ToolbarGrid;
+
+        // Token: 0x04000064 RID: 100
+        //public XdeToolbar MainToolbar;
+
+        // Token: 0x04000065 RID: 101
+        public XdeToolbar FlyoutToolbar;
+
+        // Token: 0x04000066 RID: 102
+        //private bool _contentLoaded;
+
+
+        // Token: 0x0600008D RID: 141 RVA: 0x0000478C File Offset: 0x0000298C
+        public EmulatorWindow()
 		{
 			this.InitializeComponent();
 			base.Loaded += this.EmulatorWindow_Loaded;
@@ -196,10 +284,10 @@ namespace Microsoft.Xde.Client
 		{
 			get
 			{
-				System.Windows.Point point = this.MainToolbar.TransformToAncestor(this).Transform(new System.Windows.Point(0.0, 0.0));
+				System.Windows.Point point = EmulatorWindow.MainToolbar.TransformToAncestor(this).Transform(new System.Windows.Point(0.0, 0.0));
 				point.X += (double)this.Location.X;
 				point.Y += (double)this.Location.Y;
-				return new System.Drawing.Rectangle((int)point.X, (int)point.Y, (int)this.MainToolbar.ActualWidth, (int)this.MainToolbar.ActualHeight);
+				return new System.Drawing.Rectangle((int)point.X, (int)point.Y, (int)EmulatorWindow.MainToolbar.ActualWidth, (int)EmulatorWindow.MainToolbar.ActualHeight);
 			}
 		}
 
@@ -427,8 +515,20 @@ namespace Microsoft.Xde.Client
 			}
 		}
 
-		// Token: 0x060000BE RID: 190 RVA: 0x00004DD4 File Offset: 0x00002FD4
-		public Rect GetFirstDisplayOutputRect()
+        public class MainToolbar : UIElement
+        {
+            public static int ActualWidth { get; internal set; }
+            public static int ActualHeight { get; internal set; }
+            public static FrameworkElement Template { get; internal set; }
+
+            internal static GeneralTransform TransformToAncestor(EmulatorWindow emulatorWindow)
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        // Token: 0x060000BE RID: 190 RVA: 0x00004DD4 File Offset: 0x00002FD4
+        public Rect GetFirstDisplayOutputRect()
 		{
 			DisplayControl displayControl = this.GetDisplayControl(0, 0);
 			Rect rect = displayControl.TransformToVisual(this.allChromesCanvas).TransformBounds(new Rect(displayControl.RenderSize));
@@ -548,17 +648,19 @@ namespace Microsoft.Xde.Client
 		public System.Windows.Point GetFlyoutLocationForButton(string buttonName)
 		{
 			double y = 0.0;
-			double actualWidth = this.MainToolbar.ActualWidth;
-			foreach (object obj in ((WrapPanel)this.MainToolbar.Template.FindName("ItemsPanel", this.MainToolbar)).Children)
+			double actualWidth = EmulatorWindow.MainToolbar.ActualWidth;
+			foreach (object obj in ((WrapPanel)EmulatorWindow.MainToolbar.Template.FindName("ItemsPanel" /*,EmulatorWindow.MainToolbar*/)).Children)
 			{
 				FrameworkElement frameworkElement = (FrameworkElement)obj;
 				ToolBarButtonViewModel toolBarButtonViewModel = frameworkElement.DataContext as ToolBarButtonViewModel;
 				if (toolBarButtonViewModel != null && buttonName == toolBarButtonViewModel.Name)
 				{
-					y = frameworkElement.TransformToVisual(this.MainToolbar).TransformBounds(new Rect(frameworkElement.RenderSize)).Top;
+					//RnD
+					//y = frameworkElement.TransformToVisual((Visual)this.MainToolbar).TransformBounds(new Rect(frameworkElement.RenderSize)).Top;
 					break;
 				}
 			}
+			//RnD
 			return new System.Windows.Point(actualWidth, y);
 		}
 
@@ -965,7 +1067,7 @@ namespace Microsoft.Xde.Client
 		}
 
 		// Token: 0x060000EB RID: 235 RVA: 0x00005980 File Offset: 0x00003B80
-		[DebuggerNonUserCode]
+		/*[DebuggerNonUserCode]
 		[GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
 		public void InitializeComponent()
 		{
@@ -977,19 +1079,23 @@ namespace Microsoft.Xde.Client
 			Uri resourceLocator = new Uri("/XDE;V10.1.0.0;component/controls/emulatorwindow.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
+		*/
 
 		// Token: 0x060000EC RID: 236 RVA: 0x000059B0 File Offset: 0x00003BB0
+		/*
 		[DebuggerNonUserCode]
 		[GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
 		internal Delegate _CreateDelegate(Type delegateType, string handler)
 		{
 			return Delegate.CreateDelegate(delegateType, this, handler);
 		}
+		*/
 
 		// Token: 0x060000ED RID: 237 RVA: 0x000059BC File Offset: 0x00003BBC
-		[DebuggerNonUserCode]
-		[GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
-		[EditorBrowsable(EditorBrowsableState.Never)]
+		//[DebuggerNonUserCode]
+		//[GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
+		//[EditorBrowsable(EditorBrowsableState.Never)]
+		/*
 		void IComponentConnector.Connect(int connectionId, object target)
 		{
 			switch (connectionId)
@@ -1061,18 +1167,19 @@ namespace Microsoft.Xde.Client
 				return;
 			}
 		}
+		*/
 
 		// Token: 0x060000EE RID: 238 RVA: 0x00005BFB File Offset: 0x00003DFB
-		void IXdeView.add_Closing(CancelEventHandler value)
-		{
-			base.Closing += value;
-		}
+		//void IXdeView.add_Closing(CancelEventHandler value)
+		//{
+		//	base.Closing += value;
+		//}
 
 		// Token: 0x060000EF RID: 239 RVA: 0x00005C04 File Offset: 0x00003E04
-		void IXdeView.remove_Closing(CancelEventHandler value)
-		{
-			base.Closing -= value;
-		}
+		//void IXdeView.remove_Closing(CancelEventHandler value)
+		//{
+		//	base.Closing -= value;
+		//}
 
 		// Token: 0x060000F0 RID: 240 RVA: 0x00005C0D File Offset: 0x00003E0D
 		void IXdeView.Close()
@@ -1080,85 +1187,6 @@ namespace Microsoft.Xde.Client
 			base.Close();
 		}
 
-		// Token: 0x04000046 RID: 70
-		private EmulatorWindowViewModel model;
-
-		// Token: 0x04000047 RID: 71
-		private InputSettings inputSettings;
-
-		// Token: 0x04000048 RID: 72
-		private WindowsFormsHost host = new WindowsFormsHost();
-
-		// Token: 0x04000049 RID: 73
-		private Icon icon;
-
-		// Token: 0x0400004A RID: 74
-		private KeyboardHook keyboardHook;
-
-		// Token: 0x0400004B RID: 75
-		private System.Windows.Point cornerDownAt;
-
-		// Token: 0x0400004C RID: 76
-		private ResizeCorner currentCorner;
-
-		// Token: 0x0400004D RID: 77
-		private IXdeControllerState controllerState;
-
-		// Token: 0x0400004E RID: 78
-		private IXdeSku sku;
-
-		// Token: 0x04000055 RID: 85
-		internal Grid MainGrid;
-
-		// Token: 0x04000056 RID: 86
-		internal StackPanel CaptionPanel;
-
-		// Token: 0x04000057 RID: 87
-		internal Canvas allChromesCanvas;
-
-		// Token: 0x04000058 RID: 88
-		internal ItemsControl ChromesList;
-
-		// Token: 0x04000059 RID: 89
-		internal MultiTouch MultiTouch;
-
-		// Token: 0x0400005A RID: 90
-		internal System.Windows.Shapes.Rectangle TopSizeRect;
-
-		// Token: 0x0400005B RID: 91
-		internal System.Windows.Shapes.Rectangle BottomSizeRect;
-
-		// Token: 0x0400005C RID: 92
-		internal System.Windows.Shapes.Rectangle LeftSizeRect;
-
-		// Token: 0x0400005D RID: 93
-		internal System.Windows.Shapes.Rectangle RightSizeRect;
-
-		// Token: 0x0400005E RID: 94
-		internal Polygon BottomLeftSizeRect;
-
-		// Token: 0x0400005F RID: 95
-		internal Polygon TopLeftSizeRect;
-
-		// Token: 0x04000060 RID: 96
-		internal Polygon TopRightSizeRect;
-
-		// Token: 0x04000061 RID: 97
-		internal Polygon BottomRightSizeRect;
-
-		// Token: 0x04000062 RID: 98
-		internal DisplayControl ExternDisplayControl;
-
-		// Token: 0x04000063 RID: 99
-		internal Grid ToolbarGrid;
-
-		// Token: 0x04000064 RID: 100
-		internal XdeToolbar MainToolbar;
-
-		// Token: 0x04000065 RID: 101
-		internal XdeToolbar FlyoutToolbar;
-
-		// Token: 0x04000066 RID: 102
-		private bool _contentLoaded;
+		
 	}
 }

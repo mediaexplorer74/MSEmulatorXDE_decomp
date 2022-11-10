@@ -1,6 +1,12 @@
 <UserControl
-	x:Class="Microsoft.Xde.Client.MultiTouch" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:sys="clr-namespace:System;assembly=mscorlib" xmlns:local="clr-namespace:Microsoft.Xde.Client"
-	Name="TopControl">
+	x:Class="Microsoft.Xde.Client.MultiTouch" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+    xmlns:local="clr-namespace:Microsoft.Xde.Client"
+	Name="TopControl1">
 	<FrameworkElement.Resources>
 		<ResourceDictionary>
 			<sys:Double
@@ -94,8 +100,9 @@
 			</Style>
 		</ResourceDictionary>
 	</FrameworkElement.Resources>
+    
 	<ContentControl
-		Name="MainControl">
+		Name="MainControl1">
 		<Control.Template>
 			<ControlTemplate
 				TargetType="{x:Type ContentControl}">

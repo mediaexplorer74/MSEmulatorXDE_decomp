@@ -45,6 +45,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -66,13 +67,19 @@
     </Compile>
     <Compile Include="DisplayControl.cs" />
     <Compile Include="ElevationRequiredDlg.cs" />
-    <Compile Include="EmulatorWindow.cs" />
+    <Compile Include="Controls\EmulatorWindow.cs">
+      <DependentUpon>EmulatorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EmulatorWindowViewModel.cs" />
     <Compile Include="Executed.cs" />
     <Compile Include="IsPressedButton.cs" />
+    <Compile Include="IXdeAutomation.cs" />
+    <Compile Include="IXdeSensorConfig.cs" />
     <Compile Include="IXdeUiFactory.cs" />
     <Compile Include="ModifySystemSettingsDialog.cs" />
-    <Compile Include="MultiTouch.cs" />
+    <Compile Include="Controls\MultiTouch.cs">
+      <DependentUpon>MultiTouc.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MultiTouchEventArgs.cs" />
     <Compile Include="ParsedArg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -96,12 +103,15 @@
     <Compile Include="ToolBarItemSelector.cs" />
     <Compile Include="ToolBarItemViewModel.cs" />
     <Compile Include="ToolBarSliderViewModel.cs" />
+    <Compile Include="ToolsWindow.cs" />
     <Compile Include="TouchEventType.cs" />
     <Compile Include="VmUserSettings.cs" />
     <Compile Include="XdeArgsProcessor.cs" />
     <Compile Include="XdeController.cs" />
     <Compile Include="XdeReturnCode.cs" />
+    <Compile Include="XdeServerSession.cs" />
     <Compile Include="XdeToolbar.cs" />
+    <Compile Include="XdeTools\XdeToolsControl.cs" />
     <Compile Include="XdeTools\XdeToolsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,7 +139,7 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\emulatorwindow.xaml">
+    <Page Include="Controls\EmulatorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -137,7 +147,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\multitouch.xaml">
+    <Page Include="Controls\MultiTouch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SimpleStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

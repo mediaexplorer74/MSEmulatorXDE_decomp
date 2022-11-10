@@ -131,10 +131,11 @@ namespace XdeManager.ViewModel
 		{
 			get
 			{
-				if (UacSecurity.IsAdmin())
-				{
-					return "Microsoft Emulator Manager (Administrator)";
-				}
+				//RnD
+				//if (UacSecurity.IsAdmin())
+				//{
+				//	return "Microsoft Emulator Manager (Administrator)";
+				//}
 				return "Microsoft Emulator Manager";
 			}
 		}

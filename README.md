@@ -7,6 +7,12 @@ My fork of MS Emulator (decompiled by Empyreal96).
 This is the source codes for parts of the Microsoft Emulator (aka XDE).
 XDE used to run the Windows 10 Mobile Emulator Images.
 
+## Screenshots
+<p align="center">
+  <img src="Images/shot1.png">  
+  <img src="Images/shot2.png"> 
+</p>
+
 
 ## Tech. details
 
@@ -78,8 +84,10 @@ also some sections may have errors.
 - Use `dnSpy` or some analougues to obtain the lost code (i.e., Microsoft.Xde.Interface, 
 Windows.Foundation.UniversalApiContract, Windows.Foundation.FoundationContract, Windows.Services.Store.StoreContract).
 - Learn more about [Friend assemblies](https://learn.microsoft.com/en-us/dotnet/standard/assembly/friend/)... 
-or change "internals" to "publics" at _internal repos. 
+or change "internals" to "publics" at "internal" repos. 
 
+## CAUTION 
+This project has success on compiling. BUT app logics are very unstable (no tests, no good work guarantees).
 
 ## .. 
 AS IS. No support. RnD only / DIY

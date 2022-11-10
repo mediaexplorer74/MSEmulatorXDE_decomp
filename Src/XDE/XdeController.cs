@@ -647,8 +647,10 @@ namespace Microsoft.Xde.Client
 			}
 		}
 
-		// Token: 0x06000375 RID: 885 RVA: 0x0000C501 File Offset: 0x0000A701
-		public void ShutdownXde()
+        IXdeSensorConfig IXdeAutomation.SensorsConfig { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        // Token: 0x06000375 RID: 885 RVA: 0x0000C501 File Offset: 0x0000A701
+        public void ShutdownXde()
 		{
 			if (this.IsShuttingDown)
 			{
@@ -725,8 +727,8 @@ namespace Microsoft.Xde.Client
 					return this.exitCode = XdeReturnCode.InvalidArguments;
 				}
 				string xdeOwnershipMutexName = Utility.GetXdeOwnershipMutexName(this.ArgsProcessor.VirtualMachineName);
-				bool flag;
-				using (new Mutex(true, xdeOwnershipMutexName, ref flag))
+				bool flag = default;
+				using (new Mutex(true, xdeOwnershipMutexName, out flag))
 				{
 					if (!flag)
 					{
@@ -1159,7 +1161,8 @@ namespace Microsoft.Xde.Client
 		// Token: 0x06000393 RID: 915 RVA: 0x0000D158 File Offset: 0x0000B358
 		private async void RestartGuestShell()
 		{
-			DevicePortal devicePortal = new DevicePortal("http://" + this.addressInfo.GuestIpAddress);
+			//RnD
+			DevicePortal devicePortal = null;//new DevicePortal("http://" + this.addressInfo.GuestIpAddress);
 			try
 			{
 				Task<DevicePortal.RunningProcesses> runningProcessesAsync = devicePortal.GetRunningProcessesAsync();

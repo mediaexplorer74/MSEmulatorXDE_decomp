@@ -36,6 +36,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -96,6 +100,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="app.manifest" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -140,6 +145,10 @@
     <ProjectReference Include="..\Microsoft.Xde.Common.Base\Microsoft.Xde.Common.Base.csproj">
       <Project>{a78f4998-31a5-4e67-bf7a-a39f9ff038be}</Project>
       <Name>Microsoft.Xde.Common.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.Common\Microsoft.Xde.Common.csproj">
+      <Project>{8576637a-f463-47ac-9ce3-759d4089f5f9}</Project>
+      <Name>Microsoft.Xde.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Microsoft.Xde.DeviceManagement\Microsoft.Xde.DeviceManagement.csproj">
       <Project>{d766028e-531d-459c-96c4-822a31a5620f}</Project>

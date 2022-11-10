@@ -59,6 +59,7 @@ namespace Microsoft.Tools.WindowsDevicePortal
                             }
                             catch (SerializationException ex)
                             {
+                                Debug.WriteLine("[ex] Serialization failure encountered. Check DataContract types for a possible mismatch between expectations and reality: "+ ex.Message);
                                 // Assert on serialization failure.
                                 Debug.Assert(false, "Serialization failure encountered. Check DataContract types for a possible mismatch between expectations and reality");
                                 throw;

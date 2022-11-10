@@ -11,9 +11,9 @@
 namespace Microsoft.Xde.Client.Properties {
     
     
-    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0")]
-    internal sealed partial class XdeUserSettings : global::System.Configuration.ApplicationSettingsBase {
+    //[global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    //[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0")]
+    public sealed partial class XdeUserSettings : global::System.Configuration.ApplicationSettingsBase {
         
         private static XdeUserSettings defaultInstance = ((XdeUserSettings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new XdeUserSettings())));
         

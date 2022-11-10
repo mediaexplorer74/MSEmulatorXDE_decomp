@@ -30,6 +30,9 @@ namespace Microsoft.Xde.Client
 		}
 
 		// Token: 0x040000AC RID: 172
-		public new static readonly DependencyProperty IsPressedProperty = DependencyProperty.Register("IsPressed", typeof(bool), typeof(IsPressedButton), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+		public new static readonly DependencyProperty IsPressedProperty 
+			= DependencyProperty.Register("IsPressed", typeof(bool), 
+				typeof(IsPressedButton), 
+				new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 	}
 }
