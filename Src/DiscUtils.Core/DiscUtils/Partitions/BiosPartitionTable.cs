@@ -282,7 +282,7 @@ namespace DiscUtils.Partitions
 			biosPartitionRecord.LBAStart = (uint)first;
 			biosPartitionRecord.LBALength = (uint)(last - first + 1L);
 			biosPartitionRecord.PartitionType = type;
-			biosPartitionRecord.Status = (markActive ? 128 : 0);
+			biosPartitionRecord.Status = (byte)(markActive ? 128 : 0);
 			foreach (BiosPartitionRecord biosPartitionRecord2 in primaryRecords)
 			{
 				if (Utilities.RangesOverlap<uint>((uint)first, (uint)last + 1U, biosPartitionRecord2.LBAStartAbsolute, biosPartitionRecord2.LBAStartAbsolute + biosPartitionRecord2.LBALength))
@@ -307,7 +307,7 @@ namespace DiscUtils.Partitions
 			List<BiosPartitionRecord> list = new List<BiosPartitionRecord>(this.GetPrimaryRecords());
 			for (int i = 0; i < list.Count; i++)
 			{
-				list[i].Status = ((i == index) ? 128 : 0);
+				list[i].Status = (byte)((i == index) ? 128 : 0);
 				this.WriteRecord(i, list[i]);
 			}
 		}

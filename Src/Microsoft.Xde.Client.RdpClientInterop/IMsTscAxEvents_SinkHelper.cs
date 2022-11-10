@@ -436,5 +436,170 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 
 		// Token: 0x040000BB RID: 187
 		public int m_dwCookie;
-	}
+
+        void IMsTscAxEvents.OnConnecting()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnConnected()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnLoginComplete()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnDisconnected(int discReason)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnEnterFullScreenMode()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnLeaveFullScreenMode()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnChannelReceivedData(string chanName, string data)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnRequestGoFullScreen()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnRequestLeaveFullScreen()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnFatalError(int errorCode)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnWarning(int warningCode)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnRemoteDesktopSizeChange(int width, int height)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnIdleTimeoutNotification()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnRequestContainerMinimize()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnConfirmClose(out bool pfAllowClose)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnReceivedTSPublicKey(string publicKey, out bool pfContinueLogon)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnAutoReconnecting(int disconnectReason, int attemptCount, out AutoReconnectContinueState pArcContinueStatus)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnAuthenticationWarningDisplayed()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnAuthenticationWarningDismissed()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnRemoteProgramResult(string bstrRemoteProgram, RemoteProgramResult lError, bool vbIsExecutable)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnRemoteProgramDisplayed(bool vbDisplayed, uint uDisplayInformation)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnRemoteWindowDisplayed(bool vbDisplayed, ref _RemotableHandle hwnd, RemoteWindowDisplayedAttribute windowAttribute)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnLogonError(int lError)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnFocusReleased(int iDirection)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnUserNameAcquired(string bstrUserName)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnMouseInputModeChanged(bool fMouseModeRelative)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnServiceMessageReceived(string serviceMessage)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnConnectionBarPullDown()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnNetworkBandwidthChanged(int qualityLevel)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMsTscAxEvents.OnAutoReconnected()
+        {
+            throw new NotImplementedException();
+        }
+
+        //public void OnConfirmClose(out bool pfAllowClose)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public void OnReceivedTSPublicKey([In, MarshalAs(UnmanagedType.BStr)] string publicKey, out bool pfContinueLogon)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public void OnAutoReconnecting([In] int disconnectReason, [In] int attemptCount, out AutoReconnectContinueState pArcContinueStatus)
+        //{
+        //    throw new NotImplementedException();
+        // }
+    }
 }

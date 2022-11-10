@@ -6,7 +6,7 @@ using DiscUtils.Streams;
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x0200000F RID: 15
-	internal class BiosParameterBlock
+	public class BiosParameterBlock
 	{
 		// Token: 0x17000011 RID: 17
 		// (get) Token: 0x06000047 RID: 71 RVA: 0x00002DC1 File Offset: 0x00000FC1

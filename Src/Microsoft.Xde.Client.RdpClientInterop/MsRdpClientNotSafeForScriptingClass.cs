@@ -9,7 +9,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 	[ComSourceInterfaces("Microsoft.Xde.Client.RdpClientInterop.IMsTscAxEvents\0\0")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[TypeLibType(TypeLibTypeFlags.FCanCreate | TypeLibTypeFlags.FControl)]
-	[ComImport]
+	//[ComImport]
 	public class MsRdpClientNotSafeForScriptingClass : IMsRdpClient, MsRdpClientNotSafeForScripting, IMsTscAxEvents_Event, IMsTscAx, IMsTscAx_Redist, IMsTscNonScriptable, IMsRdpClientNonScriptable
 	{
 		// Token: 0x060001E9 RID: 489

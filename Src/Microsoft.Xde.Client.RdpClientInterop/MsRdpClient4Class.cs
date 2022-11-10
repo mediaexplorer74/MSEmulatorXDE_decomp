@@ -10,7 +10,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 	[Guid("4EDCB26C-D24C-4E72-AF07-B576699AC0DE")]
 	[ComConversionLoss]
 	[ClassInterface(ClassInterfaceType.None)]
-	[ComImport]
+	//[ComImport]
 	public class MsRdpClient4Class : IMsRdpClient4, MsRdpClient4, IMsTscAxEvents_Event, IMsRdpClient3, IMsRdpClient2, IMsRdpClient, IMsTscAx, IMsTscAx_Redist, IMsTscNonScriptable, IMsRdpClientNonScriptable, IMsRdpClientNonScriptable2
 	{
 		// Token: 0x060009F4 RID: 2548

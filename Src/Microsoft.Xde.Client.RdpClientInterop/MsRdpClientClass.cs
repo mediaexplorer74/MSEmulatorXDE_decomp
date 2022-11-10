@@ -8,7 +8,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 	[ComSourceInterfaces("Microsoft.Xde.Client.RdpClientInterop.IMsTscAxEvents\0\0")]
 	[Guid("791FA017-2DE3-492E-ACC5-53C67A2B94D0")]
 	[ClassInterface(ClassInterfaceType.None)]
-	[ComImport]
+	//[ComImport]
 	public class MsRdpClientClass : IMsRdpClient, MsRdpClient, IMsTscAxEvents_Event, IMsTscAx, IMsTscAx_Redist, IMsTscNonScriptable, IMsRdpClientNonScriptable
 	{
 		// Token: 0x06000282 RID: 642

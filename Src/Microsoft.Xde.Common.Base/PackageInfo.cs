@@ -102,15 +102,16 @@ namespace Microsoft.Xde.Common
 			public IntPtr publisherId;
 
 			// Token: 0x0400014C RID: 332
-			[FixedBuffer(typeof(char), 1024)]
-			public PackageInfo.PACKAGE_ID.<fixedBuffer>e__FixedBuffer fixedBuffer;
+			//[FixedBuffer(typeof(char), 1024)]
+			//public PackageInfo.PACKAGE_ID.<fixedBuffer>e__FixedBuffer fixedBuffer;
+
 
 			// Token: 0x02000077 RID: 119
 			[CompilerGenerated]
 			[UnsafeValueType]
 			[StructLayout(LayoutKind.Sequential, Size = 2048)]
-			public struct <fixedBuffer>e__FixedBuffer
-			{
+			public struct e__FixedBuffer//<fixedBuffer>e__FixedBuffer
+            {
 				// Token: 0x04000248 RID: 584
 				public char FixedElementField;
 			}

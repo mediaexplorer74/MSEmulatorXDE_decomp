@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 namespace DiscUtils.Internal
 {
 	// Token: 0x02000073 RID: 115
-	internal static class Utilities
+	public static class Utilities
 	{
 		// Token: 0x06000425 RID: 1061 RVA: 0x0000C758 File Offset: 0x0000A958
 		public static U[] Map<T, U>(ICollection<T> source, Func<T, U> func)
@@ -126,7 +126,7 @@ namespace DiscUtils.Internal
 		// Token: 0x0600042F RID: 1071 RVA: 0x0000C965 File Offset: 0x0000AB65
 		public static ulong BitSwap(ulong value)
 		{
-			return (ulong)Utilities.BitSwap((uint)(value & (ulong)-1)) << 32 | (ulong)Utilities.BitSwap((uint)(value >> 32));
+			return (ulong)Utilities.BitSwap((uint)(value -1)) << 32 | (ulong)Utilities.BitSwap((uint)(value >> 32));
 		}
 
 		// Token: 0x06000430 RID: 1072 RVA: 0x0000C981 File Offset: 0x0000AB81

@@ -8,10 +8,10 @@ using DiscUtils.Streams;
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x02000034 RID: 52
-	internal class MasterFileTable : IDiagnosticTraceable, IDisposable
+	public class MasterFileTable : IDiagnosticTraceable, IDisposable
 	{
 		// Token: 0x06000204 RID: 516 RVA: 0x0000AA30 File Offset: 0x00008C30
-		public MasterFileTable(INtfsContext context)
+		public MasterFileTable(INtfsContext context, MasterFileTable mft)
 		{
 			BiosParameterBlock biosParameterBlock = context.BiosParameterBlock;
 			this._recordCache = new ObjectCache<long, FileRecord>();
@@ -20,18 +20,23 @@ namespace DiscUtils.Ntfs
 			this._recordStream = new SubStream(context.RawStream, biosParameterBlock.MftCluster * (long)((ulong)biosParameterBlock.SectorsPerCluster) * (long)((ulong)biosParameterBlock.BytesPerSector), (long)(24 * this.RecordSize));
 		}
 
-		// Token: 0x17000086 RID: 134
-		// (get) Token: 0x06000205 RID: 517 RVA: 0x0000AA9E File Offset: 0x00008C9E
-		public IEnumerable<FileRecord> Records
+        public MasterFileTable(NtfsContext context)
+        {
+            this.context = context;
+        }
+
+        // Token: 0x17000086 RID: 134
+        // (get) Token: 0x06000205 RID: 517 RVA: 0x0000AA9E File Offset: 0x00008C9E
+        public IEnumerable<FileRecord> Records
 		{
 			get
 			{
-				using (Stream mftStream = this._self.OpenStream(AttributeType.Data, null, FileAccess.Read))
+				using (Stream mftStream1 = this._self.OpenStream(AttributeType.Data, null, FileAccess.Read))
 				{
 					uint index = 0U;
-					while (mftStream.Position < mftStream.Length)
+					while (mftStream1.Position < mftStream1.Length)
 					{
-						byte[] array = StreamUtilities.ReadExact(mftStream, this.RecordSize);
+						byte[] array = StreamUtilities.ReadExact(mftStream1, this.RecordSize);
 						if (!(EndianUtilities.BytesToString(array, 0, 4) != "FILE"))
 						{
 							FileRecord fileRecord = new FileRecord(this._bytesPerSector);
@@ -45,7 +50,7 @@ namespace DiscUtils.Ntfs
 				}
 				Stream mftStream = null;
 				yield break;
-				yield break;
+				//yield break;
 			}
 		}
 
@@ -421,5 +426,6 @@ namespace DiscUtils.Ntfs
 
 		// Token: 0x04000100 RID: 256
 		private File _self;
-	}
+        private NtfsContext context;
+    }
 }

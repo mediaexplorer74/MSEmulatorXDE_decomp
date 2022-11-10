@@ -8,7 +8,7 @@ using DiscUtils.Internal;
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x02000017 RID: 23
-	internal class Directory : File
+	public class Directory : File
 	{
 		// Token: 0x060000A8 RID: 168 RVA: 0x00004F38 File Offset: 0x00003138
 		public Directory(INtfsContext context, FileRecord baseRecord) : base(context, baseRecord)
@@ -164,7 +164,7 @@ namespace DiscUtils.Ntfs
 			}
 			File file2 = file;
 			ushort hardLinkCount = file2.HardLinkCount;
-			file2.HardLinkCount = hardLinkCount - 1;
+			file2.HardLinkCount = (ushort)(hardLinkCount - 1);
 			file.UpdateRecordInMft();
 			base.Modified();
 			base.UpdateRecordInMft();

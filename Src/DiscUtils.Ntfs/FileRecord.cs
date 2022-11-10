@@ -6,7 +6,7 @@ using DiscUtils.Streams;
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x0200001D RID: 29
-	internal class FileRecord : FixupRecordBase
+	public class FileRecord : FixupRecordBase
 	{
 		// Token: 0x06000104 RID: 260 RVA: 0x00007470 File Offset: 0x00005670
 		public FileRecord(int sectorSize) : base("FILE", sectorSize)
@@ -140,8 +140,8 @@ namespace DiscUtils.Ntfs
 		public void ReInitialize(int sectorSize, int recordLength, uint index)
 		{
 			base.Initialize("FILE", sectorSize, recordLength);
-			ushort sequenceNumber = this.SequenceNumber;
-			this.SequenceNumber = sequenceNumber + 1;
+			ushort sequenceNumber = (ushort)this.SequenceNumber;
+			this.SequenceNumber = (ushort)(sequenceNumber + 1);
 			this.Flags = FileRecordFlags.None;
 			this.AllocatedSize = (uint)recordLength;
 			this.NextAttributeId = 0;
@@ -201,7 +201,7 @@ namespace DiscUtils.Ntfs
 		public ushort CreateAttribute(AttributeType type, string name, bool indexed, AttributeFlags flags)
 		{
 			ushort nextAttributeId = this.NextAttributeId;
-			this.NextAttributeId = nextAttributeId + 1;
+			this.NextAttributeId = (ushort)(nextAttributeId + 1);
 			ushort num = nextAttributeId;
 			this.Attributes.Add(new ResidentAttributeRecord(type, name, num, indexed, flags));
 			this.Attributes.Sort();
@@ -212,7 +212,7 @@ namespace DiscUtils.Ntfs
 		public ushort CreateNonResidentAttribute(AttributeType type, string name, AttributeFlags flags)
 		{
 			ushort nextAttributeId = this.NextAttributeId;
-			this.NextAttributeId = nextAttributeId + 1;
+			this.NextAttributeId = (ushort)(nextAttributeId + 1);
 			ushort num = nextAttributeId;
 			this.Attributes.Add(new NonResidentAttributeRecord(type, name, num, flags, 0L, new List<DataRun>()));
 			this.Attributes.Sort();
@@ -223,7 +223,7 @@ namespace DiscUtils.Ntfs
 		public ushort CreateNonResidentAttribute(AttributeType type, string name, AttributeFlags flags, long firstCluster, ulong numClusters, uint bytesPerCluster)
 		{
 			ushort nextAttributeId = this.NextAttributeId;
-			this.NextAttributeId = nextAttributeId + 1;
+			this.NextAttributeId = (ushort)(nextAttributeId + 1);
 			ushort num = nextAttributeId;
 			this.Attributes.Add(new NonResidentAttributeRecord(type, name, num, flags, firstCluster, numClusters, bytesPerCluster));
 			this.Attributes.Sort();
@@ -234,7 +234,7 @@ namespace DiscUtils.Ntfs
 		public ushort AddAttribute(AttributeRecord attrRec)
 		{
 			ushort nextAttributeId = this.NextAttributeId;
-			this.NextAttributeId = nextAttributeId + 1;
+			this.NextAttributeId = (ushort)(nextAttributeId + 1);
 			attrRec.AttributeId = nextAttributeId;
 			this.Attributes.Add(attrRec);
 			this.Attributes.Sort();
@@ -334,7 +334,7 @@ namespace DiscUtils.Ntfs
 		// Token: 0x0600012D RID: 301 RVA: 0x00007C74 File Offset: 0x00005E74
 		protected override ushort Write(byte[] buffer, int offset)
 		{
-			ushort num = this._haveIndex ? 48 : 42;
+			ushort num = (ushort)(this._haveIndex ? 48 : 42);
 			this._firstAttributeOffset = (ushort)MathUtilities.RoundUp((int)num + base.UpdateSequenceSize, 8);
 			this.RealSize = (uint)this.CalcSize();
 			EndianUtilities.WriteBytesLittleEndian(this.LogFileSequenceNumber, buffer, offset + 8);

@@ -53,7 +53,9 @@ namespace DiscUtils
 		// Token: 0x06000215 RID: 533 RVA: 0x00004FD4 File Offset: 0x000031D4
 		private static IEnumerable<LogicalVolumeFactory> GetLogicalVolumeFactories(Assembly assembly)
 		{
-			foreach (Type type in assembly.GetTypes())
+            Type[] array;
+
+            foreach (Type type in assembly.GetTypes())
 			{
 				foreach (Attribute attribute in ReflectionHelper.GetCustomAttributes(type, typeof(LogicalVolumeFactoryAttribute), false))
 				{
@@ -61,11 +63,11 @@ namespace DiscUtils
 					yield return (LogicalVolumeFactory)Activator.CreateInstance(type);
 				}
 				IEnumerator<Attribute> enumerator = null;
-				type = null;
+				array = null;
 			}
-			Type[] array = null;
+			
 			yield break;
-			yield break;
+			//yield break;
 		}
 
 		// Token: 0x06000216 RID: 534 RVA: 0x00004FE4 File Offset: 0x000031E4

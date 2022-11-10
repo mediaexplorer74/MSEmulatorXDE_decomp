@@ -60,7 +60,7 @@ namespace DiscUtils
 			string name = xmlNode.Name;
 			if (name != null)
 			{
-				uint num = <PrivateImplementationDetails>.ComputeStringHash(name);
+				long num = name.GetHashCode();//<PrivateImplementationDetails>.ComputeStringHash(name);
 				if (num <= 1278716217U)
 				{
 					if (num != 184981848U)

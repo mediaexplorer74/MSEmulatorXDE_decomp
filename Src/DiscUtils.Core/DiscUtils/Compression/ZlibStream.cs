@@ -32,7 +32,7 @@ namespace DiscUtils.Compression
 			else
 			{
 				ushort num2 = 30848;
-				num2 |= 31 - num2 % 31;
+				num2 |= (ushort)(31 - num2 % 31);
 				byte[] buffer = new byte[2];
 				EndianUtilities.WriteBytesBigEndian(num2, buffer, 0);
 				stream.Write(buffer, 0, 2);

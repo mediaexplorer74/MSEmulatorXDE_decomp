@@ -24,7 +24,7 @@ namespace DiscUtils.Partitions
 				string text = this.PartitionType.ToString().ToUpperInvariant();
 				if (text != null)
 				{
-					uint num = <PrivateImplementationDetails>.ComputeStringHash(text);
+					long num = text.GetHashCode();//<PrivateImplementationDetails>.ComputeStringHash(text);
 					if (num <= 2298181622U)
 					{
 						if (num <= 683956618U)

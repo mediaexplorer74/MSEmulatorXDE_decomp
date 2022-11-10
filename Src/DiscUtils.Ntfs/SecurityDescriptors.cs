@@ -9,7 +9,7 @@ using DiscUtils.Streams;
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x0200004E RID: 78
-	internal sealed class SecurityDescriptors : IDiagnosticTraceable
+	public sealed class SecurityDescriptors : IDiagnosticTraceable
 	{
 		// Token: 0x0600039D RID: 925 RVA: 0x000143A0 File Offset: 0x000125A0
 		public SecurityDescriptors(File file)

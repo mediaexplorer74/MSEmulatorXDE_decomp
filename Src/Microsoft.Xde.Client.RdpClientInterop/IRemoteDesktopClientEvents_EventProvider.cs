@@ -42,7 +42,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_ConnectionPoint == null)
 				{
@@ -57,7 +57,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -70,7 +70,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_aEventSinkHelpers != null)
 				{
@@ -106,7 +106,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -119,7 +119,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_ConnectionPoint == null)
 				{
@@ -134,7 +134,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -147,7 +147,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_aEventSinkHelpers != null)
 				{
@@ -183,7 +183,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -196,7 +196,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_ConnectionPoint == null)
 				{
@@ -211,7 +211,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -224,7 +224,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_aEventSinkHelpers != null)
 				{
@@ -260,7 +260,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -273,7 +273,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_ConnectionPoint == null)
 				{
@@ -288,7 +288,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -301,7 +301,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_aEventSinkHelpers != null)
 				{
@@ -337,7 +337,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -350,7 +350,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_ConnectionPoint == null)
 				{
@@ -365,7 +365,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -378,7 +378,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_aEventSinkHelpers != null)
 				{
@@ -414,7 +414,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -427,7 +427,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_ConnectionPoint == null)
 				{
@@ -442,7 +442,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -455,7 +455,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_aEventSinkHelpers != null)
 				{
@@ -491,7 +491,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -504,7 +504,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_ConnectionPoint == null)
 				{
@@ -519,7 +519,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -532,7 +532,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_aEventSinkHelpers != null)
 				{
@@ -568,7 +568,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -581,7 +581,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_ConnectionPoint == null)
 				{
@@ -596,7 +596,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -609,7 +609,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_aEventSinkHelpers != null)
 				{
@@ -645,7 +645,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -658,7 +658,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_ConnectionPoint == null)
 				{
@@ -673,7 +673,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -686,7 +686,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_aEventSinkHelpers != null)
 				{
@@ -722,7 +722,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -735,7 +735,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_ConnectionPoint == null)
 				{
@@ -750,7 +750,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -763,7 +763,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_aEventSinkHelpers != null)
 				{
@@ -799,7 +799,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -812,7 +812,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_ConnectionPoint == null)
 				{
@@ -827,7 +827,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -840,7 +840,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_aEventSinkHelpers != null)
 				{
@@ -876,7 +876,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -889,7 +889,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_ConnectionPoint == null)
 				{
@@ -904,7 +904,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -917,7 +917,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_aEventSinkHelpers != null)
 				{
@@ -953,7 +953,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -966,7 +966,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_ConnectionPoint == null)
 				{
@@ -981,7 +981,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -1030,7 +1030,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);
@@ -1050,7 +1050,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 		{
 			try
 			{
-				bool flag;
+				bool flag = default;
 				Monitor.Enter(this, ref flag);
 				if (this.m_ConnectionPoint != null)
 				{
@@ -1074,7 +1074,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 			}
 			finally
 			{
-				bool flag;
+				bool flag = default;
 				if (flag)
 				{
 					Monitor.Exit(this);

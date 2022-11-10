@@ -7,7 +7,7 @@ using DiscUtils.Streams;
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x02000046 RID: 70
-	internal sealed class ObjectIds
+	public sealed class ObjectIds
 	{
 		// Token: 0x0600035E RID: 862 RVA: 0x00012D72 File Offset: 0x00010F72
 		public ObjectIds(File file)

@@ -1214,7 +1214,7 @@ namespace DiscUtils.Ntfs
 		// Token: 0x060002E8 RID: 744 RVA: 0x0000FA56 File Offset: 0x0000DC56
 		public MasterFileTable GetMasterFileTable()
 		{
-			return new MasterFileTable(this._context, this._context.Mft);
+			return new MasterFileTable(_context, _context.Mft);
 		}
 
 		// Token: 0x060002E9 RID: 745 RVA: 0x0000FA70 File Offset: 0x0000DC70

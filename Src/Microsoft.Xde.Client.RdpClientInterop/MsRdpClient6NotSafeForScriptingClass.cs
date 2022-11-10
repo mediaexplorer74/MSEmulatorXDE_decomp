@@ -10,7 +10,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 	[ClassInterface(ClassInterfaceType.None)]
 	[Guid("D2EA46A7-C2BF-426B-AF24-E19C44456399")]
 	[TypeLibType(TypeLibTypeFlags.FCanCreate | TypeLibTypeFlags.FControl)]
-	[ComImport]
+	//[ComImport]
 	public class MsRdpClient6NotSafeForScriptingClass : IMsRdpClient6, MsRdpClient6NotSafeForScripting, IMsTscAxEvents_Event, IMsRdpClient5, IMsRdpClient4, IMsRdpClient3, IMsRdpClient2, IMsRdpClient, IMsTscAx, IMsTscAx_Redist, IMsTscNonScriptable, IMsRdpClientNonScriptable, IMsRdpClientNonScriptable2, IMsRdpClientNonScriptable3, IMsRdpClientNonScriptable4
 	{
 		// Token: 0x06001002 RID: 4098

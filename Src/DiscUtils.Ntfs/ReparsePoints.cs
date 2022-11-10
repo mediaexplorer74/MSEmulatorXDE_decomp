@@ -7,7 +7,7 @@ using DiscUtils.Streams;
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x0200004A RID: 74
-	internal class ReparsePoints
+	public class ReparsePoints
 	{
 		// Token: 0x06000378 RID: 888 RVA: 0x00013B45 File Offset: 0x00011D45
 		public ReparsePoints(File file)

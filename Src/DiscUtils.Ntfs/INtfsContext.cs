@@ -4,11 +4,11 @@ using System.IO;
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x02000031 RID: 49
-	internal interface INtfsContext
+	public interface INtfsContext
 	{
 		// Token: 0x17000071 RID: 113
 		// (get) Token: 0x060001E0 RID: 480
-		AllocateFileFn AllocateFile { get; }
+		public AllocateFileFn AllocateFile { get; }
 
 		// Token: 0x17000072 RID: 114
 		// (get) Token: 0x060001E1 RID: 481

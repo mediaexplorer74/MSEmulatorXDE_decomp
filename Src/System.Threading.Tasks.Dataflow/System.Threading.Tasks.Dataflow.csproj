@@ -25,7 +25,7 @@
     <Prefer32Bit>false</Prefer32Bit>
     <NoWarn>1591;1574</NoWarn>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>..\deploy\debug\System.Threading.Tasks.Dataflow.XML</DocumentationFile>
+    <DocumentationFile>System.Threading.Tasks.Dataflow.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,7 +35,7 @@
     <DefineConstants>TRACE;NET_4_5_X;NET_3_5_ABOVE;NET_4_0_ABOVE;NET45PLUS;NET40PLUS;NET35PLUS;CONCURRENT_COLLECTIONS;FEATURE_TRACING</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\deploy\net45\System.Threading.Tasks.Dataflow.XML</DocumentationFile>
+    <DocumentationFile>System.Threading.Tasks.Dataflow.XML</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
     <NoWarn>1591;1574</NoWarn>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -44,7 +44,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>..\StrongKey.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>StrongKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -110,6 +110,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="StrongKey.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

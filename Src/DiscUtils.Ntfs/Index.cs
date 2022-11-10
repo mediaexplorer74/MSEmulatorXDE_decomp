@@ -369,7 +369,7 @@ namespace DiscUtils.Ntfs
 				{
 					yield return focus;
 				}
-				focus = null;
+				//focus = null;
 			}
 			IEnumerator<IndexEntry> enumerator = null;
 			yield break;
@@ -417,7 +417,7 @@ namespace DiscUtils.Ntfs
 				{
 					yield break;
 				}
-				focus = null;
+				//focus = null;
 			}
 			IEnumerator<IndexEntry> enumerator = null;
 			yield break;

@@ -6,7 +6,7 @@ using DiscUtils.Streams;
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x02000007 RID: 7
-	internal sealed class AttributeDefinitions
+	public sealed class AttributeDefinitions
 	{
 		// Token: 0x0600000A RID: 10 RVA: 0x000021AC File Offset: 0x000003AC
 		public AttributeDefinitions()

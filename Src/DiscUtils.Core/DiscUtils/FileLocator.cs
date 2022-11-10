@@ -6,7 +6,7 @@ using DiscUtils.Setup;
 namespace DiscUtils
 {
 	// Token: 0x0200000F RID: 15
-	internal abstract class FileLocator
+	public abstract class FileLocator
 	{
 		// Token: 0x060000A7 RID: 167
 		public abstract bool Exists(string fileName);

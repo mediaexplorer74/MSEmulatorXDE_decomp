@@ -6,7 +6,7 @@ using DiscUtils.Streams;
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x02000011 RID: 17
-	internal class ClusterBitmap : IDisposable
+	public class ClusterBitmap : IDisposable
 	{
 		// Token: 0x06000062 RID: 98 RVA: 0x00003994 File Offset: 0x00001B94
 		public ClusterBitmap(File file)

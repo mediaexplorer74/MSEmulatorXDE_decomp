@@ -111,7 +111,8 @@ namespace DiscUtils.Registry
 		// Token: 0x0600002F RID: 47 RVA: 0x00003065 File Offset: 0x00001265
 		public static RegistryHive Create(string path)
 		{
-			return RegistryHive.Create(new LocalFileLocator(string.Empty).Open(path, FileMode.Create, FileAccess.ReadWrite, FileShare.None), Ownership.Dispose);
+			return RegistryHive.Create(new LocalFileLocator(string.Empty).Open(path, 
+				FileMode.Create, FileAccess.ReadWrite, FileShare.None), Ownership.Dispose);
 		}
 
 		// Token: 0x06000030 RID: 48 RVA: 0x00003080 File Offset: 0x00001280

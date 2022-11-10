@@ -5,7 +5,7 @@ using DiscUtils.Internal;
 namespace DiscUtils
 {
 	// Token: 0x02000008 RID: 8
-	internal sealed class DiscFileLocator : FileLocator
+	public sealed class DiscFileLocator : FileLocator
 	{
 		// Token: 0x06000037 RID: 55 RVA: 0x0000255A File Offset: 0x0000075A
 		public DiscFileLocator(DiscFileSystem fileSystem, string basePath)

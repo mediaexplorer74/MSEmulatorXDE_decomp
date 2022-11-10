@@ -9,7 +9,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 	[ComSourceInterfaces("Microsoft.Xde.Client.RdpClientInterop.IRemoteDesktopClientEvents\0\0")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[Guid("EAB16C5D-EED1-4E95-868B-0FBA1B42C092")]
-	[ComImport]
+	//[ComImport]
 	public class RemoteDesktopClientClass : IRemoteDesktopClient, RemoteDesktopClient, IRemoteDesktopClientEvents_Event
 	{
 		// Token: 0x06001EA0 RID: 7840

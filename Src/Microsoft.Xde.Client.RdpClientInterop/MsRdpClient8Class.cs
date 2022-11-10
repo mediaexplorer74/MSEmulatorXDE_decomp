@@ -10,7 +10,7 @@ namespace Microsoft.Xde.Client.RdpClientInterop
 	[TypeLibType(TypeLibTypeFlags.FCanCreate)]
 	[ComConversionLoss]
 	[Guid("5F681803-2900-4C43-A1CC-CF405404A676")]
-	[ComImport]
+	//[ComImport]
 	public class MsRdpClient8Class : IMsRdpClient8, MsRdpClient8, IMsTscAxEvents_Event, IMsRdpClient7, IMsRdpClient6, IMsRdpClient5, IMsRdpClient4, IMsRdpClient3, IMsRdpClient2, IMsRdpClient, IMsTscAx, IMsTscAx_Redist, IMsTscNonScriptable, IMsRdpClientNonScriptable, IMsRdpClientNonScriptable2, IMsRdpClientNonScriptable3, IMsRdpClientNonScriptable4, IMsRdpClientNonScriptable5, IMsRdpPreferredRedirectionInfo
 	{
 		// Token: 0x06001BDB RID: 7131

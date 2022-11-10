@@ -160,7 +160,7 @@ namespace DiscUtils
 			{
 				num = 64;
 			}
-			else if (capacity <= (long)((ulong)-67108864))
+			else if (capacity <= (long)(-67108864))
 			{
 				num = 128;
 			}

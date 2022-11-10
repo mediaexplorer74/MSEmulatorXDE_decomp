@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Caching;
 using DiscUtils.Internal;
 using DiscUtils.Streams;
 
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x02000019 RID: 25
-	internal class File
+	public class File
 	{
 		// Token: 0x060000BB RID: 187 RVA: 0x00005560 File Offset: 0x00003760
 		public File(INtfsContext context, FileRecord baseRecord)

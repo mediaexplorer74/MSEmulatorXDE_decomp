@@ -33,7 +33,7 @@ namespace DiscUtils.Registry
 			string text = EndianUtilities.BytesToString(buffer, pos, 2);
 			if (text != null)
 			{
-				uint num = <PrivateImplementationDetails>.ComputeStringHash(text);
+				long num = text.GetHashCode();
 				Cell cell;
 				if (num <= 1077001542U)
 				{

@@ -126,7 +126,7 @@ namespace MS.WindowsAPICodePack.Internal
 					{
 						throw new ArgumentException(LocalizedMessages.PropVariantTypeNotSupported);
 					}
-					ParameterExpression parameterExpression;
+					ParameterExpression parameterExpression = default;
 					func = Expression.Lambda<Func<object, PropVariant>>(Expression.New(constructor, new Expression[]
 					{
 						Expression.Convert(parameterExpression, type)
@@ -590,7 +590,7 @@ namespace MS.WindowsAPICodePack.Internal
 			long num = value.ToFileTime();
 			return new System.Runtime.InteropServices.ComTypes.FILETIME
 			{
-				dwLowDateTime = (int)(num & (long)((ulong)-1)),
+				dwLowDateTime = (int)(num & (long)(-1)),
 				dwHighDateTime = (int)(num >> 32)
 			};
 		}

@@ -24,7 +24,7 @@ namespace DiscUtils
 			this._diskId = diskId;
 			this._disk = disk;
 			this._streamOpener = (() => new SubStream(disk.Content, Ownership.None, 0L, disk.Capacity));
-			this.VolumeType = 1;
+			this.VolumeType = (PhysicalVolumeType)1;
 		}
 
 		// Token: 0x17000054 RID: 84

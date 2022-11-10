@@ -21,42 +21,6 @@ System.Threading.Tasks.Dataflow (?)
 System.Management.Automation (?)
 Microsoft.Diagnostics.Tracing.EventSource (?)
 
-(XDE)
-XDE
-Microsoft.Xde.Base
-Microsoft.Xde.Client.RdpClientAxHost
-Microsoft.Xde.Client.RdpClientInterop
-Microsoft.Xde.Communication
-Microsoft.Xde.LocSimulator
-Microsoft.Xde.SantPlugin
-System.Threading.Tasks.Dataflow (?)
-
-(XdeConfig)
-XdeConfig
-CommandLine
-System.Management.Automation (?)
-
-(XdeManager)
-XdeManager
-DiscUtils.Core
-DiscUtils.Ntfs
-DiscUtils.Registry
-DiscUtils.Streams
-DiscUtils.Vhd
-DiscUtils.Vhdx
-Diskstream
-Microsoft.Diagnostics.Tracing.EventSource (?)
-Microsoft.HyperV.Schema
-Microsoft.Xde.Common
-Microsoft.Xde.Common.Base
-Microsoft.Xde.DeviceManagement
-Microsoft.Xde.Hcs
-Microsoft.Xde.Interface.Common
-Microsoft.Xde.Interface.Public.10.1
-Microsoft.Xde.WindowsAPICodePack
-Microsoft.Xde.Wmi
-WindowsDevicePortalWrapper
-```
 
 **Original AppxPackage:** `Microsoft.MicrosoftEmulator_1.1.1081.0_x64__8wekyb3d8bbwe`
 
@@ -64,9 +28,57 @@ WindowsDevicePortalWrapper
 - 30 projects merged on main "XDE" solution.
 - Some fast RnD completed (see Docs folder). 
 
+## Status / progress of R.E.
+
+(XDE)
+XDE
+Microsoft.Xde.Base  -
+Microsoft.Xde.Client.RdpClientAxHost  +
+Microsoft.Xde.Client.RdpClientInterop  +
+Microsoft.Xde.Communication  -
+Microsoft.Xde.LocSimulator  +-
+Microsoft.Xde.SantPlugin 
+Microsoft.Xde.Interface -/NA (fake repo temporary added)
+Windows.Foundation.UniversalApiContract -/NA (fake repo temporary added)
+Windows.Foundation.FoundationContract  -/NA (fake repo temporary added)
+Windows.Services.Store.StoreContract  -/NA (fake repo temporary added)
+
+
+(XdeConfig)
+XdeConfig  -
+CommandLine -
+
+
+(XdeManager)
+XdeManager -
+DiscUtils.Core +
+DiscUtils.Ntfs -
+DiscUtils.Registry -
+DiscUtils.Streams +
+DiscUtils.Vhd -
+DiscUtils.Vhdx -
+Diskstream -
+
+Microsoft.HyperV.Schema +
+Microsoft.Xde.Common +
+Microsoft.Xde.Common.Base +
+Microsoft.Xde.DeviceManagement
+Microsoft.Xde.Hcs -
+Microsoft.Xde.Interface.Common +
+Microsoft.Xde.Interface.Public.10.1 +
+Microsoft.Xde.WindowsAPICodePack
+Microsoft.Xde.Wmi -
+WindowsDevicePortalWrapper +
+```
+
+
 ## TODO
-Expect fixes needing to be applied to parts of the decompiled code, also some sections may have errors. 
-`dnSpy` was used to obtain this code.
+- Expect fixes needing to be applied to parts of the decompiled code, 
+also some sections may have errors. 
+- Use `dnSpy` or some analougues to obtain the lost code (i.e., Microsoft.Xde.Interface, 
+Windows.Foundation.UniversalApiContract, Windows.Foundation.FoundationContract, Windows.Services.Store.StoreContract).
+- Learn more about [Friend assemblies](https://learn.microsoft.com/en-us/dotnet/standard/assembly/friend/)... 
+or change "internals" to "publics" at _internal repos. 
 
 
 ## .. 

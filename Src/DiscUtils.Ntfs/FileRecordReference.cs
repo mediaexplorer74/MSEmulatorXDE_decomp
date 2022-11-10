@@ -4,7 +4,7 @@ using DiscUtils.Streams;
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x0200001F RID: 31
-	internal struct FileRecordReference : IByteArraySerializable, IComparable<FileRecordReference>
+	public struct FileRecordReference : IByteArraySerializable, IComparable<FileRecordReference>
 	{
 		// Token: 0x0600012F RID: 303 RVA: 0x00007E48 File Offset: 0x00006048
 		public FileRecordReference(ulong val)

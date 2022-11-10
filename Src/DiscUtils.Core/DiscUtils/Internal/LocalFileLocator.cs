@@ -4,7 +4,7 @@ using System.IO;
 namespace DiscUtils.Internal
 {
 	// Token: 0x0200006F RID: 111
-	internal sealed class LocalFileLocator : FileLocator
+	public sealed class LocalFileLocator : FileLocator
 	{
 		// Token: 0x06000410 RID: 1040 RVA: 0x0000C38F File Offset: 0x0000A58F
 		public LocalFileLocator(string dir)

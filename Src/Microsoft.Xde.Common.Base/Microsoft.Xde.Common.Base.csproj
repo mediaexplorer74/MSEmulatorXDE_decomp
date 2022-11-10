@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -28,7 +28,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -66,7 +66,9 @@
     <Compile Include="KeyboardHookFlags.cs" />
     <Compile Include="MathUtils.cs" />
     <Compile Include="NativeMethods.cs" />
+    <Compile Include="Package.cs" />
     <Compile Include="PackageInfo.cs" />
+    <Compile Include="PackageManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.cs" />
     <Compile Include="RegValueType.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="SkuRegKey.cs" />
     <Compile Include="SkuRegRoots.cs" />
     <Compile Include="SkuRegValue.cs" />
+    <Compile Include="StoreContext.cs" />
     <Compile Include="StoreUtils.cs" />
     <Compile Include="Strings.cs" />
     <Compile Include="StringUtilities.cs" />

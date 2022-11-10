@@ -17,11 +17,11 @@ namespace DiscUtils.Partitions
 			this._lbaOffset = lbaOffset;
 			this.Status = data[offset];
 			this.StartHead = data[offset + 1];
-			this.StartSector = (data[offset + 2] & 63);
+			this.StartSector = (byte)(data[offset + 2] & 63);
 			this.StartCylinder = (ushort)((int)data[offset + 3] | (int)(data[offset + 2] & 192) << 2);
 			this.PartitionType = data[offset + 4];
 			this.EndHead = data[offset + 5];
-			this.EndSector = (data[offset + 6] & 63);
+			this.EndSector = (byte)(data[offset + 6] & 63);
 			this.EndCylinder = (ushort)((int)data[offset + 7] | (int)(data[offset + 6] & 192) << 2);
 			this.LBAStart = EndianUtilities.ToUInt32LittleEndian(data, offset + 8);
 			this.LBALength = EndianUtilities.ToUInt32LittleEndian(data, offset + 12);

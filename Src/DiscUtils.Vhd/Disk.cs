@@ -84,7 +84,7 @@ namespace DiscUtils.Vhd
 		}
 
 		// Token: 0x06000006 RID: 6 RVA: 0x000022A8 File Offset: 0x000004A8
-		internal Disk(FileLocator locator, string path, FileAccess access)
+		public Disk(FileLocator locator, string path, FileAccess access)
 		{
 			DiskImageFile item = new DiskImageFile(locator, path, access);
 			this._files = new List<Tuple<DiskImageFile, Ownership>>();

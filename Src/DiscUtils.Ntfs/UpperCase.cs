@@ -6,7 +6,7 @@ using DiscUtils.Streams;
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x02000053 RID: 83
-	internal sealed class UpperCase : IComparer<string>
+	public sealed class UpperCase : IComparer<string>
 	{
 		// Token: 0x060003BE RID: 958 RVA: 0x00015038 File Offset: 0x00013238
 		public UpperCase(File file)

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.EnterpriseServices.Internal;
 using System.IO;
+//using System.IO.Packaging;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Win32;
-using Windows.ApplicationModel;
-using Windows.Management.Deployment;
+//using Windows.ApplicationModel;
+//using Windows.Management.Deployment;
 
 namespace Microsoft.Xde.Common
 {
@@ -47,19 +48,20 @@ namespace Microsoft.Xde.Common
 		// (get) Token: 0x060001B7 RID: 439 RVA: 0x0000474F File Offset: 0x0000294F
 		public static bool IsInternalVersion { get; }
 
-		// Token: 0x17000081 RID: 129
-		// (get) Token: 0x060001B8 RID: 440 RVA: 0x00004756 File Offset: 0x00002956
-		public static Package EmulatorPackage
-		{
-			get
-			{
-				return new PackageManager().FindPackagesForUser(string.Empty, "Microsoft.MicrosoftEmulator_8wekyb3d8bbwe").FirstOrDefault<Package>();
-			}
-		}
+        // Token: 0x17000081 RID: 129
+        // (get) Token: 0x060001B8 RID: 440 RVA: 0x00004756 File Offset: 0x00002956
+        public static Package EmulatorPackage
+        {
+            get
+            {
+                return new PackageManager().FindPackagesForUser(string.Empty, 
+					"Microsoft.MicrosoftEmulator_8wekyb3d8bbwe").FirstOrDefault<Package>();
+            }
+        }
 
-		// Token: 0x17000082 RID: 130
-		// (get) Token: 0x060001B9 RID: 441 RVA: 0x00004774 File Offset: 0x00002974
-		public static bool IsRunningAsPackagedEmulator
+        // Token: 0x17000082 RID: 130
+        // (get) Token: 0x060001B9 RID: 441 RVA: 0x00004774 File Offset: 0x00002974
+        public static bool IsRunningAsPackagedEmulator
 		{
 			get
 			{
