@@ -48,7 +48,7 @@ namespace DiscUtils
 		public abstract string ResolveRelativePath(string path);
 
 		// Token: 0x060000B1 RID: 177 RVA: 0x00002C4C File Offset: 0x00000E4C
-		internal string MakeRelativePath(FileLocator fileLocator, string path)
+		public string MakeRelativePath(FileLocator fileLocator, string path)
 		{
 			if (!this.HasCommonRoot(fileLocator))
 			{

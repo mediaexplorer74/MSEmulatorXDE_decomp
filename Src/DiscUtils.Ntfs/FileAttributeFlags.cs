@@ -4,7 +4,7 @@ namespace DiscUtils.Ntfs
 {
 	// Token: 0x0200001A RID: 26
 	[Flags]
-	internal enum FileAttributeFlags : uint
+	public enum FileAttributeFlags : uint
 	{
 		// Token: 0x0400007E RID: 126
 		None = 0U,

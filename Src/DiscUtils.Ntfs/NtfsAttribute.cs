@@ -7,7 +7,7 @@ using DiscUtils.Streams;
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x02000039 RID: 57
-	internal class NtfsAttribute : IDiagnosticTraceable
+	public class NtfsAttribute : IDiagnosticTraceable
 	{
 		// Token: 0x06000252 RID: 594 RVA: 0x0000C934 File Offset: 0x0000AB34
 		protected NtfsAttribute(File file, FileRecordReference containingFile, AttributeRecord record)

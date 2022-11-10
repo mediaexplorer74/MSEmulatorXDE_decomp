@@ -49,5 +49,15 @@ namespace HCS.Schema.VirtualMachines.Resources
 		// Token: 0x040000C1 RID: 193
 		[DataMember(IsRequired = true)]
 		public Guid ParentAddress;
-	}
+
+        public static class HvSocketConfig
+        {
+            public static object ServiceTable { get; set; }
+        }
+
+        public static implicit operator HvSocketAddress(HvSocket v)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

@@ -12,7 +12,7 @@ namespace XdeManager.Properties
 	// Token: 0x0200000B RID: 11
 	[CompilerGenerated]
 	[GeneratedCode("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.2.0.0")]
-	internal sealed partial class Settings : ApplicationSettingsBase
+	public sealed partial class Settings : ApplicationSettingsBase
 	{
 		// Token: 0x17000010 RID: 16
 		// (get) Token: 0x06000047 RID: 71 RVA: 0x00002B5E File Offset: 0x00000D5E

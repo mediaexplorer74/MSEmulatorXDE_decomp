@@ -3,7 +3,7 @@
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x02000018 RID: 24
-	internal class DirectoryEntry
+	public class DirectoryEntry
 	{
 		// Token: 0x060000B5 RID: 181 RVA: 0x000054D0 File Offset: 0x000036D0
 		public DirectoryEntry(Directory directory, FileRecordReference fileReference, FileNameRecord fileDetails)

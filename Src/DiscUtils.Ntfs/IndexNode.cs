@@ -6,7 +6,7 @@ using DiscUtils.Streams;
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x0200002D RID: 45
-	internal class IndexNode
+	public class IndexNode
 	{
 		// Token: 0x060001A8 RID: 424 RVA: 0x00009390 File Offset: 0x00007590
 		public IndexNode(IndexNodeSaveFn store, int storeOverhead, Index index, bool isRoot, uint allocatedSize)
@@ -164,7 +164,7 @@ namespace DiscUtils.Ntfs
 			}
 			this.Header.OffsetToFirstEntry = (uint)MathUtilities.RoundUp(16 + this._storageOverhead, 8);
 			this.Header.TotalSizeOfEntries = num + this.Header.OffsetToFirstEntry;
-			this.Header.HasChildNodes = (flag ? 1 : 0);
+			this.Header.HasChildNodes = (byte)(flag ? 1 : 0);
 			this.Header.WriteTo(buffer, offset);
 			int num2 = (int)this.Header.OffsetToFirstEntry;
 			foreach (IndexEntry indexEntry2 in this._entries)

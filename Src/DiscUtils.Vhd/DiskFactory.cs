@@ -6,7 +6,7 @@ using DiscUtils.Internal;
 namespace DiscUtils.Vhd
 {
 	// Token: 0x02000005 RID: 5
-	[VirtualDiskFactory("VHD", ".vhd,.avhd")]
+	//[VirtualDiskFactory("VHD", ".vhd,.avhd")]
 	internal sealed class DiskFactory : VirtualDiskFactory
 	{
 		// Token: 0x1700000C RID: 12

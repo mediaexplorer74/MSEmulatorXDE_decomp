@@ -7,7 +7,7 @@ using DiscUtils.Streams;
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x02000028 RID: 40
-	internal class Index : IDisposable
+	public class Index : IDisposable
 	{
 		// Token: 0x06000171 RID: 369 RVA: 0x00008384 File Offset: 0x00006584
 		public Index(File file, string name, BiosParameterBlock bpb, UpperCase upCase)

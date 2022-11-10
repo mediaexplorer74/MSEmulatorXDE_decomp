@@ -7,7 +7,7 @@ namespace DiscUtils
 	public sealed class ClusterMap
 	{
 		// Token: 0x0600000C RID: 12 RVA: 0x000021F9 File Offset: 0x000003F9
-		internal ClusterMap(ClusterRoles[] clusterToRole, object[] clusterToFileId, Dictionary<object, string[]> fileIdToPaths)
+		public ClusterMap(ClusterRoles[] clusterToRole, object[] clusterToFileId, Dictionary<object, string[]> fileIdToPaths)
 		{
 			this._clusterToRole = clusterToRole;
 			this._clusterToFileId = clusterToFileId;

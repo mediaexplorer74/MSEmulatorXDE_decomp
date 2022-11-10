@@ -6,6 +6,7 @@ using System.Linq;
 using System.ServiceModel;
 using Microsoft.Xde.Common;
 using Microsoft.Xde.Communication;
+using Microsoft.Xde.H2LPlugin.Orientation;
 using Microsoft.Xde.Interface;
 using Microsoft.Xde.Telemetry;
 

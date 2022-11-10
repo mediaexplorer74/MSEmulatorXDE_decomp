@@ -32,12 +32,12 @@ Microsoft.Diagnostics.Tracing.EventSource (?)
 
 (XDE)
 XDE
-Microsoft.Xde.Base  -
-Microsoft.Xde.Client.RdpClientAxHost  +
-Microsoft.Xde.Client.RdpClientInterop  +
-Microsoft.Xde.Communication  -
+Microsoft.Xde.Base  +-
+Microsoft.Xde.Client.RdpClientAxHost  +-
+Microsoft.Xde.Client.RdpClientInterop  +-
+Microsoft.Xde.Communication  +-
 Microsoft.Xde.LocSimulator  +-
-Microsoft.Xde.SantPlugin 
+Microsoft.Xde.SantPlugin +-
 Microsoft.Xde.Interface -/NA (fake repo temporary added)
 Windows.Foundation.UniversalApiContract -/NA (fake repo temporary added)
 Windows.Foundation.FoundationContract  -/NA (fake repo temporary added)
@@ -45,29 +45,29 @@ Windows.Services.Store.StoreContract  -/NA (fake repo temporary added)
 
 
 (XdeConfig)
-XdeConfig  -
-CommandLine -
+XdeConfig  +-
+CommandLine +
 
 
 (XdeManager)
-XdeManager -
+XdeManager +-
 DiscUtils.Core +
-DiscUtils.Ntfs -
-DiscUtils.Registry -
+DiscUtils.Ntfs +-
+DiscUtils.Registry +-
 DiscUtils.Streams +
-DiscUtils.Vhd -
-DiscUtils.Vhdx -
-Diskstream -
+DiscUtils.Vhd +-
+DiscUtils.Vhdx +-
+Diskstream +-
 
 Microsoft.HyperV.Schema +
 Microsoft.Xde.Common +
 Microsoft.Xde.Common.Base +
 Microsoft.Xde.DeviceManagement
-Microsoft.Xde.Hcs -
+Microsoft.Xde.Hcs +-
 Microsoft.Xde.Interface.Common +
 Microsoft.Xde.Interface.Public.10.1 +
-Microsoft.Xde.WindowsAPICodePack
-Microsoft.Xde.Wmi -
+Microsoft.Xde.WindowsAPICodePack +
+Microsoft.Xde.Wmi +-
 WindowsDevicePortalWrapper +
 ```
 

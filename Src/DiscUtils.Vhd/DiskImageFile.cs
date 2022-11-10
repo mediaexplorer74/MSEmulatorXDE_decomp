@@ -61,8 +61,8 @@ namespace DiscUtils.Vhd
 
 		// Token: 0x1700000D RID: 13
 		// (get) Token: 0x06000036 RID: 54 RVA: 0x00002C28 File Offset: 0x00000E28
-		internal override long Capacity
-		{
+		public override long Capacity
+        {
 			get
 			{
 				return this._footer.CurrentSize;
@@ -162,7 +162,7 @@ namespace DiscUtils.Vhd
 
 		// Token: 0x17000016 RID: 22
 		// (get) Token: 0x0600003F RID: 63 RVA: 0x00002CE2 File Offset: 0x00000EE2
-		internal override FileLocator RelativeFileLocator
+		public override FileLocator RelativeFileLocator
 		{
 			get
 			{
@@ -190,8 +190,11 @@ namespace DiscUtils.Vhd
 			}
 		}
 
-		// Token: 0x06000042 RID: 66 RVA: 0x00002D04 File Offset: 0x00000F04
-		public static DiskImageFile InitializeFixed(Stream stream, Ownership ownsStream, long capacity)
+        
+
+
+        // Token: 0x06000042 RID: 66 RVA: 0x00002D04 File Offset: 0x00000F04
+        public static DiskImageFile InitializeFixed(Stream stream, Ownership ownsStream, long capacity)
 		{
 			return DiskImageFile.InitializeFixed(stream, ownsStream, capacity, null);
 		}
@@ -374,7 +377,7 @@ namespace DiscUtils.Vhd
 		// Token: 0x06000052 RID: 82 RVA: 0x00003020 File Offset: 0x00001220
 		private static void InitializeDynamicInternal(Stream stream, long capacity, Geometry geometry, long blockSize)
 		{
-			if (blockSize > (long)((ulong)-1) || blockSize < 0L)
+			if (blockSize > (long)(-1) || blockSize < 0L)
 			{
 				throw new ArgumentOutOfRangeException("blockSize", "Must be in the range 0 to uint.MaxValue");
 			}

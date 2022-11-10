@@ -18,7 +18,7 @@ namespace DiscUtils.Ntfs
 		public ResidentAttributeRecord(AttributeType type, string name, ushort id, bool indexed, AttributeFlags flags) : base(type, name, id, flags)
 		{
 			this._nonResidentFlag = 0;
-			this._indexedFlag = (indexed ? 1 : 0);
+			this._indexedFlag = (byte)(indexed ? 1 : 0);
 			this._memoryBuffer = new SparseMemoryBuffer(1024);
 		}
 

@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 namespace DiscUtils.CoreCompat
 {
 	// Token: 0x02000079 RID: 121
-	internal static class ReflectionHelper
+	public static class ReflectionHelper
 	{
 		// Token: 0x06000456 RID: 1110 RVA: 0x0000CE8D File Offset: 0x0000B08D
 		public static bool IsEnum(Type type)

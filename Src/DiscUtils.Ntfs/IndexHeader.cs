@@ -4,7 +4,7 @@ using DiscUtils.Streams;
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x0200002C RID: 44
-	internal class IndexHeader
+	public class IndexHeader
 	{
 		// Token: 0x060001A5 RID: 421 RVA: 0x000092E4 File Offset: 0x000074E4
 		public IndexHeader(uint allocatedSize)

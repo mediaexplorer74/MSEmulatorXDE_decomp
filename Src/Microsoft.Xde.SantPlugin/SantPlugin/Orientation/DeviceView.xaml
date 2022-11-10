@@ -185,7 +185,7 @@
 				</ItemsControl.ItemTemplate>
 			</ComboBox>
 		</StackPanel>
-		<ui:Device
-			Name="device" />
+		<!--ui:Device
+			Name="device" /-->
 	</Grid>
 </UserControl>

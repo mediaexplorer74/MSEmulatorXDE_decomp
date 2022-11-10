@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace DiscUtils.Internal
 {
 	// Token: 0x02000072 RID: 114
-	internal class ObjectCache<K, V>
+	public class ObjectCache<K, V>
 	{
 		// Token: 0x0600041E RID: 1054 RVA: 0x0000C4C1 File Offset: 0x0000A6C1
 		public ObjectCache()
@@ -49,7 +49,7 @@ namespace DiscUtils.Internal
 		}
 
 		// Token: 0x06000421 RID: 1057 RVA: 0x0000C5A0 File Offset: 0x0000A7A0
-		internal void Remove(K key)
+		public void Remove(K key)
 		{
 			for (int i = 0; i < this._recent.Count; i++)
 			{

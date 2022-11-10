@@ -6,8 +6,8 @@ using DiscUtils.Internal;
 namespace DiscUtils.Vhdx
 {
 	// Token: 0x02000009 RID: 9
-	[VirtualDiskFactory("VHDX", ".vhdx,.avhdx")]
-	internal sealed class DiskFactory : VirtualDiskFactory
+	//[VirtualDiskFactory("VHDX", ".vhdx,.avhdx")]
+	public sealed class DiskFactory : VirtualDiskFactory
 	{
 		// Token: 0x17000019 RID: 25
 		// (get) Token: 0x06000053 RID: 83 RVA: 0x000034AB File Offset: 0x000016AB

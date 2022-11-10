@@ -4,7 +4,7 @@ using DiscUtils.Streams;
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x0200002A RID: 42
-	internal class IndexEntry
+	public class IndexEntry
 	{
 		// Token: 0x06000196 RID: 406 RVA: 0x0000900A File Offset: 0x0000720A
 		public IndexEntry(bool isFileIndexEntry)
@@ -158,7 +158,7 @@ namespace DiscUtils.Ntfs
 				}
 				else
 				{
-					ushort num3 = this.IsFileIndexEntry ? 0 : (16 + num2);
+					ushort num3 = (ushort)(this.IsFileIndexEntry ? 0 : (16 + num2));
 					ushort val = (ushort)this._dataBuffer.Length;
 					EndianUtilities.WriteBytesLittleEndian(num3, buffer, offset);
 					EndianUtilities.WriteBytesLittleEndian(val, buffer, offset + 2);

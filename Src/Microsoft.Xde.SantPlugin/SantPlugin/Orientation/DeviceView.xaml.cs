@@ -109,5 +109,6 @@ namespace Microsoft.Xde.SantPlugin.Orientation
 
 		// Token: 0x04000080 RID: 128
 		private DoubleAnimation zrotAnim = new DoubleAnimation();
-	}
+        private Device device;
+    }
 }

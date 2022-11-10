@@ -5,8 +5,8 @@ using System.IO;
 namespace DiscUtils.Internal
 {
 	// Token: 0x02000074 RID: 116
-	internal abstract class VirtualDiskFactory
-	{
+	public abstract class VirtualDiskFactory 
+    {
 		// Token: 0x1700011A RID: 282
 		// (get) Token: 0x0600043D RID: 1085
 		public abstract string[] Variants { get; }

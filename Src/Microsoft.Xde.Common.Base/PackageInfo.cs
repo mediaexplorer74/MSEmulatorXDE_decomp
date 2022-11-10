@@ -52,9 +52,10 @@ namespace Microsoft.Xde.Common
 		// (get) Token: 0x0600004A RID: 74 RVA: 0x00002F65 File Offset: 0x00001165
 		// (set) Token: 0x0600004B RID: 75 RVA: 0x00002F6D File Offset: 0x0000116D
 		public Version Version { get; private set; }
+        public object FullName { get; set; }
 
-		// Token: 0x0600004C RID: 76
-		[DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
+        // Token: 0x0600004C RID: 76
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
 		private static extern int GetCurrentPackageFamilyName(ref uint length, StringBuilder packageFamilyName);
 
 		// Token: 0x0600004D RID: 77

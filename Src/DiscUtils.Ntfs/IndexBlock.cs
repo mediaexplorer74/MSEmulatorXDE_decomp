@@ -65,7 +65,7 @@ namespace DiscUtils.Ntfs
 		{
 			EndianUtilities.WriteBytesLittleEndian(this._logSequenceNumber, buffer, offset + 8);
 			EndianUtilities.WriteBytesLittleEndian(this._indexBlockVcn, buffer, offset + 16);
-			return 24 + this.Node.WriteTo(buffer, offset + 24);
+			return (ushort)(24 + this.Node.WriteTo(buffer, offset + 24));
 		}
 
 		// Token: 0x06000195 RID: 405 RVA: 0x00009003 File Offset: 0x00007203

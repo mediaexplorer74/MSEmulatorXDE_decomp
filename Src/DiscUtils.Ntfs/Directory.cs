@@ -139,7 +139,7 @@ namespace DiscUtils.Ntfs
 			fileNameRecord.ParentDirectory = base.MftReference;
 			file.CreateStream(AttributeType.FileName, null).SetContent<FileNameRecord>(fileNameRecord);
 			ushort hardLinkCount = file.HardLinkCount;
-			file.HardLinkCount = hardLinkCount + 1;
+			file.HardLinkCount = (ushort)(hardLinkCount + 1);
 			file.UpdateRecordInMft();
 			this.Index[fileNameRecord] = file.MftReference;
 			base.Modified();

@@ -5,7 +5,7 @@ using DiscUtils.Streams;
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x02000021 RID: 33
-	internal abstract class FixupRecordBase
+	public abstract class FixupRecordBase
 	{
 		// Token: 0x06000142 RID: 322 RVA: 0x00008001 File Offset: 0x00006201
 		public FixupRecordBase(string magic, int sectorSize)
@@ -151,7 +151,7 @@ namespace DiscUtils.Ntfs
 		private void ProtectBuffer(byte[] buffer, int offset)
 		{
 			ushort updateSequenceNumber = this.UpdateSequenceNumber;
-			this.UpdateSequenceNumber = updateSequenceNumber + 1;
+			this.UpdateSequenceNumber = (ushort)(updateSequenceNumber + 1);
 			for (int i = 0; i < this._updateSequenceArray.Length; i++)
 			{
 				this._updateSequenceArray[i] = EndianUtilities.ToUInt16LittleEndian(buffer, offset + 512 * (i + 1) - 2);

@@ -7,7 +7,7 @@ namespace DiscUtils
 	public sealed class DiskImageFileSpecification
 	{
 		// Token: 0x060000A4 RID: 164 RVA: 0x00002BC4 File Offset: 0x00000DC4
-		internal DiskImageFileSpecification(string name, StreamBuilder builder)
+		public DiskImageFileSpecification(string name, StreamBuilder builder)
 		{
 			this.Name = name;
 			this._builder = builder;

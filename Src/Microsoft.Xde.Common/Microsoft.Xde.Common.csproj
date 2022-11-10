@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.Windows.SDK.Contracts.10.0.19041.1\build\Microsoft.Windows.SDK.Contracts.props" Condition="Exists('..\packages\Microsoft.Windows.SDK.Contracts.10.0.19041.1\build\Microsoft.Windows.SDK.Contracts.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -38,23 +37,32 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="microsoft.identitymodel, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IdentityModel.7.0.0\lib\net35\microsoft.identitymodel.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Primitives, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Serialization.Primitives.4.3.0\lib\net46\System.Runtime.Serialization.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
     <Reference Include="System.Xaml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <AppDesigner Include="Properties\" />
@@ -177,12 +185,6 @@
     <EmbeddedResource Include="Xde\Common\Strings.resources" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="simplestyles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\DiscUtils.Core\DiscUtils.Core.csproj">
       <Project>{6932758a-cd40-42a9-9e4c-bff9141e6d97}</Project>
       <Name>DiscUtils.Core</Name>
@@ -214,6 +216,10 @@
     <ProjectReference Include="..\Microsoft.Xde.Common.Base\Microsoft.Xde.Common.Base.csproj">
       <Project>{a78f4998-31a5-4e67-bf7a-a39f9ff038be}</Project>
       <Name>Microsoft.Xde.Common.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Xde.DeviceManagement\Microsoft.Xde.DeviceManagement.csproj">
+      <Project>{d766028e-531d-459c-96c4-822a31a5620f}</Project>
+      <Name>Microsoft.Xde.DeviceManagement</Name>
     </ProjectReference>
     <ProjectReference Include="..\Microsoft.Xde.Interface.Common\Microsoft.Xde.Interface.Common.csproj">
       <Project>{565c6d9f-dbc4-4cc0-9011-fe6618fdf434}</Project>

@@ -202,7 +202,7 @@ namespace DiscUtils.Ntfs
 			int num = 16;
 			for (int i = 0; i < array.Length; i++)
 			{
-				array[i] = 4 + b;
+				array[i] = (byte)(4 + b);
 				if (i == num)
 				{
 					num <<= 1;

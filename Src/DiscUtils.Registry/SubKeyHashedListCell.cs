@@ -85,7 +85,7 @@ namespace DiscUtils.Registry
 			this._subKeyIndexes.Add(cellIndex);
 			this._nameHashes.Add(this.CalcHash(name));
 			short numElements = this._numElements;
-			this._numElements = numElements + 1;
+			this._numElements = (short)(numElements + 1);
 			return (int)numElements;
 		}
 

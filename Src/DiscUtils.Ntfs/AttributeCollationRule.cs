@@ -3,7 +3,7 @@
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x02000005 RID: 5
-	internal enum AttributeCollationRule
+	public enum AttributeCollationRule
 	{
 		// Token: 0x04000002 RID: 2
 		Binary,

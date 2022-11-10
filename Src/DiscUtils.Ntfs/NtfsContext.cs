@@ -4,7 +4,7 @@ using System.IO;
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x0200003B RID: 59
-	internal sealed class NtfsContext : INtfsContext
+	public sealed class NtfsContext : INtfsContext
 	{
 		// Token: 0x170000AF RID: 175
 		// (get) Token: 0x0600027A RID: 634 RVA: 0x0000D3D3 File Offset: 0x0000B5D3

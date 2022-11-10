@@ -354,7 +354,7 @@ namespace XdeConfig
 				int deleted = 0;
 				windowsImageVhd.DeleteFiles(options.Path, options.Recursive, delegate(string fileName)
 				{
-					int deleted = deleted;
+					//int deleted = deleted;
 					deleted++;
 				});
 				if (deleted == 0)
@@ -413,7 +413,7 @@ namespace XdeConfig
 				int copied = 0;
 				windowsImageVhd.CopyDirectoryFromLocalToVhd(text2, fileSpec, options.Dest, options.Recursive, false, delegate(string src, string dest)
 				{
-					int copied = copied;
+					//int copied = copied;
 					copied++;
 					Console.WriteLine(src);
 				});
@@ -468,7 +468,7 @@ namespace XdeConfig
 				int copied = 0;
 				windowsImageVhd.CopyDirectoryFromVhdToLocal(vhdDir, fileSpec, options.Dest, options.Recursive, delegate(string src, string dest)
 				{
-					int copied = copied;
+					//int copied = copied;
 					copied++;
 					Console.WriteLine(src);
 				});

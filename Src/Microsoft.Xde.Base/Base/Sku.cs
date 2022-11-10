@@ -141,7 +141,7 @@ namespace Microsoft.Xde.Base
 						}
 						IEnumerator<IXdeConnectionController> enumerator2 = null;
 					}
-					feature = null;
+					//feature = null;
 				}
 				List<IXdeFeature>.Enumerator enumerator = default(List<IXdeFeature>.Enumerator);
 				yield break;

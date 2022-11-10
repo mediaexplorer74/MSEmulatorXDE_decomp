@@ -5,7 +5,7 @@ using DiscUtils.Streams;
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x02000051 RID: 81
-	internal sealed class StandardInformation : IByteArraySerializable, IDiagnosticTraceable
+	public sealed class StandardInformation : IByteArraySerializable, IDiagnosticTraceable
 	{
 		// Token: 0x170000F8 RID: 248
 		// (get) Token: 0x060003AD RID: 941 RVA: 0x00014AAD File Offset: 0x00012CAD

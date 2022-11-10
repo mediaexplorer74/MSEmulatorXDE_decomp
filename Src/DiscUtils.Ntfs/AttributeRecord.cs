@@ -6,7 +6,7 @@ using DiscUtils.Streams;
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x0200000B RID: 11
-	internal abstract class AttributeRecord : IComparable<AttributeRecord>
+	public abstract class AttributeRecord : IComparable<AttributeRecord>
 	{
 		// Token: 0x06000026 RID: 38 RVA: 0x00002A98 File Offset: 0x00000C98
 		public AttributeRecord()
@@ -124,16 +124,19 @@ namespace DiscUtils.Ntfs
 		// Token: 0x06000038 RID: 56 RVA: 0x00002B49 File Offset: 0x00000D49
 		public static AttributeRecord FromBytes(byte[] buffer, int offset, out int length)
 		{
+			length = 0; //RnD
+
 			if (EndianUtilities.ToUInt32LittleEndian(buffer, offset) == 4294967295U)
 			{
 				length = 0;
 				return null;
 			}
+
 			if (buffer[offset + 8] != 0)
 			{
-				return new NonResidentAttributeRecord(buffer, offset, ref length);
+				return new NonResidentAttributeRecord(buffer, offset, out length);
 			}
-			return new ResidentAttributeRecord(buffer, offset, ref length);
+			return new ResidentAttributeRecord(buffer, offset, out length);
 		}
 
 		// Token: 0x06000039 RID: 57 RVA: 0x00002B72 File Offset: 0x00000D72

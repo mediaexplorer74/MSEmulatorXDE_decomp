@@ -1,10 +1,51 @@
 ﻿using System;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Services.Store;
 
 namespace Microsoft.Xde.DeviceManagement
 {
-	// Token: 0x02000005 RID: 5
-	internal class StoreQueueItemStatusWrapper : IDownloadableItemStatus
+    internal class StoreQueueItem
+    {
+        internal EventRegistrationToken add_Completed(TypedEventHandler<StoreQueueItem, StoreQueueItemCompletedEventArgs> arg)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal EventRegistrationToken add_StatusChanged(TypedEventHandler<StoreQueueItem, object> arg)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal Task CancelInstallAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal StoreQueueItemStatus GetCurrentStatus()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void remove_Completed(EventRegistrationToken obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void remove_StatusChanged(EventRegistrationToken obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static implicit operator StoreQueueItem(int v)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+    // Token: 0x02000005 RID: 5
+    internal class StoreQueueItemStatusWrapper : IDownloadableItemStatus
 	{
 		// Token: 0x0600002E RID: 46 RVA: 0x00002684 File Offset: 0x00000884
 		public StoreQueueItemStatusWrapper(StoreQueueItemStatus status)

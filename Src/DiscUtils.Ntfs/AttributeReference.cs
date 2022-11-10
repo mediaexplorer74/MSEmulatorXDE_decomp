@@ -3,7 +3,7 @@
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x0200000C RID: 12
-	internal class AttributeReference : IComparable<AttributeReference>, IEquatable<AttributeReference>
+	public class AttributeReference : IComparable<AttributeReference>, IEquatable<AttributeReference>
 	{
 		// Token: 0x0600003F RID: 63 RVA: 0x00002CCE File Offset: 0x00000ECE
 		public AttributeReference(FileRecordReference fileReference, ushort attributeId)

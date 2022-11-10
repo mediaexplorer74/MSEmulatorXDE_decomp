@@ -20,7 +20,7 @@ namespace XdeManager.ViewModel
 		// Token: 0x17000065 RID: 101
 		// (get) Token: 0x060000EF RID: 239 RVA: 0x00004366 File Offset: 0x00002566
 		// (set) Token: 0x060000F0 RID: 240 RVA: 0x0000436E File Offset: 0x0000256E
-		private protected virtual bool ThrowOnInvalidPropertyName { protected get; private set; }
+		private protected virtual bool ThrowOnInvalidPropertyName { get; private set; }
 
 		// Token: 0x060000F1 RID: 241 RVA: 0x00004378 File Offset: 0x00002578
 		[Conditional("DEBUG")]

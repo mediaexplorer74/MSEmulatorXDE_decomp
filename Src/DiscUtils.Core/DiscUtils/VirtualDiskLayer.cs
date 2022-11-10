@@ -9,7 +9,7 @@ namespace DiscUtils
 	{
 		// Token: 0x1700007B RID: 123
 		// (get) Token: 0x060001DC RID: 476
-		internal abstract long Capacity { get; }
+		public abstract long Capacity { get; }
 
 		// Token: 0x1700007C RID: 124
 		// (get) Token: 0x060001DD RID: 477 RVA: 0x00004D0A File Offset: 0x00002F0A
@@ -45,7 +45,7 @@ namespace DiscUtils
 
 		// Token: 0x17000081 RID: 129
 		// (get) Token: 0x060001E2 RID: 482
-		internal abstract FileLocator RelativeFileLocator { get; }
+		public abstract FileLocator RelativeFileLocator { get; }
 
 		// Token: 0x060001E3 RID: 483 RVA: 0x00004D18 File Offset: 0x00002F18
 		public void Dispose()

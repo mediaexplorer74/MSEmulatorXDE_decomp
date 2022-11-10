@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Tracing;
 using System.Reflection;
 using System.Text;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 using Microsoft.Diagnostics.Telemetry;
-using Microsoft.Diagnostics.Tracing;
+//using Microsoft.Diagnostics.Tracing;
 using Microsoft.Xde.Common;
 
 namespace Microsoft.Xde.Telemetry

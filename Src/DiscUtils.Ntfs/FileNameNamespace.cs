@@ -3,7 +3,7 @@
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x0200001B RID: 27
-	internal enum FileNameNamespace : byte
+	public enum FileNameNamespace : byte
 	{
 		// Token: 0x0400008F RID: 143
 		Posix,

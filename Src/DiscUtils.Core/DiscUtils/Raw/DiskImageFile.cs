@@ -28,7 +28,7 @@ namespace DiscUtils.Raw
 
 		// Token: 0x170000CE RID: 206
 		// (get) Token: 0x060002F5 RID: 757 RVA: 0x0000677C File Offset: 0x0000497C
-		internal override long Capacity
+		public override long Capacity
 		{
 			get
 			{
@@ -77,7 +77,7 @@ namespace DiscUtils.Raw
 
 		// Token: 0x170000D4 RID: 212
 		// (get) Token: 0x060002FC RID: 764 RVA: 0x000067B5 File Offset: 0x000049B5
-		internal override FileLocator RelativeFileLocator
+		public override FileLocator RelativeFileLocator
 		{
 			get
 			{

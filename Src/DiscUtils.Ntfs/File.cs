@@ -931,7 +931,7 @@ namespace DiscUtils.Ntfs
 		}
 
 		// Token: 0x060000F3 RID: 243 RVA: 0x00006D54 File Offset: 0x00004F54
-		private void RemoveAttribute(NtfsAttribute attr)
+		public void RemoveAttribute(NtfsAttribute attr)
 		{
 			if (attr != null)
 			{
@@ -1015,10 +1015,10 @@ namespace DiscUtils.Ntfs
 		protected INtfsContext _context;
 
 		// Token: 0x04000079 RID: 121
-		private readonly ObjectCache<string, Index> _indexCache;
+		public readonly ObjectCache<string, Index> _indexCache;
 
 		// Token: 0x0400007A RID: 122
-		private readonly MasterFileTable _mft;
+		public readonly MasterFileTable _mft;
 
 		// Token: 0x0400007B RID: 123
 		private readonly List<FileRecord> _records;

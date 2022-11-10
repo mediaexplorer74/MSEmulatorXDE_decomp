@@ -3,7 +3,7 @@
 namespace DiscUtils.Internal
 {
 	// Token: 0x0200006E RID: 110
-	internal sealed class Crc32LittleEndian : Crc32
+	public sealed class Crc32LittleEndian : Crc32
 	{
 		// Token: 0x0600040A RID: 1034 RVA: 0x0000C268 File Offset: 0x0000A468
 		static Crc32LittleEndian()

@@ -8,7 +8,7 @@ using DiscUtils.Streams;
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x02000047 RID: 71
-	internal sealed class Quotas
+	public sealed class Quotas
 	{
 		// Token: 0x06000364 RID: 868 RVA: 0x00012F7C File Offset: 0x0001117C
 		public Quotas(File file)

@@ -2,10 +2,11 @@
 
 using System;
 using CommandLine.Core;
-using Microsoft.FSharp.Core;
+//using Microsoft.FSharp.Core;
 
 namespace CommandLine.Infrastructure
 {
+    /*
     static class FSharpOptionHelper
     {
         public static Type GetUnderlyingType(Type type)
@@ -45,5 +46,6 @@ namespace CommandLine.Infrastructure
                 .StaticMethod(
                     "get_IsSome", value);
         }
-    }
+
+    }*/
 }

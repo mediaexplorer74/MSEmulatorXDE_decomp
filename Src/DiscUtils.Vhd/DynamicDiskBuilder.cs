@@ -167,7 +167,7 @@ namespace DiscUtils.Vhd
 						byte b = (byte)(1 << 7 - (int)(range.Offset + (long)num) % 8);
 						byte[] array2 = array;
 						IntPtr intPtr = checked((IntPtr)(unchecked(range.Offset + (long)num) / 8L));
-						array2[(int)intPtr] = (array2[(int)intPtr] | b);
+						array2[(int)intPtr] = (byte)(array2[(int)intPtr] | b);
 						num++;
 					}
 				}

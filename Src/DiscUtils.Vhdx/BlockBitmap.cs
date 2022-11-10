@@ -20,7 +20,7 @@ namespace DiscUtils.Vhdx
 			int num2 = first % 8;
 			int i = first / 8;
 			state = (((int)this._data[this._offset + i] & 1 << num2) != 0);
-			byte b = state ? byte.MaxValue : 0;
+			byte b = (byte)(state ? byte.MaxValue : 0);
 			while (i < this._length)
 			{
 				if (this._data[this._offset + i] == b)

@@ -325,7 +325,11 @@ namespace DiscUtils.Vhdx
 			// Token: 0x06000167 RID: 359 RVA: 0x00006F5C File Offset: 0x0000515C
 			public override bool IsValid(ulong sequenceNumber)
 			{
-				return this.SequenceNumber == sequenceNumber && this._offset + 4096 <= this._data.Length && (ulong)EndianUtilities.ToUInt32LittleEndian(this._data, this._offset + 4096 - 4) == (sequenceNumber & (ulong)-1) && (ulong)EndianUtilities.ToUInt32LittleEndian(this._data, this._offset + 4) == (sequenceNumber >> 32 & (ulong)-1) && this.DataSignature == 1635017060U;
+				return this.SequenceNumber == sequenceNumber && this._offset + 4096 <= this._data.Length 
+					&& (ulong)EndianUtilities.ToUInt32LittleEndian(this._data, this._offset + 4096 - 4) == 
+					(ulong)((int)sequenceNumber & (int)-1) 
+					&& (ulong)EndianUtilities.ToUInt32LittleEndian(this._data, this._offset + 4) == (ulong)((int)sequenceNumber >> 32 & (int)-1) 
+					&& this.DataSignature == 1635017060U;
 			}
 
 			// Token: 0x06000168 RID: 360 RVA: 0x00006FD4 File Offset: 0x000051D4

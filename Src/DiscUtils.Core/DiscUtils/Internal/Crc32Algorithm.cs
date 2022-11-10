@@ -3,7 +3,7 @@
 namespace DiscUtils.Internal
 {
 	// Token: 0x0200006C RID: 108
-	internal enum Crc32Algorithm
+	public enum Crc32Algorithm
 	{
 		// Token: 0x0400017C RID: 380
 		Common,

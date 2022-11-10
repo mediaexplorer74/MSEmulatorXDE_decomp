@@ -27,8 +27,13 @@ namespace DiscUtils.Ntfs.Internals
 			}
 		}
 
-		// Token: 0x060003F2 RID: 1010 RVA: 0x00015675 File Offset: 0x00013875
-		public IEnumerable<MasterFileTableEntry> GetEntries(EntryStates filter)
+        private FileRecord GetRecord(long index, bool v1, bool v2)
+        {
+            throw new NotImplementedException();
+        }
+
+        // Token: 0x060003F2 RID: 1010 RVA: 0x00015675 File Offset: 0x00013875
+        public IEnumerable<MasterFileTableEntry> GetEntries(EntryStates filter)
 		{
 			foreach (FileRecord fileRecord in this._mft.Records)
 			{
@@ -95,5 +100,7 @@ namespace DiscUtils.Ntfs.Internals
 
 		// Token: 0x040001C4 RID: 452
 		private readonly MasterFileTable _mft;
-	}
+
+        public IEnumerable<FileRecord> Records { get; private set; }
+    }
 }

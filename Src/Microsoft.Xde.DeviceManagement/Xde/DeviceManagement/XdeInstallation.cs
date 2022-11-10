@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Xde.Common;
-using Windows.ApplicationModel;
+//using Windows.ApplicationModel;
 
 namespace Microsoft.Xde.DeviceManagement
 {

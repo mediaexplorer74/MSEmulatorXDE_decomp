@@ -12,4 +12,4 @@ using System.Security.Permissions;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyTrademark("")]
 [assembly: Guid("9DF037C2-AAC6-41BA-AF0A-2CA454FED896")]
-[assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
+//[assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]

@@ -3,7 +3,7 @@
 namespace DiscUtils.Internal
 {
 	// Token: 0x0200006B RID: 107
-	internal abstract class Crc32
+	public abstract class Crc32
 	{
 		// Token: 0x06000401 RID: 1025 RVA: 0x0000C125 File Offset: 0x0000A325
 		protected Crc32(uint[] table)

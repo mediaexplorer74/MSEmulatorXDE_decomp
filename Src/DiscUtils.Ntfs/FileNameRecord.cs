@@ -6,7 +6,7 @@ using DiscUtils.Streams;
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x0200001C RID: 28
-	internal class FileNameRecord : IByteArraySerializable, IDiagnosticTraceable, IEquatable<FileNameRecord>
+	public class FileNameRecord : IByteArraySerializable, IDiagnosticTraceable, IEquatable<FileNameRecord>
 	{
 		// Token: 0x060000F8 RID: 248 RVA: 0x00006FAA File Offset: 0x000051AA
 		public FileNameRecord()

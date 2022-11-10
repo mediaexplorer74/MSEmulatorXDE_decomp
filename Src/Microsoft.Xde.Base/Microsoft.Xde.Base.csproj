@@ -48,7 +48,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\Automation\IXdeAutomationServices.cs" />
     <Compile Include="Base\Automation\XdeAutomationManager.cs" />
+    <Compile Include="Base\Automation\XdeFeatureServerSession.cs" />
     <Compile Include="Base\Connection\XdeConnectionAddressInfo.cs" />
     <Compile Include="Base\Connection\XdeConnectionManager.cs" />
     <Compile Include="Base\InputSettings.cs" />

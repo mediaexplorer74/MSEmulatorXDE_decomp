@@ -5,13 +5,13 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Xde.Common;
-using Windows.ApplicationModel;
-using Windows.Management.Deployment;
+//using Windows.ApplicationModel;
+//using Windows.Management.Deployment;
 
 namespace Microsoft.Xde.DeviceManagement
 {
 	// Token: 0x02000009 RID: 9
-	internal class OptionalPackageDevice : XdeDevice
+	public class OptionalPackageDevice : XdeDevice
 	{
 		// Token: 0x06000065 RID: 101 RVA: 0x00002D14 File Offset: 0x00000F14
 		private OptionalPackageDevice(string packageId, string fileName)
@@ -386,7 +386,7 @@ namespace Microsoft.Xde.DeviceManagement
 		// Token: 0x0600008D RID: 141 RVA: 0x00002FC4 File Offset: 0x000011C4
 		public override bool CanModifyProperty(string propName)
 		{
-			uint num = <PrivateImplementationDetails>.ComputeStringHash(propName);
+			long num = propName.GetHashCode();
 			if (num <= 2601956777U)
 			{
 				if (num != 266367750U)
@@ -478,14 +478,15 @@ namespace Microsoft.Xde.DeviceManagement
 			this.overrideDevice.Save();
 		}
 
-		// Token: 0x06000090 RID: 144 RVA: 0x000030E6 File Offset: 0x000012E6
-		private Package GetPackage()
-		{
-			return XdeAppUtils.EmulatorPackage.Dependencies.FirstOrDefault((Package p) => StringComparer.OrdinalIgnoreCase.Equals(p.Id.FamilyName, this.packageId));
-		}
+        // Token: 0x06000090 RID: 144 RVA: 0x000030E6 File Offset: 0x000012E6
+        private Package GetPackage()
+        {
+            return XdeAppUtils.EmulatorPackage.Dependencies.FirstOrDefault((Package p) 
+				=> StringComparer.OrdinalIgnoreCase.Equals(p.Id.FamilyName, this.packageId));
+        }
 
-		// Token: 0x04000026 RID: 38
-		private AppXdeDevice optionalPackageDevice;
+        // Token: 0x04000026 RID: 38
+        private AppXdeDevice optionalPackageDevice;
 
 		// Token: 0x04000027 RID: 39
 		private AppXdeDevice overrideDevice;

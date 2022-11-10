@@ -57,7 +57,7 @@ namespace DiscUtils.Vhdx
 
 		// Token: 0x1700001A RID: 26
 		// (get) Token: 0x06000061 RID: 97 RVA: 0x00003728 File Offset: 0x00001928
-		internal override long Capacity
+		public override long Capacity
 		{
 			get
 			{
@@ -170,7 +170,7 @@ namespace DiscUtils.Vhdx
 
 		// Token: 0x17000023 RID: 35
 		// (get) Token: 0x0600006A RID: 106 RVA: 0x00003881 File Offset: 0x00001A81
-		internal override FileLocator RelativeFileLocator
+		public override FileLocator RelativeFileLocator
 		{
 			get
 			{
@@ -198,8 +198,9 @@ namespace DiscUtils.Vhdx
 			}
 		}
 
-		// Token: 0x0600006D RID: 109 RVA: 0x000038A3 File Offset: 0x00001AA3
-		public static DiskImageFile InitializeFixed(Stream stream, Ownership ownsStream, long capacity)
+     
+        // Token: 0x0600006D RID: 109 RVA: 0x000038A3 File Offset: 0x00001AA3
+        public static DiskImageFile InitializeFixed(Stream stream, Ownership ownsStream, long capacity)
 		{
 			return DiskImageFile.InitializeFixed(stream, ownsStream, capacity, null);
 		}
@@ -301,7 +302,7 @@ namespace DiscUtils.Vhdx
 		}
 
 		// Token: 0x06000078 RID: 120 RVA: 0x000039F4 File Offset: 0x00001BF4
-		internal DiskImageFile CreateDifferencing(FileLocator fileLocator, string path)
+		public DiskImageFile CreateDifferencing(FileLocator fileLocator, string path)
 		{
 			Stream stream = fileLocator.Open(path, FileMode.Create, FileAccess.ReadWrite, FileShare.None);
 			string fullPath = this._fileLocator.GetFullPath(this._fileName);
@@ -312,7 +313,7 @@ namespace DiscUtils.Vhdx
 		}
 
 		// Token: 0x06000079 RID: 121 RVA: 0x00003A58 File Offset: 0x00001C58
-		internal MappedStream DoOpenContent(SparseStream parent, Ownership ownsParent)
+		public MappedStream DoOpenContent(SparseStream parent, Ownership ownsParent)
 		{
 			SparseStream parentStream = parent;
 			Ownership ownsParent2 = ownsParent;

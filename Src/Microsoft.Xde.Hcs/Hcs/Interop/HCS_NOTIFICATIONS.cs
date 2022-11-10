@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace Microsoft.Xde.Hcs.Interop
 {
 	// Token: 0x02000011 RID: 17
-	[StructLayout(LayoutKind.Auto, CharSet = CharSet.Unicode)]
+	//[StructLayout(LayoutKind.Auto, CharSet = CharSet.Unicode)]
 	public enum HCS_NOTIFICATIONS : uint
 	{
 		// Token: 0x04000032 RID: 50

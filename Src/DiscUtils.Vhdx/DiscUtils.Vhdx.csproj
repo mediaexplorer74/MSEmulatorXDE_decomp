@@ -2,8 +2,6 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{91740F6E-2953-484F-BA64-F47BC05F0BBA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>DiscUtils.Vhdx</RootNamespace>
@@ -30,6 +28,12 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>StrongKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <AppDesigner Include="Properties\" />
@@ -81,6 +85,9 @@
       <Project>{49ffb3df-bb58-496c-93a8-2881be6899b9}</Project>
       <Name>DiscUtils.Streams</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="StrongKey.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

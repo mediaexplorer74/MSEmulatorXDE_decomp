@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using HCS.Compute.System;
 using HCS.Config.Containers.HNS;
+using HCS.Config.Devices.Networking;
 using HCS.Schema;
 using HCS.Schema.HvSocket;
 using HCS.Schema.Options;
@@ -725,7 +726,13 @@ namespace Microsoft.Xde.Hcs
 			string guestIpAddress = this.addressInfo.GuestIpAddress;
 			if (!string.IsNullOrEmpty(guestIpAddress))
 			{
-				DevicePortal devicePortal = new DevicePortal("http://" + guestIpAddress);
+				var addr = "http://" + guestIpAddress;
+				
+				//RnD
+				IDevicePortalConnection conn = null;
+				//conn.Connection = { IPAddress = addr};
+
+                DevicePortal devicePortal = new DevicePortal(conn);
 				DevicePortal.Device device = null;
 				try
 				{
@@ -872,7 +879,10 @@ namespace Microsoft.Xde.Hcs
 			{
 				WindowsIdentity.GetCurrent().User
 			});
-			this.currentSettings.Data.ComputeSystem.VirtualMachine.Devices.HvSocket.HvSocketConfig.ServiceTable[Globals.XdeServicesId] = new HvSocketServiceConfig
+
+			//RnD
+			/*
+			currentSettings.Data.ComputeSystem.VirtualMachine.Devices.HvSocket.HvSocketConfig.ServiceTable[Globals.XdeServicesId] = new HvSocketServiceConfig
 			{
 				BindSecurityDescriptor = "D:P(D;;FA;;;WD)",
 				ConnectSecurityDescriptor = connectSecurityDescriptor,
@@ -884,6 +894,7 @@ namespace Microsoft.Xde.Hcs
 				ConnectSecurityDescriptor = connectSecurityDescriptor,
 				AllowWildcardBinds = true
 			};
+			*/
 		}
 
 		// Token: 0x06000057 RID: 87 RVA: 0x000038E7 File Offset: 0x00001AE7

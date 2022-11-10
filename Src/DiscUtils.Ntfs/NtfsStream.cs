@@ -6,7 +6,7 @@ using DiscUtils.Streams;
 namespace DiscUtils.Ntfs
 {
 	// Token: 0x02000042 RID: 66
-	internal class NtfsStream
+	public class NtfsStream
 	{
 		// Token: 0x06000347 RID: 839 RVA: 0x00012A30 File Offset: 0x00010C30
 		public NtfsStream(File file, NtfsAttribute attr)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xde.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -67,7 +68,8 @@ namespace Microsoft.Xde.DeviceManagement
 			set
 			{
 				this.itemStatus = value;
-				if (this.itemStatus != null && this.itemStatus.PackageInstallState == 1)
+				//RnD
+				if (this.itemStatus != null)// && this.itemStatus.PackageInstallState == 1)
 				{
 					this.Downloaded = true;
 					XdeDeviceFactory.FireDeviceListChanged();
@@ -144,15 +146,15 @@ namespace Microsoft.Xde.DeviceManagement
 		public static async Task<IEnumerable<DownloadableImageInfo>> LoadDownloadableImageInfos(StoreContext storeContext)
 		{
 			List<DownloadableImageInfo> infos = new List<DownloadableImageInfo>();
-			StoreProductQueryResult storeProductQueryResult = await storeContext.GetAssociatedStoreProductsAsync(new string[]
-			{
-				"Durable"
-			});
+			StoreProductQueryResult storeProductQueryResult = null;// await storeContext.GetAssociatedStoreProductsAsync(new string[]
+			//{
+			//	"Durable"
+			//});
 			foreach (KeyValuePair<string, StoreProduct> pair in storeProductQueryResult.Products)
 			{
 				bool flag = await pair.Value.GetIsAnySkuInstalledAsync();
 				infos.Add(new DownloadableImageInfo(storeContext, pair.Value, flag));
-				pair = default(KeyValuePair<string, StoreProduct>);
+				//pair = default(KeyValuePair<string, StoreProduct>);
 			}
 			IEnumerator<KeyValuePair<string, StoreProduct>> enumerator = null;
 			return infos;
@@ -167,7 +169,7 @@ namespace Microsoft.Xde.DeviceManagement
 			this.OnPropertyChanged("CanInstall");
 			if (!this.StoreProduct.IsInUserCollection)
 			{
-				StorePurchaseResult storePurchaseResult = await this.storeContext.RequestPurchaseAsync(this.StoreId);
+				StorePurchaseResult storePurchaseResult = null;//await this.storeContext.RequestPurchaseAsync(this.StoreId);
 				if (storePurchaseResult.ExtendedError != null)
 				{
 					this.SetGenericErrorMessageForInstall(storePurchaseResult.ExtendedError);
@@ -188,7 +190,9 @@ namespace Microsoft.Xde.DeviceManagement
 			}
 			await Task.Run(async delegate()
 			{
-				IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus> downloadTask = this.storeContext.DownloadAndInstallStorePackagesAsync(new string[]
+				/*
+				IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus> downloadTask 
+				= (IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus>)this.storeContext.DownloadAndInstallStorePackagesAsync(new string[]
 				{
 					this.StoreId
 				});
@@ -208,22 +212,24 @@ namespace Microsoft.Xde.DeviceManagement
 					num += 250;
 				}
 				StoreQueueItem storeQueueItem = this.storeQueueItem;
-				await WindowsRuntimeSystemExtensions.AsTask<StorePackageUpdateResult, StorePackageUpdateStatus>(downloadTask);
+				
+				//RnD
+				//await WindowsRuntimeSystemExtensions.AsTask<StorePackageUpdateResult, StorePackageUpdateStatus>(downloadTask);
 				this.NotifyInstallFinished();
 				StorePackageUpdateResult results = downloadTask.GetResults();
-				StoreQueueItem storeQueueItem2 = results.StoreQueueItems.FirstOrDefault<StoreQueueItem>();
+				StoreQueueItem storeQueueItem2 = null;// results.StoreQueueItems.FirstOrDefault<StoreQueueItem>();
 				if (storeQueueItem2 != null)
 				{
 					StoreQueueItemStatus currentStatus = storeQueueItem2.GetCurrentStatus();
 					this.DownloadItemStatus = new StoreQueueItemStatusWrapper(currentStatus);
 					if (currentStatus.PackageInstallState == 3)
 					{
-						WindowsRuntimeSystemExtensions.AsTask(storeQueueItem2.CancelInstallAsync()).Wait();
+						//WindowsRuntimeSystemExtensions.AsTask(storeQueueItem2.CancelInstallAsync()).Wait();
 					}
 				}
 				else
 				{
-					StoreQueueItemState installState = downloadTask.Status;
+					StoreQueueItemState installState = (StoreQueueItemState)downloadTask.Status;
 					Exception ex = downloadTask.ErrorCode;
 					if (results.OverallState == 5)
 					{
@@ -234,7 +240,7 @@ namespace Microsoft.Xde.DeviceManagement
 						}
 					}
 					StorePackageUpdateStatus updateStatus;
-					if (results.StorePackageUpdateStatuses != null && results.StorePackageUpdateStatuses.Count > 0)
+					if (results.StorePackageUpdateStatuses != null && results.StorePackageUpdateStatuses.Count() > 0)
 					{
 						updateStatus = results.StorePackageUpdateStatuses.First<StorePackageUpdateStatus>();
 					}
@@ -245,12 +251,17 @@ namespace Microsoft.Xde.DeviceManagement
 						updateStatus = storePackageUpdateStatus;
 					}
 					this.DownloadItemStatus = new InstallItemStatus(installState, updateStatus, ex);
-				}
+				}*/
 			});
 		}
 
-		// Token: 0x06000048 RID: 72 RVA: 0x00002900 File Offset: 0x00000B00
-		public async void CancelInstall()
+        private void SetGenericErrorMessageForInstall(object extendedError)
+        {
+            throw new NotImplementedException();
+        }
+
+        // Token: 0x06000048 RID: 72 RVA: 0x00002900 File Offset: 0x00000B00
+        public async void CancelInstall()
 		{
 			StoreQueueItem storeQueueItem = this.storeQueueItem;
 			if (storeQueueItem != null)
@@ -295,10 +306,11 @@ namespace Microsoft.Xde.DeviceManagement
 			this.Downloaded = flag;
 			if (this.storeQueueItem == null)
 			{
-				this.storeQueueItem = (await this.storeContext.GetStoreQueueItemsAsync(new string[]
+				this.storeQueueItem = null;/* (await this.storeContext.GetStoreQueueItemsAsync(new string[]
 				{
 					this.StoreProduct.StoreId
-				})).FirstOrDefault<StoreQueueItem>();
+				})).FirstOrDefault<StoreQueueItem>();*/
+
 				if (this.storeQueueItem != null)
 				{
 					if (this.storeQueueItem.GetCurrentStatus().PackageInstallState != null)
@@ -311,9 +323,12 @@ namespace Microsoft.Xde.DeviceManagement
 						if (!this.downloadTaskRunning)
 						{
 							StoreQueueItem @object = this.storeQueueItem;
-							WindowsRuntimeMarshal.AddEventHandler<TypedEventHandler<StoreQueueItem, object>>(new Func<TypedEventHandler<StoreQueueItem, object>, EventRegistrationToken>(@object.add_StatusChanged), new Action<EventRegistrationToken>(@object.remove_StatusChanged), new TypedEventHandler<StoreQueueItem, object>(this.StoreQueueItem_StatusChanged));
+							WindowsRuntimeMarshal.AddEventHandler<TypedEventHandler<StoreQueueItem, object>>
+								(new Func<TypedEventHandler<StoreQueueItem, object>, EventRegistrationToken>(@object.add_StatusChanged), new Action<EventRegistrationToken>(@object.remove_StatusChanged), new TypedEventHandler<StoreQueueItem, object>(this.StoreQueueItem_StatusChanged));
 							@object = this.storeQueueItem;
-							WindowsRuntimeMarshal.AddEventHandler<TypedEventHandler<StoreQueueItem, StoreQueueItemCompletedEventArgs>>(new Func<TypedEventHandler<StoreQueueItem, StoreQueueItemCompletedEventArgs>, EventRegistrationToken>(@object.add_Completed), new Action<EventRegistrationToken>(@object.remove_Completed), new TypedEventHandler<StoreQueueItem, StoreQueueItemCompletedEventArgs>(this.StoreQueueItem_Completed));
+							WindowsRuntimeMarshal.AddEventHandler<TypedEventHandler<StoreQueueItem, StoreQueueItemCompletedEventArgs>>(new Func<TypedEventHandler<StoreQueueItem, StoreQueueItemCompletedEventArgs>, EventRegistrationToken>(
+								@object.add_Completed), new Action<EventRegistrationToken>(@object.remove_Completed), 
+								new TypedEventHandler<StoreQueueItem, StoreQueueItemCompletedEventArgs>(this.StoreQueueItem_Completed));
 						}
 						this.OnPropertyChanged("CanCancel");
 						this.OnPropertyChanged("Installing");
@@ -364,4 +379,20 @@ namespace Microsoft.Xde.DeviceManagement
 		// Token: 0x0400001B RID: 27
 		private bool downloadTaskRunning;
 	}
+
+    internal class TypedEventHandler<T1, T2>
+    {
+        private Action<StoreQueueItem, object> storeQueueItem_StatusChanged;
+        private Action<StoreQueueItem, StoreQueueItemCompletedEventArgs> storeQueueItem_Completed;
+
+        public TypedEventHandler(Action<StoreQueueItem, object> storeQueueItem_StatusChanged)
+        {
+            this.storeQueueItem_StatusChanged = storeQueueItem_StatusChanged;
+        }
+
+        public TypedEventHandler(Action<StoreQueueItem, StoreQueueItemCompletedEventArgs> storeQueueItem_Completed)
+        {
+            this.storeQueueItem_Completed = storeQueueItem_Completed;
+        }
+    }
 }

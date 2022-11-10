@@ -244,7 +244,7 @@ namespace XdeManager.ViewModel
 							status = "Starting download...";
 						}
 					}
-					else if (downloadItemStatus.PackageInstallState == 2)
+					else if (downloadItemStatus.PackageInstallState == (StoreQueueItemState)2)
 					{
 						status = "Installation canceled.";
 					}

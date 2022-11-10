@@ -330,9 +330,12 @@ namespace Microsoft.Xde.Common
 				disposable.Dispose();
 			}
 			this.DisposeStorageSpaces();
-			if (this.tempPathToMount != null && Directory.Exists(this.tempPathToMount))
+
+            // RnD: Directory
+            if (this.tempPathToMount != null && System.IO.Directory.Exists(this.tempPathToMount))
 			{
-				Directory.Delete(this.tempPathToMount);
+				// 
+				System.IO.Directory.Delete(this.tempPathToMount);
 				this.tempPathToMount = null;
 			}
 		}
@@ -364,7 +367,7 @@ namespace Microsoft.Xde.Common
 		// Token: 0x0600028F RID: 655 RVA: 0x0000622C File Offset: 0x0000442C
 		private static string CreateMd5ForFolder(string path)
 		{
-			List<string> list = (from p in Directory.GetFiles(path, "*.*", SearchOption.AllDirectories)
+			List<string> list = (from p in System.IO.Directory.GetFiles(path, "*.*", SearchOption.AllDirectories)
 			orderby p
 			select p).ToList<string>();
 			MD5 md = MD5.Create();
@@ -451,7 +454,7 @@ namespace Microsoft.Xde.Common
 				}
 			}
 			RawSecurityDescriptor securityDescriptor = (ntfsFileSystem != null && ntfsFileSystem.FileExists("\\windows\\system32\\wininet.dll")) ? ntfsFileSystem.GetSecurity("\\windows\\system32\\wininet.dll") : null;
-			foreach (string text2 in Directory.GetFiles(localDir, fileSpec))
+			foreach (string text2 in System.IO.Directory.GetFiles(localDir, fileSpec))
 			{
 				string fileName = Path.GetFileName(text2);
 				string text3 = Path.Combine(destDir, fileName);
@@ -477,7 +480,7 @@ namespace Microsoft.Xde.Common
 			}
 			if (recursive)
 			{
-				foreach (string text4 in Directory.GetDirectories(localDir))
+				foreach (string text4 in System.IO.Directory.GetDirectories(localDir))
 				{
 					string fileName2 = Path.GetFileName(text4);
 					string destDir2 = Path.Combine(destDir, fileName2);
@@ -499,9 +502,9 @@ namespace Microsoft.Xde.Common
 		// Token: 0x06000293 RID: 659 RVA: 0x00006660 File Offset: 0x00004860
 		private void CopyDirectoryFromVhdToLocalImpl(string vhdDir, string fileSpec, string localDir, bool recursive, WindowsImageVhd.CopyFileFunc copyFileFunc)
 		{
-			if (!Directory.Exists(localDir))
+			if (!System.IO.Directory.Exists(localDir))
 			{
-				Directory.CreateDirectory(localDir);
+				System.IO.Directory.CreateDirectory(localDir);
 			}
 			foreach (string text in this.OSFileSystem.GetFiles(vhdDir, fileSpec))
 			{
@@ -537,8 +540,8 @@ namespace Microsoft.Xde.Common
 			{
 				this.tempPathToMount = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
 			}
-			while (Directory.Exists(this.tempPathToMount));
-			Directory.CreateDirectory(this.tempPathToMount);
+			while (System.IO.Directory.Exists(this.tempPathToMount));
+			System.IO.Directory.CreateDirectory(this.tempPathToMount);
 			this.vhdMount = VhdUtils.MountVhdWithPartitionAccessPath(vhdPath, "MainOS", this.tempPathToMount);
 			return new NativeFileSystem(this.tempPathToMount, false);
 		}
@@ -679,7 +682,8 @@ namespace Microsoft.Xde.Common
 				string wofStreamName = WindowsImageVhd.GetWofStreamName(vhdFileName);
 				using (TempFile tempFile = new TempFile())
 				{
-					using (Stream stream = File.OpenRead(localFileName))
+					// RnD: File
+					using (Stream stream = System.IO.File.OpenRead(localFileName))
 					{
 						using (Stream stream2 = new FileStream(tempFile.FileName, FileMode.Create, FileAccess.ReadWrite))
 						{
@@ -693,7 +697,9 @@ namespace Microsoft.Xde.Common
 							}
 						}
 					}
-					using (Stream stream3 = File.OpenRead(tempFile.FileName))
+
+					// RnD
+					using (Stream stream3 = System.IO.File.OpenRead(tempFile.FileName))
 					{
 						using (Stream stream4 = ntfsFileSystem.OpenFile(wofStreamName, FileMode.Create, FileAccess.ReadWrite))
 						{
@@ -703,7 +709,9 @@ namespace Microsoft.Xde.Common
 					}
 				}
 			}
-			using (Stream stream5 = File.OpenRead(localFileName))
+
+			//RnD
+			using (Stream stream5 = System.IO.File.OpenRead(localFileName))
 			{
 				using (Stream stream6 = this.mainfileSystem.OpenFile(vhdFileName, FileMode.Create, FileAccess.ReadWrite))
 				{
@@ -728,14 +736,16 @@ namespace Microsoft.Xde.Common
 				{
 					using (Stream stream = ntfsFileSystem.OpenFile(wofStreamName, FileMode.Open, FileAccess.Read))
 					{
-						using (Stream stream2 = File.OpenWrite(tempFile.FileName))
+						//RnD
+						using (Stream stream2 = System.IO.File.OpenWrite(tempFile.FileName))
 						{
 							stream.CopyTo(stream2);
 						}
 					}
-					using (Stream stream3 = File.OpenRead(tempFile.FileName))
+					//RnD
+					using (Stream stream3 = System.IO.File.OpenRead(tempFile.FileName))
 					{
-						using (Stream stream4 = File.OpenWrite(localFileName))
+						using (Stream stream4 = System.IO.File.OpenWrite(localFileName))
 						{
 							FileUtils.WofDecompress(stream3, stream4, (uint)fileInfo.Length);
 							return;
@@ -743,7 +753,9 @@ namespace Microsoft.Xde.Common
 					}
 				}
 			}
-			using (Stream stream5 = File.OpenWrite(localFileName))
+
+			//RnD
+			using (Stream stream5 = System.IO.File.OpenWrite(localFileName))
 			{
 				using (Stream stream6 = this.mainfileSystem.OpenFile(vhdFileName, FileMode.Open, FileAccess.Read))
 				{

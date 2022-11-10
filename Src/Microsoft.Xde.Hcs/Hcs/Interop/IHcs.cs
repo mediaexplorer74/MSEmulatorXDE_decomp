@@ -7,7 +7,7 @@ using Microsoft.Win32.SafeHandles;
 namespace Microsoft.Xde.Hcs.Interop
 {
 	// Token: 0x02000014 RID: 20
-	[StructLayout(LayoutKind.Auto, CharSet = CharSet.Unicode)]
+	//[StructLayout(LayoutKind.Auto, CharSet = CharSet.Unicode)]
 	public interface IHcs
 	{
 		// Token: 0x0600008E RID: 142

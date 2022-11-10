@@ -242,7 +242,7 @@ namespace Microsoft.Xde.Common
 					select o).FirstOrDefault<ManagementObject>();
 					if (managementObject != null)
 					{
-						Func<ManagementObject, bool> <>9__1;
+						Func<ManagementObject, bool> f9__1 = default;
 						foreach (ManagementObject managementObject2 in managementObject.GetRelated("MSFT_VirtualDisk").Cast<ManagementObject>())
 						{
 							ManagementObject managementObject3 = managementObject2.GetRelated("MSFT_Disk").Cast<ManagementObject>().FirstOrDefault<ManagementObject>();
@@ -252,9 +252,9 @@ namespace Microsoft.Xde.Common
 								{
 									IEnumerable<ManagementObject> source = managementObject4.GetRelated("MSFT_Volume").Cast<ManagementObject>();
 									Func<ManagementObject, bool> predicate;
-									if ((predicate = <>9__1) == null)
+									if ((predicate = f9__1) == null)
 									{
-										predicate = (<>9__1 = ((ManagementObject v) => StringUtilities.EqualsNoCase((string)v["FileSystemLabel"], partitionName)));
+										predicate = (f9__1 = ((ManagementObject v) => StringUtilities.EqualsNoCase((string)v["FileSystemLabel"], partitionName)));
 									}
 									if (source.Where(predicate).FirstOrDefault<ManagementObject>() != null)
 									{

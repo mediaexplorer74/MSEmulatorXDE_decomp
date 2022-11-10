@@ -15,7 +15,7 @@ namespace XdeManager.ViewModel
 	public class XdeDeviceViewModel : ViewModelBase
 	{
 		// Token: 0x060000F5 RID: 245 RVA: 0x000043DC File Offset: 0x000025DC
-		public XdeDeviceViewModel(XdeManagerViewModel parent, XdeDevice device)
+		public XdeDeviceViewModel(XdeManagerViewModel parent, Microsoft.Xde.DeviceManagement.XdeDevice device)
 		{
 			this.parent = parent;
 			this.device = device;
@@ -408,11 +408,13 @@ namespace XdeManager.ViewModel
 			}
 			catch (Exception ex)
 			{
-				if (ex is UnauthorizedAccessException && !UacSecurity.IsAdmin())
+				//RnD
+				if (ex is UnauthorizedAccessException)// && !UacSecurity.IsAdmin())
 				{
 					if (MessageBox.Show("In order to add Visual Studio integration with this device, this app must run elevated. Relaunch app as admin?", "Elevation Required", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
 					{
-						UacSecurity.RestartElevated(string.Empty, false);
+						//RnD
+						//UacSecurity.RestartElevated(string.Empty, false);
 						this.parent.Owner.Close();
 					}
 					return;

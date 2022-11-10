@@ -132,10 +132,10 @@ namespace Microsoft.Xde.H2LPlugin.Orientation
 						{
 							if (!90.0.Equals(zrotation))
 							{
-								if (-90.0.Equals(zrotation))
-								{
+								//if (-90.0.Equals(zrotation))
+								//{
 									orientation = DisplayOrientation.LandscapeRight;
-								}
+								//}
 							}
 							else
 							{

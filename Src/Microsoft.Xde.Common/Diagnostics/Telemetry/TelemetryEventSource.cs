@@ -1,5 +1,6 @@
 ﻿using System;
-using Microsoft.Diagnostics.Tracing;
+using System.Diagnostics.Tracing;
+//using Microsoft.Diagnostics.Tracing;
 
 namespace Microsoft.Diagnostics.Telemetry
 {

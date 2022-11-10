@@ -43,7 +43,7 @@ namespace DiscUtils.Ntfs
 				this._bitmap.Position = MathUtilities.RoundUp(num + 1L, 8L) - 1L;
 				this._bitmap.WriteByte(0);
 			}
-			this.SetByte(num, this.GetByte(num) | b);
+			this.SetByte(num, (byte)(this.GetByte(num) | b));
 		}
 
 		// Token: 0x06000058 RID: 88 RVA: 0x00003624 File Offset: 0x00001824
@@ -72,7 +72,7 @@ namespace DiscUtils.Ntfs
 				byte b = (byte)(1 << (int)((byte)(num3 % 8L)));
 				byte[] array2 = array;
 				IntPtr intPtr = checked((IntPtr)num4);
-				array2[(int)intPtr] = (array2[(int)intPtr] | b);
+				array2[(int)intPtr] = (byte)(array2[(int)intPtr] | b);
 			}
 			this.SetBytes(num, array);
 		}
@@ -84,7 +84,7 @@ namespace DiscUtils.Ntfs
 			byte b = (byte)(1 << (int)((byte)(index % 8L)));
 			if (num < this._stream.Length)
 			{
-				this.SetByte(num, this.GetByte(num) & ~b);
+				this.SetByte(num, (byte)(this.GetByte(num) & ~b));
 			}
 			if (index < this._nextAvailable)
 			{
@@ -118,7 +118,7 @@ namespace DiscUtils.Ntfs
 				byte b = (byte)(1 << (int)((byte)(num3 % 8L)));
 				byte[] array2 = array;
 				IntPtr intPtr = checked((IntPtr)num4);
-				array2[(int)intPtr] = (array2[(int)intPtr] & ~b);
+				array2[(int)intPtr] = (byte)(array2[(int)intPtr] & ~b);
 			}
 			this.SetBytes(num, array);
 			if (index < this._nextAvailable)

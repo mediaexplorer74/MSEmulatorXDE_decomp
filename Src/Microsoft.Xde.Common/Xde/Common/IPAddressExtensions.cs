@@ -18,7 +18,7 @@ namespace Microsoft.Xde.Common
 			byte[] array = new byte[addressBytes.Length];
 			for (int i = 0; i < array.Length; i++)
 			{
-				array[i] = (addressBytes[i] & addressBytes2[i]);
+				array[i] = (byte)(addressBytes[i] & addressBytes2[i]);
 			}
 			return new IPAddress(array);
 		}
