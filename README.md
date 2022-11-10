@@ -37,13 +37,13 @@ Microsoft.Diagnostics.Tracing.EventSource (?)
 ## Status / progress of R.E.
 
 (XDE)
-XDE
+XDE +-
 Microsoft.Xde.Base  +-
 Microsoft.Xde.Client.RdpClientAxHost  +-
 Microsoft.Xde.Client.RdpClientInterop  +-
-Microsoft.Xde.Communication  +-
-Microsoft.Xde.LocSimulator  +-
-Microsoft.Xde.SantPlugin +-
+Microsoft.Xde.Communication  +
+Microsoft.Xde.LocSimulator  +
+Microsoft.Xde.SantPlugin +
 Microsoft.Xde.Interface -/NA (fake repo temporary added)
 Windows.Foundation.UniversalApiContract -/NA (fake repo temporary added)
 Windows.Foundation.FoundationContract  -/NA (fake repo temporary added)
