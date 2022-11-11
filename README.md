@@ -1,5 +1,5 @@
-# Microsoft Emulator (XDE) dotnet Decompiled
-My fork of MS Emulator (decompiled by Empyreal96).
+# XDE
+My fork of MS Emulator, or XDE (decompiled by Empyreal96).
 
 ## About
 This is the source codes for parts of the Microsoft Emulator (aka XDE).
