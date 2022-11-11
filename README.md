@@ -1,9 +1,7 @@
 # Microsoft Emulator (XDE) dotnet Decompiled
-
 My fork of MS Emulator (decompiled by Empyreal96).
 
 ## About
-
 This is the source codes for parts of the Microsoft Emulator (aka XDE).
 XDE used to run the Windows 10 Mobile Emulator Images.
 
@@ -89,11 +87,16 @@ or change "internals" to "publics" at "internal" repos.
 ## CAUTION 
 This project has success on compiling. BUT app logics are very unstable (no tests, no good work guarantees).
 
+## References
+- https://github.com/Empyreal96/MSEmulator-XDE_dotnet_decompiled :: XDE_decompiled
+- https://github.com/Empyreal96/ ::  Great C# Developer/Researcher 
+- https://microsoft.com Original ::  Developer of original XDE
+
 ## .. 
 AS IS. No support. RnD only / DIY
 
 ## .
-MediaExplorer
+: MediaExplorer74 :
 
-2022, November
+:: 2022, November ::
 
